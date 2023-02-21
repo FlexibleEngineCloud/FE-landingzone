@@ -1,1 +1,1 @@
-# FE-landingzone
+# FlexibleEngine landingzone Accelerator
