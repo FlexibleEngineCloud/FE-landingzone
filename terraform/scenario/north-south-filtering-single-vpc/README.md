@@ -1,10 +1,11 @@
-This is a guide to implementing a single VPC North-South Filtering for your Flexible Engine (FE) infrastructure. by controlling traffic flow between your On-Premsise and your FE infrastructure.
+# Single VPC North-South Filtering:
+This is a guide to implementing a single VPC North-South Filtering for your Flexible Engine (FE) infrastructure. by controlling traffic flow between your On-Premise and your FE infrastructure.
 <br/>
 This architecture uses an open source firewall (pfsense) deployed on an ECS instance using an pre-built IMS image, allowing only authorized traffic to enter and leave the LAN network on FE infastructure. 
 <br/>
 This documentation will provide an overview of this architecture and its components.
 
-<br/>
+
 ## Components:
 The Single VPC North-South filtering via a firewall architecture consists of the following components:
 
@@ -16,7 +17,7 @@ The Single VPC North-South filtering via a firewall architecture consists of the
 
 - EIP: a public IPv4 address assigned to an EC2 instance (Firewall) to allow for internet connectivity.
 
-<br/>
+
 ## Architecture:
 The architecture consists of the following steps:
 
@@ -35,6 +36,5 @@ Please make sure to disable manually "source destination check" on both NICs of 
 
 - Configure the firewall ECS instance to allow only authorized traffic to enter and leave the VPC based on predetermined security rules.
 
-<br/>
 ## Diagram:
-![Alt text](diagram.PNG)
+![Alt text](diagram.png)
