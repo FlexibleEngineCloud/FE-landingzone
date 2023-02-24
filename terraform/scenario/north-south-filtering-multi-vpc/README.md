@@ -36,7 +36,8 @@ For cross-tenant VPCs you must accept the peering.
 - Create an ECS firewall instance, with two NICs, one attached to inbound subnet, and the other to the outbound subnet.
 > Please make sure to disable manually "source destination check" on both NICs of the firewall.
 <br/>
-- Crete an EIP public ip address and attach it to the outbound NIC interface on the firewall.
+
+- Create an EIP public ip address and attach it to the outbound NIC interface on the firewall.
 
 - Create routes on the VPC route tables to redirect inbound/outbound traffic.
 
