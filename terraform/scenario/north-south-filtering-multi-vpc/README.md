@@ -1,7 +1,7 @@
 # Multi VPC North-South Filtering:
 This is a guide to implementing a multi VPC North-South Filtering for your Flexible Engine (FE) infrastructure. by controlling traffic flow between your On-Premise and your FE infrastructure.
 <br/>
-This architecture uses an open source firewall (pfsense) deployed on an ECS instance using an pre-built IMS image, allowing only authorized traffic to enter and leave the LAN network on FE infastructure. 
+This architecture uses an open source firewall (pfsense) deployed on an ECS instance using an pre-built IMS image, allowing only authorized traffic to enter and leave the LAN/Private network on FE infastructure. 
 <br/>
 This documentation will provide an overview of this architecture and its components.
 
@@ -17,6 +17,7 @@ The Multi VPC North-South filtering via a firewall architecture consists of the 
 
 - EIP: a public IPv4 address assigned to an EC2 instance (Firewall) to allow for internet connectivity.
 
+- VPC Peering: a VPC peering connection between two VPCs that enables to route traffic.
 
 ## Architecture:
 The architecture consists of the following steps:
