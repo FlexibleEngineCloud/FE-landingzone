@@ -1,4 +1,4 @@
-# ECS creation
+# Create ECS firewall instance.
 resource "flexibleengine_compute_instance_v2" "firewall" {
   name            = "pfsense-${random_string.id.result}"
   image_id        = "901cd8cc-e1aa-4065-8479-6d5e6bfce272"
@@ -13,11 +13,11 @@ resource "flexibleengine_compute_instance_v2" "firewall" {
     uuid = flexibleengine_vpc_subnet_v1.subnet-out.id
   }
   tags = {
-    scenario  = "mono-north-south-filtering"
+    scenario  = "single-vpc-north-south-filtering"
   }
 }
 
-# EIP Creation
+# Create EIP public ip address.
 resource "flexibleengine_vpc_eip" "eip_1" {
   publicip {
     type = "5_bgp"
@@ -29,10 +29,10 @@ resource "flexibleengine_vpc_eip" "eip_1" {
     charge_mode = "traffic"
   }
   tags = {
-    scenario  = "mono-north-south-filtering"
+    scenario  = "single-vpc-north-south-filtering"
   }
 }
-# Attach EIP address to Firewall NIC out
+# Attach EIP address to Firewall NIC out interface.
 resource "flexibleengine_compute_floatingip_associate_v2" "fip_1" {
   floating_ip = flexibleengine_vpc_eip.eip_1.publicip.0.ip_address
   instance_id = flexibleengine_compute_instance_v2.firewall.id

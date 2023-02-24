@@ -1,4 +1,4 @@
-# security group of the firewall.
+# Security group of the firewall.
 resource "flexibleengine_networking_secgroup_v2" "secgroup_1" {
   name        = "secgroup-${random_string.id.result}"
   description = "security group of Firewall"

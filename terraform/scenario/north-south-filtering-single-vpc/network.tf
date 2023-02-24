@@ -11,7 +11,7 @@ resource "flexibleengine_vpc_v1" "vpc" {
   cidr =  var.cidr_vpc
 
   tags = {
-    scenario  = "mono-north-south-filtering"
+    scenario  = "single-vpc-north-south-filtering"
   }
 }
 # create IN subnet.
@@ -22,11 +22,11 @@ resource "flexibleengine_vpc_subnet_v1" "subnet-in" {
   vpc_id     = flexibleengine_vpc_v1.vpc.id
 
   tags = {
-    scenario  = "mono-north-south-filtering"
+    scenario  = "single-vpc-north-south-filtering"
   }
 }
 
-# Create OUT subnet
+# Create OUT subnet.
 resource "flexibleengine_vpc_subnet_v1" "subnet-out" {
   name       = "subnet-out-${random_string.id.result}"
   cidr       = var.cidr_subnet_out
@@ -34,11 +34,11 @@ resource "flexibleengine_vpc_subnet_v1" "subnet-out" {
   vpc_id     = flexibleengine_vpc_v1.vpc.id
 
   tags = {
-    scenario  = "mono-north-south-filtering"
+    scenario  = "single-vpc-north-south-filtering"
   }
 }
 
-# EIP Creation
+# Create EIP.
 resource "flexibleengine_vpc_eip" "eip_1" {
   publicip {
     type = "5_bgp"
@@ -50,21 +50,21 @@ resource "flexibleengine_vpc_eip" "eip_1" {
     charge_mode = "traffic"
   }
   tags = {
-    scenario  = "mono-north-south-filtering"
+    scenario  = "single-vpc-north-south-filtering"
   }
 }
 
-# default route
+# Create default VPC route.
 resource "flexibleengine_vpc_route" "vpc_route" {
   vpc_id         = flexibleengine_vpc_v1.vpc.id
   destination    = "0.0.0.0/0"
   type           = "ecs"
   nexthop        = flexibleengine_compute_instance_v2.firewall.network.0.fixed_ip_v4
 }
-# default route
+# Create subnet remote VPC route.
 resource "flexibleengine_vpc_route" "vpc_route" {
   vpc_id         = flexibleengine_vpc_v1.vpc.id
-  destination    = "0.0.0.0/0"
+  destination    = "192.168.100.0/24"
   type           = "ecs"
-  nexthop        = var.nexthop
+  nexthop        = flexibleengine_compute_instance_v2.firewall.network.0.fixed_ip_v4
 }
