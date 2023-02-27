@@ -69,13 +69,31 @@ You should be able to provision resources on your FlexibleEngine domain.
 <br/>
 for more details about setting authentication credentials, please refer to the [FlexibleEngine terraform documentation](https://registry.terraform.io/providers/FlexibleEngineCloud/flexibleengine/latest/docs).
 
-In a terminal, go into the scenario that fits tour requirements, and run the terraform init command:
+In a terminal, go into the scenario that fits your requirements, and run the terraform init command:
 ```
 $ terraform init
 Initializing the backend...
+
 Initializing provider plugins...
-    - Reusing previous version of hashicorp/aws from the lock file
-    - Using hashicorp/aws v4.19.0 from the shared cache directory
+- Finding latest version of hashicorp/tls...
+- Finding latest version of hashicorp/random...
+- Finding latest version of flexibleenginecloud/flexibleengine...
+- Installing flexibleenginecloud/flexibleengine v1.36.0...
+- Installed flexibleenginecloud/flexibleengine v1.36.0 (self-signed, key ID 0D0EDE6AC300F5EE)
+- Installing hashicorp/tls v4.0.4...
+- Installed hashicorp/tls v4.0.4 (signed by HashiCorp)
+- Installing hashicorp/random v3.4.3...
+- Installed hashicorp/random v3.4.3 (signed by HashiCorp)
+
+Partner and community providers are signed by their developers.
+If you'd like to know more about provider signing, you can read about it here:
+https://www.terraform.io/docs/cli/plugins/signing.html
+
+Terraform has created a lock file .terraform.lock.hcl to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.
+
 Terraform has been successfully initialized!
 ```
 Now, run the terraform plan command:
