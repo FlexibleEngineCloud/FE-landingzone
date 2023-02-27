@@ -42,6 +42,36 @@ For cross-tenant VPCs you must accept the peering.
 - Create routes on the VPC route tables to redirect inbound/outbound traffic.
 
 - Configure the firewall ECS instance to allow only authorized traffic to enter and leave the VPC based on predetermined security rules.
+<br/>
+
+## vars / Arguments Reference
+The following vars / arguments  parameters are expected : terraform variables are declared in vars.tf, and defined in terraform.tfvars
+
+Name | Type      | Description
+-----|-----------|------------
+ak | string | The access key of the FlexibleEngine cloud
+sk | string | The secret key of the FlexibleEngine cloud
+domain_name | string | The Name of the Domain to scope to
+tenant_name | string | The Name of the Project to login with
+region | string | Region of the FlexibleEngine cloud
+availability_zone_names | List | Availability zone of resource
+cidr_vpc | string | The VPC CIDR of the main VPC
+cidr_subnet_in | String | the input subnet that will hold our FE resources
+cidr_subnet_out | String | the output subnet that will be exposed to public network and On-Perm via EIP
+cidr_private_vpc | string | The VPC CIDR of the private VPC
+cidr_private_subnet | String | the private subnet that will hold our FE resources
+gateway_in | string | The gateway ip address of input subnet
+gateway_out | string | The gateway ip address of output subnet
+private_gateway | string | The gateway ip address of private subnet
+
+## Output / Attributes Reference
+The following attributes / output parameters are produced : terraform output variables res defined in outputs.tf
+
+Name | Description
+-----|------------
+ip_firewall_in | Firewall ip address of network interface card attached to input subnet
+ip_firewall_out | Firewall ip address of network interface card attached to output subnet
+<br/>
 
 ## Diagram:
 ![Alt text](https://github.com/FlexibleEngineCloud/FE-landingzone/blob/main/docs/diagrams/north-south-multivpc.png)
