@@ -81,24 +81,33 @@ resource "flexibleengine_vpc_eip" "eip_1" {
   }
 }
 
+# Firewall VPC Route table
 # Create default VPC route.
-resource "flexibleengine_vpc_route" "vpc_route" {
+resource "flexibleengine_vpc_route" "vpc_route_1" {
   vpc_id         = flexibleengine_vpc_v1.vpc.id
   destination    = "0.0.0.0/0"
   type           = "ecs"
-  nexthop        = flexibleengine_compute_instance_v2.firewall.network.0.fixed_ip_v4
+  nexthop        = flexibleengine_compute_instance_v2.firewall.id
 }
 # Create subnet remote VPC route.
-resource "flexibleengine_vpc_route" "vpc_route" {
+resource "flexibleengine_vpc_route" "vpc_route_2" {
   vpc_id         = flexibleengine_vpc_v1.vpc.id
   destination    = "192.168.100.0/24"
   type           = "ecs"
-  nexthop        = flexibleengine_compute_instance_v2.firewall.network.0.fixed_ip_v4
+  nexthop        = flexibleengine_compute_instance_v2.firewall.id
+}
+# Create private VPC route.
+resource "flexibleengine_vpc_route" "vpc_route_3" {
+  vpc_id         = flexibleengine_vpc_v1.vpc.id
+  destination    = var.cidr_private_vpc
+  type           = "peering"
+  nexthop        = flexibleengine_vpc_peering_connection_v2.peering.id
 }
 
-# Create private VPC route.
-resource "flexibleengine_vpc_route" "vpc_route" {
-  vpc_id         = flexibleengine_vpc_v1.vpc.id
+# Private VPC Route table
+# Create firewall VPC route.
+resource "flexibleengine_vpc_route" "vpc_route_4" {
+  vpc_id         = flexibleengine_vpc_v1.private-vpc.id
   destination    = "0.0.0.0/0"
   type           = "peering"
   nexthop        = flexibleengine_vpc_peering_connection_v2.peering.id
