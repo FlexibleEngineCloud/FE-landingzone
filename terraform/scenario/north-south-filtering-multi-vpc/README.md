@@ -44,4 +44,4 @@ For cross-tenant VPCs you must accept the peering.
 - Configure the firewall ECS instance to allow only authorized traffic to enter and leave the VPC based on predetermined security rules.
 
 ## Diagram:
-![Alt text](diagram.png)
+![Alt text](https://github.com/FlexibleEngineCloud/FE-landingzone/blob/main/docs/diagrams/north-south-multivpc.png)
