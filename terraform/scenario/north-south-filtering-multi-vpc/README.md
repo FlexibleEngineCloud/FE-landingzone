@@ -74,4 +74,4 @@ ip_firewall_out | Firewall ip address of network interface card attached to outp
 <br/>
 
 ## Diagram:
-![Alt text](https://github.com/FlexibleEngineCloud/FE-landingzone/blob/main/docs/diagrams/north-south-multivpc.png)
+![Alt text](https://github.com/FlexibleEngineCloud/FE-landingzone/blob/main/docs/designs/north-south-multivpc.png)
