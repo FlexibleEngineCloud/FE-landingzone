@@ -67,7 +67,7 @@ $ git clone https://github.com/FlexibleEngineCloud/FE-landingzone.git
 After setting authentication method credentials, it could be either, username/password, AK/SK, Token.
 You should be able to provision resources on your FlexibleEngine domain.
 <br/>
-for more details about setting authentication credentials, please refer to the [FlexibleEngine terraform documentation](https://registry.terraform.io/providers/FlexibleEngineCloud/flexibleengine/latest/docs).
+See [SECURITY.md](https://github.com/FlexibleEngineCloud/FE-landingzone/blob/main/SECURITY.md) for best practices managing terraform secrets.
 
 In a terminal, go into the scenario that fits your requirements, and run the terraform init command:
 ```
@@ -114,6 +114,11 @@ Tap "yes", to confirm.
 Apply complete! Resources: 18 added, 0 changed, 0 destroyed.
 ```
 Congrats, you’ve just deployed a landing zone in your FlexibleEngine account using Terraform! To verify this, head over to the FlexibleEngine console, and you should see your awesome infrastructure ready to go.
+
+### See Also 
+- [Automating Flexible Engine Deployments with Terraform and GitHub Actions](https://cloud.orange-business.com/en/how-to/automating-flexible-engine-deployments-with-terraform-and-github-actions).
+- [Terraform on Flexible Engine](https://cloud.orange-business.com/en/how-to/terraform-on-flexible-engine).
+
 
 ## Contributing
 We welcome contributions to this repository! If you would like to contribute, please see our contributing guidelines for more information.
