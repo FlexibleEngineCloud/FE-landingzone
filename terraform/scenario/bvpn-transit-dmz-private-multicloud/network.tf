@@ -169,38 +169,69 @@ resource "flexibleengine_antiddos_v1" "antiddos" {
 
 
 
-
-
-/*
-# Firewall VPC Route table
+# CPE VPC Route table
 # Create default VPC route.
 resource "flexibleengine_vpc_route" "vpc_route_1" {
   vpc_id         = flexibleengine_vpc_v1.vpc.id
   destination    = "0.0.0.0/0"
-  type           = "ecs"
-  nexthop        = flexibleengine_compute_instance_v2.firewall.id
-}
-# Create subnet remote VPC route.
-resource "flexibleengine_vpc_route" "vpc_route_2" {
-  vpc_id         = flexibleengine_vpc_v1.vpc.id
-  destination    = "192.168.100.0/24"
-  type           = "ecs"
-  nexthop        = flexibleengine_compute_instance_v2.firewall.id
-}
-# Create private VPC route.
-resource "flexibleengine_vpc_route" "vpc_route_3" {
-  vpc_id         = flexibleengine_vpc_v1.vpc.id
-  destination    = var.cidr_private_vpc
-  type           = "peering"
-  nexthop        = flexibleengine_vpc_peering_connection_v2.peering.id
+  type           = "vip"
+  nexthop        = flexibleengine_networking_vip_v2.vip_in.ip_address
 }
 
-# Private VPC Route table
-# Create firewall VPC route.
-resource "flexibleengine_vpc_route" "vpc_route_4" {
-  vpc_id         = flexibleengine_vpc_v1.private-vpc.id
+
+# Create subnet IN custom route table.
+resource "flexibleengine_vpc_route_table" "route_table" {
+  name    = "custom-rtb-${random_string.id.result}"
+  vpc_id  = flexibleengine_vpc_v1.vpc.id
+  subnets = [flexibleengine_vpc_subnet_v1.subnet_in.id]
+
+  route {
+    destination = "192.168.1.0/24"
+    type        = "peering"
+    nexthop     = flexibleengine_vpc_peering_connection_v2.peering1.id
+  }
+  route {
+    destination = "192.168.2.0/24"
+    type        = "peering"
+    nexthop     = flexibleengine_vpc_peering_connection_v2.peering2.id
+  }
+  route {
+    destination = "192.168.3.0/24"
+    type        = "peering"
+    nexthop     = flexibleengine_vpc_peering_connection_v2.peering3.id
+  }
+  /*
+  route {
+    destination = "RFC1918"
+    type        = "dc"
+    nexthop     = "Direct Connect gateway ID"
+  }
+  */
+}
+
+# DMZ VPC Route table
+# Create default route.
+resource "flexibleengine_vpc_route" "vpc_route_2" {
+  vpc_id         = flexibleengine_vpc_v1.vpc_dmz.id
   destination    = "0.0.0.0/0"
   type           = "peering"
-  nexthop        = flexibleengine_vpc_peering_connection_v2.peering.id
+  nexthop        = flexibleengine_vpc_peering_connection_v2.peering1.id
 }
-*/
+
+# Production VPC Route table
+# Create default route.
+resource "flexibleengine_vpc_route" "vpc_route_3" {
+  vpc_id         = flexibleengine_vpc_v1.vpc_prod.id
+  destination    = "0.0.0.0/0"
+  type           = "peering"
+  nexthop        = flexibleengine_vpc_peering_connection_v2.peering2.id
+}
+
+# Development VPC Route table
+# Create default route.
+resource "flexibleengine_vpc_route" "vpc_route_4" {
+  vpc_id         = flexibleengine_vpc_v1.vpc_dev.id
+  destination    = "0.0.0.0/0"
+  type           = "peering"
+  nexthop        = flexibleengine_vpc_peering_connection_v2.peering3.id
+}
