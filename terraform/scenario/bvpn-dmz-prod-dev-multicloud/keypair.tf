@@ -15,3 +15,12 @@ resource "flexibleengine_compute_keypair_v2" "keypair" {
     EOT
   }
 }
+
+# Create KMS key
+resource "flexibleengine_kms_key_v1" "kmskey" {
+  key_alias       = "key-${random_string.id.result}"
+  pending_days    = "7"
+  key_description = "kms key for SFS Turbo"
+  realm           = "eu-west-0a"
+  is_enabled      = true
+}

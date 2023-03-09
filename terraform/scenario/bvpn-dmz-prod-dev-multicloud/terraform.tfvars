@@ -1,11 +1,6 @@
-domain_name = "XXXXXXXXXX"
-tenant_name = "XXXXXXXXXX"
+domain_name = "OCB0001661"
+tenant_name = "eu-west-0_or"
 region = "eu-west-0"
-availability_zone_names = [
-  "eu-west-0a",
-  "eu-west-0b",
-  "eu-west-0c"
-]
 
 cidr_vpc = "192.168.0.0/24"
 cidr_subnet_in = "192.168.0.128/27"

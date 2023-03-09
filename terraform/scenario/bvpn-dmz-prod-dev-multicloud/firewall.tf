@@ -5,6 +5,7 @@ resource "flexibleengine_compute_instance_v2" "firewall1" {
   flavor_id       = "c6.xlarge.2"
   key_pair        = flexibleengine_compute_keypair_v2.keypair.name
   security_groups = ["default",flexibleengine_networking_secgroup_v2.secgroup_1.name]
+  availability_zone = "eu-west-0a"
 
   network {
     uuid = flexibleengine_vpc_subnet_v1.subnet_in.id
@@ -27,6 +28,7 @@ resource "flexibleengine_compute_instance_v2" "firewall2" {
   flavor_id       = "c6.xlarge.2"
   key_pair        = flexibleengine_compute_keypair_v2.keypair.name
   security_groups = ["default",flexibleengine_networking_secgroup_v2.secgroup_1.name]
+  availability_zone = "eu-west-0b"
 
   network {
     uuid = flexibleengine_vpc_subnet_v1.subnet_in.id

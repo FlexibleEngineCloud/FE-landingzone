@@ -9,6 +9,16 @@ variable "sk" {
   description = "The secret key of the FlexibleEngine cloud"
   sensitive = true
 }
+variable "db_pass" {
+  type = string
+  description = "The password of RDS DB database"
+  sensitive = true
+}
+variable "mrs_pass" {
+  type = string
+  description = "The password of MRS cluster manager"
+  sensitive = true
+}
 variable "domain_name" {
   type = string
   description = "The Name of the Domain to scope to"
@@ -21,11 +31,13 @@ variable "region" {
   type = string
   description = "Region of the FlexibleEngine cloud"
 }
+/*
 variable "availability_zone_names" {
   type = list(string)
   description = "Availability zone of resource"
-  default = ["eu-west-0a"]
+  default = ["eu-west-0a","eu-west-0b","eu-west-0c"]
 }
+*/
 
 # VPC and Subnet variables
 variable "cidr_vpc" {

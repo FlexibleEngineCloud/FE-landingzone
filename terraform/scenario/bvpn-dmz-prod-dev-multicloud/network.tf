@@ -235,3 +235,52 @@ resource "flexibleengine_vpc_route" "vpc_route_4" {
   type           = "peering"
   nexthop        = flexibleengine_vpc_peering_connection_v2.peering3.id
 }
+
+# L7 elb flavors
+data "flexibleengine_elb_flavors" "l7_flavors" {
+  type            = "L7"
+}
+
+# Create loadbalancer
+resource "flexibleengine_lb_loadbalancer_v3" "lb" {
+  name              = "lb-${random_string.id.result}"
+  description       = "load balancer for DMZ AS Group"
+  cross_vpc_backend = false
+  vpc_id            = flexibleengine_vpc_v1.vpc_dmz.id
+  ipv4_subnet_id    = flexibleengine_vpc_subnet_v1.subnet_dmz.ipv4_subnet_id
+  l7_flavor_id = data.flexibleengine_elb_flavors.l7_flavors.ids[0]
+
+  availability_zone = [
+    "eu-west-0a",
+    "eu-west-0b",
+    "eu-west-0c"
+  ]
+  tags = {
+    scenario  = "bvpn-transit-dmz-private-multicloud"
+  }
+}
+
+# Create HTTP listener
+resource "flexibleengine_lb_listener_v3" "lblistener" {
+  name            = "listener-${random_string.id.result}"
+  description     = "HTTP listener for load balancer"
+  protocol        = "HTTP"
+  protocol_port   = 8080
+  loadbalancer_id = flexibleengine_lb_loadbalancer_v3.lb.id
+
+  idle_timeout     = 60
+  request_timeout  = 60
+  response_timeout = 60
+
+  tags = {
+    scenario  = "bvpn-transit-dmz-private-multicloud"
+  }
+}
+
+# Create Backend Server Group
+resource "flexibleengine_lb_pool_v3" "pool" {
+  name = "backend-ecs-${random_string.id.result}"
+  protocol    = "HTTP"
+  lb_method   = "ROUND_ROBIN"
+  listener_id = flexibleengine_lb_listener_v3.lblistener.id
+}
