@@ -252,8 +252,7 @@ resource "flexibleengine_lb_loadbalancer_v3" "lb" {
 
   availability_zone = [
     "eu-west-0a",
-    "eu-west-0b",
-    "eu-west-0c"
+    "eu-west-0b"
   ]
   tags = {
     scenario  = "bvpn-transit-dmz-private-multicloud"
