@@ -121,6 +121,11 @@ variable "dev_gateway" {
   description = "Gateway of the development subnet"
 }
 
+variable "tag" {
+  type        = string
+  description = "Tagging resources"
+}
+
 # KeyPair Name
 variable "generated_key_name" {
   type        = string

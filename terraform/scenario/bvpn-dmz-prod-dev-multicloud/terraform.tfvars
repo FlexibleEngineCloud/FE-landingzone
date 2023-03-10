@@ -1,6 +1,8 @@
-domain_name = "OCB0001661"
-tenant_name = "eu-west-0_or"
+domain_name = "XXXXXXX"
+tenant_name = "XXXXXXX"
 region = "eu-west-0"
+
+tag = "bvpn-dmz-prod-dev-multicloud"
 
 cidr_vpc = "192.168.0.0/24"
 cidr_subnet_in = "192.168.0.128/27"
