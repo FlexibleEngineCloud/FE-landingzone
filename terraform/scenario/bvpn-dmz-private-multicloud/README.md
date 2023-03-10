@@ -1,13 +1,13 @@
-# MultiCloud DMZ, Production/Dev Environment via Orange BusinessVPN :
-This is a guide to implementing a multicloud architecture with DMZ,Prod/Dev environment. by controlling traffic flow between your On-Premise/Internet and your FE infrastructure.
+# MultiCloud DMZ/Private via Orange BusinessVPN :
+This is a guide to implementing a multicloud architecture with DMZ/Private environment. by controlling traffic flow between your On-Premise/Internet and your FE infrastructure.
 <br/>
-This architecture uses an open source firewall (pfsense) deployed on an ECS instance using an pre-built IMS image, allowing only authorized traffic to enter and leave the DMZ/Prod/Dev network on FE infastructure. 
+This architecture uses an open source firewall (pfsense) deployed on an ECS instance using an pre-built IMS image, allowing only authorized traffic to enter and leave the DMZ/Private network on FE infastructure. 
 <br/>
 This documentation will provide an overview of this architecture and its components.
 
 
 ## Components:
-The MultiCloud DMZ, Production/Dev Environment architecture consists of the following components:
+The MultiCloud DMZ/Private architecture consists of the following components:
 
 - Virtual Private Cloud (VPC): A VPC is a logically isolated virtual network within the FE (Flexible Engine) Cloud. It provides a secure and scalable environment for resources to run within.
 
@@ -27,10 +27,6 @@ The MultiCloud DMZ, Production/Dev Environment architecture consists of the foll
 
 - NetworkACL: Network Access Control List for controling traffic on subnets.
 
-- SFS-Turbo: Shared File System Turbo for high-performance file sharing.
-
-- MRS Cluster: Managed Resource Service for data processing.
-
 - RDS: Relational Database Service for data storage.
 
 
@@ -39,7 +35,7 @@ The architecture consists of the following steps:
 
 - Create multiple VPCs and their subnets.
 
-- Create a VPC peering between DMZ/Prod/Dev VPC and CPE VPC, if the peer VPC is your own, no need to accept the peering.
+- Create a VPC peering between DMZ/Private VPC and CPE VPC, if the peer VPC is your own, no need to accept the peering.
 For cross-tenant VPCs you must accept the peering.
 
 - Create an RSA keypair for logging and securing access to the ECS instances.
@@ -60,9 +56,7 @@ For cross-tenant VPCs you must accept the peering.
 
 - Create AS config, AS Group, LoadBalancer, for high availability and elasticity.
 
-- Create "Production application" resources including BMS, ECS instances.
-
-- Create "Production data" resources including SFS file system sharing, MRS Cluster and RDS relational database.
+- Create "Private VPC" resources including RDS Database and ECS instances.
 
 - DirectConnect connection to connect On-Perm data center via "Orange BusinessVPN" to FlexibleEngine VPC.
 
@@ -82,8 +76,8 @@ sk | string | The secret key of the FlexibleEngine cloud
 domain_name | string | The Name of the Domain to scope to
 tenant_name | string | The Name of the Project to login with
 region | string | Region of the FlexibleEngine cloud
+tag | string | Tag of FlexibleEngine resources
 db_pass | string | The password of RDS DB database
-mrs_pass | string | The password of MRS cluster manager
 cidr_vpc | string | The VPC CIDR of the CPE VPC
 cidr_subnet_in | String | the inbound subnet of CPE VPC
 cidr_subnet_out | String | the outbound subnet of CPE VPC that will be exposed to Internet through EIP.
@@ -94,14 +88,9 @@ gateway_sync | string | The gateway ip address of sync subnet
 cidr_dmz_vpc | string | The VPC CIDR of the DMZ VPC
 cidr_subnet_dmz | String | the DMZ subnet that will hold external-facing services to the Internet.
 dmz_gateway | string | The gateway ip address of DMZ subnet
-cidr_prod_vpc | string | The VPC CIDR of the Production VPC
-cidr_subnet_app | String | the app subnet that carry application resources
-cidr_subnet_data | String | the data subnet that carry data resources
-app_gateway | string | The gateway ip address of app subnet
-data_gateway | string | The gateway ip address of data subnet
-cidr_dev_vpc | string | The VPC CIDR of the Dev VPC
-cidr_subnet_dev | String | the dev subnet
-dev_gateway | string | The gateway ip address of dev subnet
+cidr_private_vpc | string | The private VPC CIDR
+cidr_subnet_private | String | The private subnet CIDR
+private_gateway | string | The gateway ip address of private subnet
 
 
 ## Output / Attributes Reference
@@ -118,4 +107,4 @@ vip_out | virtual ip address exposed to outbound subnet
 <br/>
 
 ## Diagram:
-![Alt text](https://github.com/FlexibleEngineCloud/FE-landingzone/blob/main/docs/designs/bvpn-dmz-prod-dev-multicloud.png)
+![Alt text](https://github.com/FlexibleEngineCloud/FE-landingzone/blob/main/docs/designs/bvpn-dmz-private-multicloud.png)
