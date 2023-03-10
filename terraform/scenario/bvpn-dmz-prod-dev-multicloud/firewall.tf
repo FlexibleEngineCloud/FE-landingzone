@@ -17,7 +17,7 @@ resource "flexibleengine_compute_instance_v2" "firewall1" {
     uuid = flexibleengine_vpc_subnet_v1.subnet_sync.id
   }
   tags = {
-    scenario  = "bvpn-transit-dmz-private-multicloud"
+    scenario  = var.tag
   }
 }
 
@@ -40,7 +40,7 @@ resource "flexibleengine_compute_instance_v2" "firewall2" {
     uuid = flexibleengine_vpc_subnet_v1.subnet_sync.id
   }
   tags = {
-    scenario  = "bvpn-transit-dmz-private-multicloud"
+    scenario  = var.tag
   }
 }
 

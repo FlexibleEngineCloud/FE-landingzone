@@ -11,7 +11,7 @@ resource "flexibleengine_vpc_v1" "vpc" {
   cidr =  var.cidr_vpc
 
   tags = {
-    scenario  = "bvpn-transit-dmz-private-multicloud"
+    scenario  = var.tag
   }
 }
 # create IN subnet.
@@ -22,7 +22,7 @@ resource "flexibleengine_vpc_subnet_v1" "subnet_in" {
   vpc_id     = flexibleengine_vpc_v1.vpc.id
 
   tags = {
-    scenario  = "bvpn-transit-dmz-private-multicloud"
+    scenario  = var.tag
   }
 }
 # Create OUT subnet.
@@ -33,7 +33,7 @@ resource "flexibleengine_vpc_subnet_v1" "subnet_out" {
   vpc_id     = flexibleengine_vpc_v1.vpc.id
 
   tags = {
-    scenario  = "bvpn-transit-dmz-private-multicloud"
+    scenario  = var.tag
   }
 }
 # Create Synchronization subnet.
@@ -44,7 +44,7 @@ resource "flexibleengine_vpc_subnet_v1" "subnet_sync" {
   vpc_id     = flexibleengine_vpc_v1.vpc.id
 
   tags = {
-    scenario  = "bvpn-transit-dmz-private-multicloud"
+    scenario  = var.tag
   }
 }
 
@@ -54,7 +54,7 @@ resource "flexibleengine_vpc_v1" "vpc_dmz" {
   cidr =  var.cidr_dmz_vpc
 
   tags = {
-    scenario  = "bvpn-transit-dmz-private-multicloud"
+    scenario  = var.tag
   }
 }
 # create DMZ subnet.
@@ -65,7 +65,7 @@ resource "flexibleengine_vpc_subnet_v1" "subnet_dmz" {
   vpc_id     = flexibleengine_vpc_v1.vpc_dmz.id
 
   tags = {
-    scenario  = "bvpn-transit-dmz-private-multicloud"
+    scenario  = var.tag
   }
 }
 
@@ -75,7 +75,7 @@ resource "flexibleengine_vpc_v1" "vpc_prod" {
   cidr =  var.cidr_prod_vpc
 
   tags = {
-    scenario  = "bvpn-transit-dmz-private-multicloud"
+    scenario  = var.tag
   }
 }
 # create Application Prod subnet.
@@ -86,7 +86,7 @@ resource "flexibleengine_vpc_subnet_v1" "subnet_app" {
   vpc_id     = flexibleengine_vpc_v1.vpc_prod.id
 
   tags = {
-    scenario  = "bvpn-transit-dmz-private-multicloud"
+    scenario  = var.tag
   }
 }
 # create Data Prod subnet.
@@ -97,7 +97,7 @@ resource "flexibleengine_vpc_subnet_v1" "subnet_data" {
   vpc_id     = flexibleengine_vpc_v1.vpc_prod.id
 
   tags = {
-    scenario  = "bvpn-transit-dmz-private-multicloud"
+    scenario  = var.tag
   }
 }
 
@@ -107,7 +107,7 @@ resource "flexibleengine_vpc_v1" "vpc_dev" {
   cidr =  var.cidr_dev_vpc
 
   tags = {
-    scenario  = "bvpn-transit-dmz-private-multicloud"
+    scenario  = var.tag
   }
 }
 # create Dev subnet.
@@ -118,7 +118,7 @@ resource "flexibleengine_vpc_subnet_v1" "subnet_dev" {
   vpc_id     = flexibleengine_vpc_v1.vpc_dev.id
 
   tags = {
-    scenario  = "bvpn-transit-dmz-private-multicloud"
+    scenario  = var.tag
   }
 }
 
@@ -154,7 +154,7 @@ resource "flexibleengine_vpc_eip" "eip_1" {
     charge_mode = "traffic"
   }
   tags = {
-    scenario  = "bvpn-transit-dmz-private-multicloud"
+    scenario  = var.tag
   }
 }
 # Enable AntiDDOS on EIP
@@ -255,7 +255,7 @@ resource "flexibleengine_lb_loadbalancer_v3" "lb" {
     "eu-west-0b"
   ]
   tags = {
-    scenario  = "bvpn-transit-dmz-private-multicloud"
+    scenario  = var.tag
   }
 }
 
@@ -272,7 +272,7 @@ resource "flexibleengine_lb_listener_v3" "lblistener" {
   response_timeout = 60
 
   tags = {
-    scenario  = "bvpn-transit-dmz-private-multicloud"
+    scenario  = var.tag
   }
 }
 

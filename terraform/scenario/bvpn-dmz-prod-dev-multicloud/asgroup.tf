@@ -36,6 +36,6 @@ resource "flexibleengine_as_group_v1" "as_group_with_elb" {
   }
 
   tags = {
-    scenario  = "bvpn-transit-dmz-private-multicloud"
+    scenario  = var.tag
   }
 }

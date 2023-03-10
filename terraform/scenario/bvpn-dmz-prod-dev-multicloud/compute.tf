@@ -11,7 +11,7 @@ resource "flexibleengine_compute_instance_v2" "instance1" {
     uuid = flexibleengine_vpc_subnet_v1.subnet_app.id
   }
   tags = {
-    scenario  = "bvpn-transit-dmz-private-multicloud"
+    scenario  = var.tag
   }
 }
 
@@ -28,7 +28,7 @@ resource "flexibleengine_compute_instance_v2" "instance2" {
     uuid = flexibleengine_vpc_subnet_v1.subnet_app.id
   }
   tags = {
-    scenario  = "bvpn-transit-dmz-private-multicloud"
+    scenario  = var.tag
   }
 }
 
@@ -43,7 +43,7 @@ resource "flexibleengine_compute_bms_server_v2" "bms-server" {
   availability_zone = "eu-west-0a"
 
   metadata = {
-    scenario  = "bvpn-transit-dmz-private-multicloud"
+    scenario  = var.tag
   }
   network {
     uuid = flexibleengine_vpc_subnet_v1.subnet_app.id
@@ -85,6 +85,6 @@ resource "flexibleengine_mrs_cluster_v2" "mrs-cluster" {
     data_volume_count = 1
   }
   tags = {
-    scenario  = "bvpn-transit-dmz-private-multicloud"
+    scenario  = var.tag
   }
 }
