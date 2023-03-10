@@ -19,6 +19,7 @@ This repository contains the Terraform code and related resources necessary to d
 A landing zone typically consists of several components, including:
 
 - Identity and Access Management (IAM): IAM controls who has access to your landing zone and what they can do. This includes authentication, authorization, and permissions management for users, groups, and roles.
+More on [IAM and multi tenancy best practices on Flexible Engine](https://cloud.orange-business.com/en/best-practices-and-how-to/iam-multi-tenancy).
 
 - Networking: Networking includes the configuration of Virtual Private Clouds (VPCs), subnets, routing, and security groups. This ensures that your resources are properly segmented and protected within your landing zone.
 
@@ -118,7 +119,7 @@ Congrats, you’ve just deployed a landing zone in your FlexibleEngine account u
 ### See Also 
 - [Automating Flexible Engine Deployments with Terraform and GitHub Actions](https://cloud.orange-business.com/en/how-to/automating-flexible-engine-deployments-with-terraform-and-github-actions).
 - [Terraform on Flexible Engine](https://cloud.orange-business.com/en/how-to/terraform-on-flexible-engine).
-
+- [IAM and multi tenancy best practices on Flexible Engine](https://cloud.orange-business.com/en/best-practices-and-how-to/iam-multi-tenancy).
 
 ## Contributing
 We welcome contributions to this repository! If you would like to contribute, please see our contributing guidelines for more information.
