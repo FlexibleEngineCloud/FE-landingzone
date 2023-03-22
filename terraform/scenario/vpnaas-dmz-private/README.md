@@ -28,7 +28,7 @@ The VPNaaS DMZ/Private architecture consists of the following components:
 
 - RDS: Relational Database Service for data storage.
 
-- VPN : VPN Tunnel between PAR region and AMS region for multiregion connectivity.
+- VPN : VPN Tunnel between PAR region and AMS region for multi region connectivity.
 
 ## Architecture:
 The architecture consists of the following steps:
