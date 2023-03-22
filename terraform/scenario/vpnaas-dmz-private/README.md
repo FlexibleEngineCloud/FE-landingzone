@@ -1,13 +1,14 @@
-# MultiCloud DMZ/Private via Orange BusinessVPN :
-This is a guide to implementing a multicloud architecture with DMZ/Private environment. by controlling traffic flow between your On-Premise/Internet and your FE infrastructure.
+# VPNaaS DMZ/Private in MultiRegion :
+This is a guide to implementing a VPNaaS architecture with DMZ/Private in multi region environment (eu-west-0/eu-west-1). by controlling traffic flow between public network and your FE infrastructure in multi region.
 <br/>
 This architecture uses an open source firewall (pfsense) deployed on an ECS instance using an pre-built IMS image, allowing only authorized traffic to enter and leave the DMZ/Private network on FE infastructure. 
 <br/>
 This documentation will provide an overview of this architecture and its components.
+> [Virtual Private Network VPN Service](https://docs.prod-cloud-ocb.orange-business.com/usermanual/vpn/en-us_topic_0035391332.html) on FlexibleEngine at now, is not supported yet for terraform deployment. The creation of VPN gateway on the second region (Paris) is done manually via console, as well as the tunnel establishement between the AMSTERDAM region from ECS instance firewall to the PARIS region VPN gateway. 
 
 
 ## Components:
-The MultiCloud DMZ/Private architecture consists of the following components:
+The VPNaaS DMZ/Private architecture consists of the following components:
 
 - Virtual Private Cloud (VPC): A VPC is a logically isolated virtual network within the FE (Flexible Engine) Cloud. It provides a secure and scalable environment for resources to run within.
 
@@ -23,17 +24,16 @@ The MultiCloud DMZ/Private architecture consists of the following components:
 
 - AutoScaling Group: Automatically adjusts ECS server capacity based on traffic load.
 
-- LoadBalancer: Distributes traffic across multiple servers, in this architecture AutoScaling Group.
-
 - NetworkACL: Network Access Control List for controling traffic on subnets.
 
 - RDS: Relational Database Service for data storage.
 
+- VPN : VPN Tunnel between PAR region and AMS region for multi region connectivity.
 
 ## Architecture:
 The architecture consists of the following steps:
 
-- Create multiple VPCs and their subnets.
+- Create multiple VPCs and their subnets on the two regions.
 
 - Create a VPC peering between DMZ/Private VPC and CPE VPC, if the peer VPC is your own, no need to accept the peering.
 For cross-tenant VPCs you must accept the peering.
@@ -54,19 +54,19 @@ For cross-tenant VPCs you must accept the peering.
 
 - Create default routes on VPCs route tables to redirect inbound/outbound traffic through Firewall instances.
 
-- Create AS config, AS Group, LoadBalancer, for high availability and elasticity.
+- Create AS config, AS Group, for high availability and elasticity.
 
 - Create "Private VPC" resources including RDS Database and ECS instances.
 
-- DirectConnect connection to connect On-Perm data center via "Orange BusinessVPN" to FlexibleEngine VPC.
+- Create VPN Gateway on PARIS region.
 
-- IPSec VPN tunnel from ECS Firewall instance to Third-party cloud platform. 
+- Establish VPN tunnel from ECS Firewall instance to VPN Gateway on PARIS region.
 
-- Configure the firewall ECS instance to allow only authorized traffic to enter and leave the VPC based on predetermined security rules.
+- Configure the firewall ECS instances to allow only authorized traffic to enter and leave the VPC based on predetermined security rules.
 <br/>
 
 
-## vars / Arguments Reference
+## Vars / Arguments Reference
 The following vars / arguments  parameters are expected : terraform variables are declared in vars.tf, and defined in terraform.tfvars
 
 Name | Type      | Description
@@ -91,10 +91,13 @@ dmz_gateway | string | The gateway ip address of DMZ subnet
 cidr_private_vpc | string | The private VPC CIDR
 cidr_subnet_private | String | The private subnet CIDR
 private_gateway | string | The gateway ip address of private subnet
+cidr_remote_vpc | string | The remote VPC CIDR
+cidr_subnet_remote | String | The remote subnet CIDR
+remote_gateway | string | The gateway ip address of remote subnet
 
 
 ## Output / Attributes Reference
-The following attributes / output parameters are produced : terraform output variables res defined in outputs.tf
+The following attributes / output parameters are produced : terraform output variables are defined in outputs.tf
 
 Name | Description
 -----|------------
@@ -107,4 +110,4 @@ vip_out | virtual ip address exposed to outbound subnet
 <br/>
 
 ## Diagram:
-![Alt text](https://github.com/FlexibleEngineCloud/FE-landingzone/blob/main/docs/designs/bvpn-dmz-private-multicloud.png)
+![Alt text](https://github.com/FlexibleEngineCloud/FE-landingzone/blob/main/docs/designs/vpnaas-dmz-private-multiregion.png)
