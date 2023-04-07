@@ -8,3 +8,4 @@
 **/.terraform.lock.hcl
 **/*.pem
 **/*secret.tfvars
+**/*secretdev.tfvars
