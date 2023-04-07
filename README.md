@@ -4,6 +4,8 @@ Landing Zones refers to the pre-configured and secure cloud environments that or
 
 This repository contains the Terraform code and related resources necessary to deploy a Landing Zone in FlexibleEngine.
 
+## Diagram Blueprint (in-progress):
+![Alt text](https://github.com/FlexibleEngineCloud/FE-landingzone/blob/main/docs/designs/landingzone-all-in-one.png)
 
 ### Benefits of Landing Zones
 - Security: A landing zone provides a secure environment for hosting your workloads. By following best practices for security, such as network segmentation, access controls, and encryption, you can minimize the risk of unauthorized access, data breaches, and other security threats.
@@ -125,4 +127,4 @@ Congrats, you’ve just deployed a landing zone in your FlexibleEngine account u
 We welcome contributions to this repository! If you would like to contribute, please see our contributing guidelines for more information.
 
 ## License
-This repository is licensed under the XXXX License. See the LICENSE file for more information.
+This repository is licensed under the Apache 2.0 License. See the LICENSE file for more information.
