@@ -9,7 +9,7 @@ def authenticate():
     token_url = f"{endpoint}/auth/tokens?Content-Type=application/json;charset=utf8"
 
     # Load Flexible Engine Credentials from .tfvars file
-    with open("/home/cloud/Desktop/FE-landingzone/secretdev.tfvars", "r") as credentials_file:
+    with open("../../secretdev.tfvars", "r") as credentials_file:
         credentials = hcl2.load(credentials_file)
 
     credentials_file.close()
