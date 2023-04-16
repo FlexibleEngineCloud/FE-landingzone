@@ -5,7 +5,7 @@ from authentication import authenticate
 
 def get_iam_policies():
     endpoint = "https://iam.eu-west-0.prod-cloud-ocb.orange-business.com/v3"
-    
+
     # Get User token
     token = authenticate()
 
@@ -40,12 +40,9 @@ def get_iam_policies():
         except KeyError:
             role_dict['display_name'] = None
 
-        try:
-            role_dict['policy'] = role['policy']
-        except KeyError:
-            role_dict['policy'] = None
-
-        roles_list.append(role_dict)
+        # Graping only "Admin" and "FullAccess" roles
+        if "Admin" in str(role_dict['display_name']) or "FullAccess" in str(role_dict['display_name']):
+            roles_list.append(role_dict)
 
     # Grouping Policies based on Service names (Catalog).
     grouped_data = {}
@@ -64,6 +61,7 @@ def get_iam_policies():
     except IOError:
         print("An error occurred while writing to the file 'policies.json'.")
         exit(1)
+
 
 if __name__ == "__main__":
     get_iam_policies()
