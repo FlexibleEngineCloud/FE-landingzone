@@ -1,3 +1,4 @@
+# Groups variable
 variable "groups" {
   type = list(object({
     name    = string
@@ -12,6 +13,7 @@ variable "groups" {
   }))
 }
 
+# Groups IDs variable
 variable "groups_ids" {
   type = map(string)
 }
