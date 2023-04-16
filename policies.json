@@ -2,40 +2,9 @@
   "AOS": [
     {
       "catalog": "AOS",
-      "description": "Application Orchestration Service Developer",
-      "display_name": "AOS Developer",
-      "id": "053d935ab9f24a4180490f1bbaa7fdf0",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "AOS:template:*",
-              "AOS:workflow:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
-    },
-    {
-      "catalog": "AOS",
       "description": "Application Orchestration Service Admin",
       "display_name": "AOS Admin",
-      "id": "e7bd66a8ee3747b39962bb34b9d52b21",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "AOS:template:*",
-              "AOS:workflow:*",
-              "AOS:node:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "e7bd66a8ee3747b39962bb34b9d52b21"
     }
   ],
   "APM": [
@@ -43,18 +12,7 @@
       "catalog": "APM",
       "description": "Application Performance Monitor Admin",
       "display_name": "APM Admin",
-      "id": "a88433a8a5e5489093b9d49059ffb20b",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "APM:monitordata:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "a88433a8a5e5489093b9d49059ffb20b"
     }
   ],
   "AS": [
@@ -62,58 +20,7 @@
       "catalog": "AS",
       "description": "Full permissions for Auto Scaling.",
       "display_name": "AutoScaling FullAccess",
-      "id": "07df273d426c4e28883d43c445680915",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "as:*:*",
-              "evs:*:get",
-              "evs:*:list",
-              "vpc:*:get",
-              "vpc:*:list",
-              "ims:*:get*",
-              "ims:*:list*",
-              "ecs:*:get",
-              "ecs:*:list",
-              "eps:*:list"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "AS",
-      "description": "Read-only permissions for Auto Scaling.",
-      "display_name": "AutoScaling ReadOnlyAccess",
-      "id": "bd91abf70f734a30a80e0ea506fcbcb1",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "as:*:list",
-              "as:*:get",
-              "dss:*:get",
-              "dss:*:list",
-              "evs:*:get*",
-              "evs:*:list",
-              "vpc:*:get*",
-              "vpc:*:list*",
-              "ims:*:get*",
-              "ims:*:list*",
-              "vpc:*:get",
-              "vpc:*:list",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "eps:*:list"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "07df273d426c4e28883d43c445680915"
     }
   ],
   "Anti-DDoS": [
@@ -121,25 +28,7 @@
       "catalog": "Anti-DDoS",
       "description": "Anti-DDoS Administrator",
       "display_name": "Anti-DDoS Administrator",
-      "id": "3b9b1a5bfc1d41feaca6906a1421dd43",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "BASE",
-            "display_name": "Guest"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "Anti-DDos:AntiDDoS:*",
-              "Anti-DDoS:Alert:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "3b9b1a5bfc1d41feaca6906a1421dd43"
     }
   ],
   "Auto Scaling": [
@@ -147,39 +36,7 @@
       "catalog": "Auto Scaling",
       "description": "AutoScaling Administrator",
       "display_name": "AutoScaling Administrator",
-      "id": "5a923bed5ec44be88c13abca5b007d49",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "BASE",
-            "display_name": "Server Administrator"
-          },
-          {
-            "catalog": "ELB",
-            "display_name": "ELB Administrator"
-          },
-          {
-            "catalog": "CES",
-            "display_name": "CES Administrator"
-          },
-          {
-            "catalog": "BASE",
-            "display_name": "Guest"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "AutoScaling:scaling_group:*",
-              "AutoScaling:scaling_configuration:*",
-              "AutoScaling:scaling_policy:*",
-              "AutoScaling:scaling_instance:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "5a923bed5ec44be88c13abca5b007d49"
     }
   ],
   "BASE": [
@@ -187,120 +44,19 @@
       "catalog": "BASE",
       "description": "Server Administrator",
       "display_name": "Server Administrator",
-      "id": "40296fa67fe947d2bbdb5ac39f71f43e",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "IMS",
-            "display_name": "IMS Administrator"
-          },
-          {
-            "catalog": "BASE",
-            "display_name": "Guest"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "ECS:compute:*",
-              "EVS:volume:*",
-              "EVS:snapshot:*",
-              "VPC:port:*",
-              "VPC:privateip:*",
-              "VPC:security_group:*",
-              "VPC:security_group_rule:*",
-              "VPC:floatingip:*",
-              "VPC:publicip:*",
-              "VPC:bandwidth:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "40296fa67fe947d2bbdb5ac39f71f43e"
     },
     {
       "catalog": "BASE",
       "description": "Security Administrator",
       "display_name": "Security Administrator",
-      "id": "4b6459d7a68f45f0b3cf7682c21c57e2",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "identity:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
-    },
-    {
-      "catalog": "BASE",
-      "description": "Guest",
-      "display_name": "Guest",
-      "id": "bb5e60bd4ce14f54863138e11ae7750b",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "*:*:Get*",
-              "*:*:List*"
-            ],
-            "Effect": "Allow"
-          },
-          {
-            "Action": [
-              "identity:*"
-            ],
-            "Effect": "Deny"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "4b6459d7a68f45f0b3cf7682c21c57e2"
     },
     {
       "catalog": "BASE",
       "description": "Tenant Administrator",
       "display_name": "Tenant Administrator",
-      "id": "c0783d60df5440a7acc4b1eb5b2a1913",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "*"
-            ],
-            "Effect": "Allow"
-          },
-          {
-            "Action": [
-              "identity:*"
-            ],
-            "Effect": "Deny"
-          }
-        ],
-        "Version": "1.0"
-      }
-    }
-  ],
-  "BASIC": [
-    {
-      "catalog": "BASIC",
-      "description": "Full access to all resources",
-      "display_name": "Full Access",
-      "id": "9287ee3e297a41249ef85500a2f4e7d4",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "*:*:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "c0783d60df5440a7acc4b1eb5b2a1913"
     }
   ],
   "BMS": [
@@ -308,121 +64,7 @@
       "catalog": "BMS",
       "description": "All permissions of BMS service.",
       "display_name": "BMS FullAccess",
-      "id": "365702b6efc44ab297352f4862162173",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "bms:*:*",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "evs:*:get",
-              "evs:*:list",
-              "evs:volumes:use",
-              "evs:snapshots:create",
-              "evs:volumes:update",
-              "ecs:serverVolumes:use",
-              "vpc:*:get",
-              "vpc:*:list",
-              "vpc:networks:create",
-              "vpc:networks:update",
-              "vpc:subnets:update",
-              "vpc:subnets:create",
-              "vpc:ports:*",
-              "vpc:publicIps:*",
-              "vpc:routers:get",
-              "vpc:routers:update",
-              "vpc:securityGroups:*",
-              "vpc:securityGroupRules:*",
-              "vpc:floatingIps:*",
-              "ims:images:create",
-              "ims:images:delete",
-              "ims:images:get",
-              "ims:images:list",
-              "ims:images:update",
-              "ims:images:upload",
-              "ecs:serverVolumes:use"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "BMS",
-      "description": "Permissions for basic BMS operations, such as starting, stopping, restarting a BMS, querying BMS details, and attaching data disks to or detaching data disks from a BMS.",
-      "display_name": "BMS CommonOperations",
-      "id": "85ca37c6831f435295aa1aaa5d87d4f8",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "bms:*:get*",
-              "bms:*:list*",
-              "bms:*:start",
-              "bms:*:stop",
-              "bms:*:reboot",
-              "bms:servers:resetServerPwd",
-              "bms:servers:attachVolume",
-              "bms:servers:detachVolume",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "evs:*:get",
-              "evs:*:list",
-              "evs:volumes:get",
-              "evs:volumes:use",
-              "evs:snapshots:create",
-              "evs:volumes:update",
-              "vpc:*:get",
-              "vpc:*:list",
-              "vpc:networks:create",
-              "vpc:networks:update",
-              "vpc:subnets:update",
-              "vpc:subnets:create",
-              "vpc:ports:*",
-              "vpc:routers:get",
-              "vpc:routers:update",
-              "vpc:securityGroups:*",
-              "vpc:securityGroupRules:*",
-              "vpc:floatingIps:*",
-              "ims:images:get",
-              "ims:images:list",
-              "ecs:serverVolumes:use"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "BMS",
-      "description": "The read-only permissions to all BMS resources, which can be used for statistics and survey.",
-      "display_name": "BMS ReadOnlyAccess",
-      "id": "a128e6abc5964937907c2086aac5a16a",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "bms:*:get*",
-              "bms:*:list*",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "evs:*:get*",
-              "evs:*:list*",
-              "vpc:*:get*",
-              "vpc:*:list*",
-              "ims:*:get*",
-              "ims:*:list*",
-              "ecs:serverGroups:manage",
-              "ecs:serverVolumes:use"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "365702b6efc44ab297352f4862162173"
     }
   ],
   "CBR": [
@@ -430,236 +72,27 @@
       "catalog": "CBR",
       "description": "Common user permissions for CBR. Users granted these permissions can create, view, and delete vaults and backups, but cannot create, update, or delete policies.",
       "display_name": "CBR BackupsAndVaultsFullAccess",
-      "id": "1fae0d9ebbb14200bb2d0918f2f91d10",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "cbr:*:get*",
-              "cbr:*:list*",
-              "cbr:backups:queryReplicationCapability",
-              "cbr:vaults:associatePolicy",
-              "cbr:vaults:update",
-              "cbr:vaults:delete",
-              "cbr:vaults:removeResources",
-              "cbr:vaults:addResources",
-              "cbr:vaults:create",
-              "cbr:vaults:dissociatePolicy",
-              "cbr:vaults:sync",
-              "cbr:vaults:replicate",
-              "cbr:vaults:backup",
-              "cbr:vaults:updateOrder",
-              "cbr:vaults:migrateResources",
-              "cbr:backups:checkAgent",
-              "cbr:backups:delete",
-              "cbr:backups:update",
-              "cbr:backups:restore",
-              "cbr:backups:replicate",
-              "cbr:backups:sync",
-              "cbr:member:create",
-              "cbr:member:delete",
-              "cbr:member:update",
-              "cbr:vaults:bulkCreateOrDeleteTags",
-              "cbr:vaults:deleteTags",
-              "cbr:vaults:setTags",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "evs:*:get*",
-              "evs:*:list*",
-              "ims:*:get*",
-              "ims:*:list*",
-              "ces:*:get*",
-              "ces:*:list*",
-              "sfsturbo:*:get*",
-              "sfsturbo:*:list*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "CBR",
-      "description": "Read-only permissions for CBR. Users granted these permissions can only view CBR data.",
-      "display_name": "CBR ReadOnlyAccess",
-      "id": "2305df01da9f40ea9f664dd0d8e37653",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "cbr:*:get*",
-              "cbr:*:list*",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "evs:*:get*",
-              "evs:*:list*",
-              "ims:*:get*",
-              "ims:*:list*",
-              "ces:*:get*",
-              "ces:*:list*",
-              "sfsturbo:*:get*",
-              "sfsturbo:*:list*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "1fae0d9ebbb14200bb2d0918f2f91d10"
     },
     {
       "catalog": "CBR",
       "description": "Administrator permissions for CBR. Users granted these permissions can operate and use all vaults, backups, and policies.",
       "display_name": "CBR FullAccess",
-      "id": "e89d5faf93e44ae596f14e3b893ca415",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "cbr:*:get*",
-              "cbr:*:list*",
-              "cbr:backups:queryReplicationCapability",
-              "cbr:vaults:associatePolicy",
-              "cbr:vaults:update",
-              "cbr:vaults:delete",
-              "cbr:vaults:removeResources",
-              "cbr:vaults:addResources",
-              "cbr:vaults:create",
-              "cbr:vaults:dissociatePolicy",
-              "cbr:vaults:sync",
-              "cbr:vaults:replicate",
-              "cbr:vaults:backup",
-              "cbr:vaults:updateOrder",
-              "cbr:vaults:migrateResources",
-              "cbr:backups:checkAgent",
-              "cbr:backups:delete",
-              "cbr:backups:update",
-              "cbr:backups:restore",
-              "cbr:backups:replicate",
-              "cbr:backups:sync",
-              "cbr:member:create",
-              "cbr:member:delete",
-              "cbr:member:update",
-              "cbr:policies:create",
-              "cbr:policies:update",
-              "cbr:policies:delete",
-              "cbr:vaults:bulkCreateOrDeleteTags",
-              "cbr:vaults:deleteTags",
-              "cbr:vaults:setTags",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "evs:*:get*",
-              "evs:*:list*",
-              "ims:*:get*",
-              "ims:*:list*",
-              "ces:*:get*",
-              "ces:*:list*",
-              "sfsturbo:*:get*",
-              "sfsturbo:*:list*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "e89d5faf93e44ae596f14e3b893ca415"
     }
   ],
   "CCE": [
     {
       "catalog": "CCE",
-      "description": "Cloud Container Engine Cluster Viewer",
-      "display_name": "CCE Viewer",
-      "id": "098d5475e51c4da8b766b84ae697025b",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "cce:*:get",
-              "cce:*:list",
-              "cce:kubernetes:*",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "evs:*:get*",
-              "evs:*:list",
-              "evs:*:count",
-              "vpc:*:get",
-              "vpc:*:list",
-              "sfs:*:get*",
-              "sfs:shares:ShareAction",
-              "aom:*:get",
-              "aom:*:list",
-              "aom:autoScalingRule:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "CCE",
       "description": "Cloud Container Engine Cluster Admin",
       "display_name": "CCE Admin",
-      "id": "148ae87b3b4945c8a38dba5482087932",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "cce:*:*",
-              "ecs:*:*",
-              "evs:*:*",
-              "vpc:*:*",
-              "sfs:*:get*",
-              "sfs:shares:ShareAction",
-              "aom:*:get",
-              "aom:*:list",
-              "aom:autoScalingRule:*",
-              "apm:icmgr:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "148ae87b3b4945c8a38dba5482087932"
     },
     {
       "catalog": "CCE",
       "description": "CCE Administrator",
       "display_name": "CCE Administrator",
-      "id": "ba36aacf15cf4867802eef6950fe110f",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "BASE",
-            "display_name": "Guest"
-          },
-          {
-            "catalog": "BASE",
-            "display_name": "Server Administrator"
-          },
-          {
-            "catalog": "ELB",
-            "display_name": "ELB Administrator"
-          },
-          {
-            "catalog": "OBS",
-            "display_name": "Tenant Administrator"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "CCE:cluster:*",
-              "CCE:app:*",
-              "CCE:app_desinger:*",
-              "CCE:component_template:*",
-              "CCE:container_registry:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "ba36aacf15cf4867802eef6950fe110f"
     }
   ],
   "CDM": [
@@ -667,119 +100,13 @@
       "catalog": "CDM",
       "description": "All permissions on Cloud Data Migration",
       "display_name": "CDM FullAccess",
-      "id": "0b9e63425dc14f36b158c7432cd64fe0",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "cdm:*:*",
-              "ecs:*:*",
-              "vpc:*:get*",
-              "vpc:*:list*",
-              "vpc:ports:*",
-              "vpc:publicIps:update",
-              "evs:*:*",
-              "bss:*:view*",
-              "bss:order:update",
-              "bss:order:pay",
-              "ces:*:get*",
-              "ces:*:list*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "CDM",
-      "description": "Read-only permission on Cloud Data Migration",
-      "display_name": "CDM ReadOnlyAccess",
-      "id": "197e42d302a646f18e2cef7384b700fc",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "cdm:cluster:list",
-              "cdm:cluster:get",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "vpc:*:get*",
-              "vpc:*:list*",
-              "evs:*:get*",
-              "evs:*:list*",
-              "bss:*:view*",
-              "ces:*:get*",
-              "ces:*:list*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "0b9e63425dc14f36b158c7432cd64fe0"
     },
     {
       "catalog": "CDM",
       "description": "All permissions on Cloud Data Migration except elastic IP address binding and unbinding",
       "display_name": "CDM FullAccessExceptEIPUpdating",
-      "id": "630f054e794a41a4b5405863fd7af83c",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "cdm:cluster:get",
-              "cdm:cluster:list",
-              "cdm:cluster:create",
-              "cdm:cluster:modify",
-              "cdm:cluster:delete",
-              "cdm:cluster:operate",
-              "cdm:job:operate",
-              "cdm:link:operate",
-              "ecs:*:*",
-              "vpc:*:get*",
-              "vpc:*:list*",
-              "vpc:ports:*",
-              "evs:*:*",
-              "bss:*:view*",
-              "bss:order:update",
-              "bss:order:pay",
-              "ces:*:get*",
-              "ces:*:list*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "CDM",
-      "description": "Operation permissions on Cloud Data Migration jobs and links",
-      "display_name": "CDM CommonOperations",
-      "id": "738802534c7643de953c784d539e7e40",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "cdm:cluster:list",
-              "cdm:cluster:get",
-              "cdm:job:*",
-              "cdm:link:*",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "vpc:*:get*",
-              "vpc:*:list*",
-              "evs:*:get*",
-              "evs:*:list*",
-              "bss:*:view*",
-              "ces:*:get*",
-              "ces:*:list*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "630f054e794a41a4b5405863fd7af83c"
     }
   ],
   "CES": [
@@ -787,70 +114,15 @@
       "catalog": "CES",
       "description": "CES Administrator",
       "display_name": "CES Administrator",
-      "id": "ac854dd96cd041a49ac20bb4793f7d7f",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "BASE",
-            "display_name": "Guest"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "CES:Alarm:*",
-              "CES:Metrics:*",
-              "CES:Notification:*",
-              "CES:Generic:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "ac854dd96cd041a49ac20bb4793f7d7f"
     }
   ],
   "CS": [
     {
       "catalog": "CS",
-      "description": "Cloud Stream Service User",
-      "display_name": "CS User",
-      "id": "baedb3dcf9c94f489c21c19c2c50b8ba",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "CS:sharecluster:*",
-              "CS:job:*",
-              "CS:monitor:*",
-              "CS:udf:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
-    },
-    {
-      "catalog": "CS",
       "description": "Cloud Stream Service Tenant Administrator, can manage multiple CS users",
       "display_name": "CS Tenant Admin",
-      "id": "c187103ff23d4121a742a2fb147414e2",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "CS:owncluster:*",
-              "CS:manageruser:*",
-              "CS:job:*",
-              "CS:monitor:*",
-              "CS:udf:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "c187103ff23d4121a742a2fb147414e2"
     }
   ],
   "CSBS": [
@@ -858,28 +130,7 @@
       "catalog": "CSBS",
       "description": "Cloud Server Backup Service Administrator",
       "display_name": "CSBS Administrator",
-      "id": "d63956e6b7ff45c3bb5368d961f3ddd5",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "BASE",
-            "display_name": "Server Administrator"
-          },
-          {
-            "catalog": "BASE",
-            "display_name": "Guest"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "CSBS:backup:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "d63956e6b7ff45c3bb5368d961f3ddd5"
     }
   ],
   "CSE": [
@@ -887,42 +138,7 @@
       "catalog": "CSE",
       "description": "Cloud Service Engine Admin",
       "display_name": "CSE Admin",
-      "id": "771df15853ff4414afaea2b1891b4b1f",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "CSE:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
-    },
-    {
-      "catalog": "CSE",
-      "description": "The read-only permissions to all CSE resources.",
-      "display_name": "CSE Viewer",
-      "id": "ea508229c0f34e9eb0849f7a90ac645f",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "cse:*:get",
-              "cse:*:list",
-              "ecs:*:get",
-              "ecs:*:list",
-              "evs:*:get",
-              "evs:*:list",
-              "vpc:*:get",
-              "vpc:*:list"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "771df15853ff4414afaea2b1891b4b1f"
     }
   ],
   "CSS": [
@@ -930,94 +146,13 @@
       "catalog": "CSS",
       "description": "All permissions for Cloud Search Service.",
       "display_name": "CSS FullAccess",
-      "id": "6ae8417b35cf42e2a60221aea272a19c",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "css:*:*",
-              "vpc:securityGroups:get",
-              "vpc:securityGroups:create",
-              "vpc:securityGroups:delete",
-              "vpc:securityGroupRules:get",
-              "vpc:securityGroupRules:create",
-              "vpc:securityGroupRules:delete",
-              "vpc:vpcs:list",
-              "vpc:privateIps:list",
-              "vpc:ports:get",
-              "vpc:ports:create",
-              "vpc:ports:update",
-              "vpc:ports:delete",
-              "vpc:quotas:list",
-              "vpc:subnets:get",
-              "ecs:cloudServerFlavors:get",
-              "ecs:serverInterfaces:use",
-              "ecs:cloudServers:addNics",
-              "ecs:quotas:get",
-              "evs:types:get",
-              "evs:quotas:get"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "6ae8417b35cf42e2a60221aea272a19c"
     },
     {
       "catalog": "CSS",
       "description": "Cloud Search Service Administrator",
       "display_name": "CSS Administrator",
-      "id": "f16ea23e552f466fa6af0d032a9d8ee2",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "BASE",
-            "display_name": "Server Administrator"
-          },
-          {
-            "catalog": "BASE",
-            "display_name": "Tenant Guest"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
-    },
-    {
-      "catalog": "CSS",
-      "description": "Read-only permissions for viewing Cloud Search Service.",
-      "display_name": "CSS ReadOnlyAccess",
-      "id": "f84acb0499e34ff682687ea0264cff0e",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "css:*:get*",
-              "css:*:list*",
-              "vpc:securityGroups:get",
-              "vpc:securityGroupRules:get",
-              "vpc:vpcs:list",
-              "vpc:privateIps:list",
-              "vpc:ports:get",
-              "vpc:quotas:list",
-              "vpc:subnets:get",
-              "ecs:cloudServerFlavors:get",
-              "ecs:quotas:get",
-              "evs:types:get",
-              "evs:quotas:get"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "f16ea23e552f466fa6af0d032a9d8ee2"
     }
   ],
   "CTS": [
@@ -1025,29 +160,7 @@
       "catalog": "CTS",
       "description": "CTS Administrator",
       "display_name": "CTS Administrator",
-      "id": "a6338bb7353b4f63bdc46e71d0e51360",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "BASE",
-            "display_name": "Guest"
-          },
-          {
-            "catalog": "OBS",
-            "display_name": "Tenant Administrator"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "CTS:Tracker:*",
-              "CTS:Trace:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "a6338bb7353b4f63bdc46e71d0e51360"
     }
   ],
   "DAS": [
@@ -1055,26 +168,7 @@
       "catalog": "DAS",
       "description": "Full permissions for Data Admin Service.",
       "display_name": "DAS FullAccess",
-      "id": "fe2e3418c81f42e0ac05ef2d862fcdcc",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "das:*:*",
-              "ecs:cloudServers:list",
-              "rds:instance:list",
-              "dds:instance:list",
-              "taurus:instance:list",
-              "nosql:instance:list",
-              "gaussdb:instance:list",
-              "ddm:instance:list",
-              "ddm:instance:get"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "fe2e3418c81f42e0ac05ef2d862fcdcc"
     }
   ],
   "DAYU": [
@@ -1082,159 +176,7 @@
       "catalog": "DAYU",
       "description": "DAYU Administrator",
       "display_name": "DAYU Administrator",
-      "id": "18e7c9040606411bb929e26c64be1b41",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "VPC",
-            "display_name": "VPC Administrator"
-          },
-          {
-            "catalog": "DWS",
-            "display_name": "DWS Administrator"
-          },
-          {
-            "catalog": "KMS",
-            "display_name": "KMS Administrator"
-          },
-          {
-            "catalog": "DLI",
-            "display_name": "DLI Service Admin"
-          },
-          {
-            "catalog": "MRS",
-            "display_name": "MRS Administrator"
-          },
-          {
-            "catalog": "CLOUDTABLE",
-            "display_name": "CLOUDTABLE Administrator"
-          },
-          {
-            "catalog": "CS",
-            "display_name": "CS Tenant Admin"
-          },
-          {
-            "catalog": "GES",
-            "display_name": "GES Administrator"
-          },
-          {
-            "catalog": "RDS",
-            "display_name": "RDS Administrator"
-          },
-          {
-            "catalog": "APIG",
-            "display_name": "APIG Administrator"
-          },
-          {
-            "catalog": "SMN",
-            "display_name": "SMN Administrator"
-          },
-          {
-            "catalog": "EVS",
-            "display_name": "EVS Admin"
-          },
-          {
-            "catalog": "BSS",
-            "display_name": "BSS Administrator"
-          },
-          {
-            "catalog": "ECS",
-            "display_name": "ECS Admin"
-          },
-          {
-            "catalog": "OBS",
-            "display_name": "OBS Operator"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "DAYU:*:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
-    },
-    {
-      "catalog": "DAYU",
-      "description": "DAYU User",
-      "display_name": "DAYU User",
-      "id": "77ccc3856911410182614f988cfbc1ad",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "VPC",
-            "display_name": "VPC Administrator"
-          },
-          {
-            "catalog": "DWS",
-            "display_name": "DWS Administrator"
-          },
-          {
-            "catalog": "KMS",
-            "display_name": "KMS Administrator"
-          },
-          {
-            "catalog": "DLI",
-            "display_name": "DLI Service Admin"
-          },
-          {
-            "catalog": "MRS",
-            "display_name": "MRS Administrator"
-          },
-          {
-            "catalog": "CLOUDTABLE",
-            "display_name": "CLOUDTABLE Administrator"
-          },
-          {
-            "catalog": "CS",
-            "display_name": "CS Tenant Admin"
-          },
-          {
-            "catalog": "GES",
-            "display_name": "GES Administrator"
-          },
-          {
-            "catalog": "RDS",
-            "display_name": "RDS Administrator"
-          },
-          {
-            "catalog": "APIG",
-            "display_name": "APIG Administrator"
-          },
-          {
-            "catalog": "SMN",
-            "display_name": "SMN Administrator"
-          },
-          {
-            "catalog": "EVS",
-            "display_name": "EVS Admin"
-          },
-          {
-            "catalog": "BSS",
-            "display_name": "BSS Administrator"
-          },
-          {
-            "catalog": "ECS",
-            "display_name": "ECS Admin"
-          },
-          {
-            "catalog": "OBS",
-            "display_name": "OBS Operator"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "DAYU:*:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "18e7c9040606411bb929e26c64be1b41"
     }
   ],
   "DCS": [
@@ -1242,523 +184,47 @@
       "catalog": "DCS",
       "description": "Distributed Cache Service Administrator",
       "display_name": "DCS Administrator",
-      "id": "1acee744f86342a8a42d03125a141bf8",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "BASE",
-            "display_name": "Server Administrator"
-          },
-          {
-            "catalog": "BASE",
-            "display_name": "Tenant Guest"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "DCS:instance:*",
-              "DCS:quota:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
-    },
-    {
-      "catalog": "DCS",
-      "description": "Common permissions of DCS service, except create, modify, delete and scale-up.",
-      "display_name": "DCS UserAccess",
-      "id": "617c014d1a064061905992ca108ed096",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "dcs:*:*",
-              "ces:*:get*",
-              "ces:*:list*"
-            ],
-            "Effect": "Allow"
-          },
-          {
-            "Action": [
-              "dcs:instance:create",
-              "dcs:instance:delete",
-              "dcs:instance:scale",
-              "dcs:instance:modify"
-            ],
-            "Effect": "Deny"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "DCS",
-      "description": "Permissions to assign to DCS agencies.",
-      "display_name": "DCS AgencyAccess",
-      "id": "73c13fd92b424406907b2bb132d697c4",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "vpc:ports:get",
-              "vpc:ports:create",
-              "vpc:ports:update",
-              "vpc:subnets:get"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "1acee744f86342a8a42d03125a141bf8"
     },
     {
       "catalog": "DCS",
       "description": "All permissions for Distributed Cache Service",
       "display_name": "DCS FullAccess",
-      "id": "c274313a03174a6e8be95afe498bb188",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "dcs:*:*",
-              "vpc:*:*",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "ecs:cloudServerNics:update",
-              "ecs:serverInterfaces:use",
-              "ces:*:get*",
-              "ces:*:list*",
-              "bss:order:update"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "DCS",
-      "description": "Read-only permissions for Distributed Cache Service.",
-      "display_name": "DCS ReadOnlyAccess",
-      "id": "d67283ff4e49485d8ffa24bf7a871104",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "dcs:*:get*",
-              "dcs:*:list*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "c274313a03174a6e8be95afe498bb188"
     }
   ],
   "DDM": [
     {
       "catalog": "DDM",
-      "description": "Common user permissions for DDM, except for permissions of creating, deleting, and scaling out DDM instances, scaling out schemas, rolling back schema scaling tasks, and changing instance class",
-      "display_name": "DDM CommonOperations",
-      "id": "216253483a8e4fe8bc8136f3c8b50431",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "vpc:*:*list*",
-              "vpc:*:*get*",
-              "vpc:ports:update",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "rds:instance:list",
-              "rds:instance:modify",
-              "rds:instance:modifyParameter"
-            ],
-            "Effect": "Allow"
-          },
-          {
-            "Condition": {
-              "StringEqualsIgnoreCase": {
-                "g:ServiceName": [
-                  "ddm"
-                ]
-              }
-            },
-            "Effect": "Allow",
-            "NotAction": [
-              "ddm:instance:create",
-              "ddm:instance:delete",
-              "ddm:database:migrate*",
-              "ddm:instance:resize",
-              "ddm:instance:extendNode"
-            ]
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "DDM",
-      "description": "Read-only permissions for Distributed Database Middleware",
-      "display_name": "DDM ReadOnlyAccess",
-      "id": "351cddbb3b7e4bc19c26f914012a462f",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "rds:instance:list",
-              "vpc:*:*list*",
-              "vpc:*:*get*",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "ddm:*:list",
-              "ddm:*:get",
-              "ddm:instance:listParameter",
-              "ddm:instance:listRwInfo",
-              "ddm:instance:listSlowSqlInfo"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "DDM",
-      "description": "Read-only permissions for Distributed Database Middleware",
-      "display_name": "DDM ReadOnlyAccess",
-      "id": "3ae09f010f2d4ce4a96abbd4c13aa077",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "rds:instance:list",
-              "vpc:*:*list*",
-              "vpc:*:*get*",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "ddm:*:list",
-              "ddm:*:get",
-              "ddm:instance:listParameter",
-              "ddm:instance:listRwInfo",
-              "ddm:instance:listSlowSqlInfo"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "DDM",
-      "description": "Common user permissions for DDM, except for permissions of creating, deleting, and scaling out DDM instances, scaling out schemas, rolling back schema scaling tasks, and changing instance class",
-      "display_name": "DDM CommonOperations",
-      "id": "8db3daa1f94b436a91db7037f6736977",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "vpc:*:*list*",
-              "vpc:*:*get*",
-              "vpc:ports:update",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "rds:instance:list",
-              "rds:instance:modify",
-              "rds:instance:modifyParameter"
-            ],
-            "Effect": "Allow"
-          },
-          {
-            "Condition": {
-              "StringEqualsIgnoreCase": {
-                "g:ServiceName": [
-                  "ddm"
-                ]
-              }
-            },
-            "Effect": "Allow",
-            "NotAction": [
-              "ddm:instance:create",
-              "ddm:instance:delete",
-              "ddm:database:migrate*",
-              "ddm:instance:resize",
-              "ddm:instance:extendNode"
-            ]
-          }
-        ],
-        "Version": "1.1"
-      }
+      "description": "Full permissions for Distributed Database Middleware",
+      "display_name": "DDM FullAccess",
+      "id": "caee5d679b4e47d9a0a42e6711e94df3"
     },
     {
       "catalog": "DDM",
       "description": "Full permissions for Distributed Database Middleware",
       "display_name": "DDM FullAccess",
-      "id": "caee5d679b4e47d9a0a42e6711e94df3",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "ddm:*:*",
-              "rds:instance:list",
-              "rds:instance:modify",
-              "rds:instance:modifyParameter",
-              "vpc:*:*",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "ecs:cloudServerNics:update",
-              "ecs:serverInterfaces:use"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "DDM",
-      "description": "Full permissions for Distributed Database Middleware",
-      "display_name": "DDM FullAccess",
-      "id": "ee9b78342ec04021954642d9ccbd2bc0",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "ddm:*:*",
-              "rds:instance:list",
-              "rds:instance:modify",
-              "rds:instance:modifyParameter",
-              "vpc:*:*",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "ecs:cloudServerNics:update",
-              "ecs:serverInterfaces:use"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "ee9b78342ec04021954642d9ccbd2bc0"
     }
   ],
   "DDS": [
     {
       "catalog": "DDS",
-      "description": "Read-only permissions for Document Database Service.",
-      "display_name": "DDS ReadOnlyAccess",
-      "id": "08595de7425c47d9834c7d8ab62d38b1",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "dds:*:list",
-              "dds:*:get",
-              "vpc:*:list",
-              "vpc:*:get",
-              "dss:*:list",
-              "dss:*:get",
-              "kms:*:list",
-              "kms:*:get",
-              "ces:*:list"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "DDS",
-      "description": "Database administrator permissions for all operations except deleting DDS resources.",
-      "display_name": "DDS ManageAccess",
-      "id": "1d5fbd56d6e44facb60cbea1d14aa13f",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "vpc:*:list",
-              "vpc:*:get",
-              "dss:*:list",
-              "dss:*:get",
-              "kms:*:list",
-              "kms:*:get",
-              "ces:*:list",
-              "ces:alarmsOnOff:put",
-              "ces:alarms:create"
-            ],
-            "Effect": "Allow"
-          },
-          {
-            "Condition": {
-              "StringEqualsIgnoreCase": {
-                "g:ServiceName": [
-                  "dds"
-                ]
-              }
-            },
-            "Effect": "Allow",
-            "NotAction": [
-              "dds:*:delete*"
-            ]
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "DDS",
-      "description": "DBA permissions of Document Database Service, except delete.",
-      "display_name": "DDS DBA",
-      "id": "5afd18e2fc3242ee8cc2ebefce37da91",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "dds:instance:list",
-              "dds:instance:modify",
-              "dds:instance:create",
-              "dds:instance:switchover",
-              "dds:instance:modifyPort",
-              "dds:instance:resetPasswd",
-              "dds:instance:modifyParameter",
-              "dds:instance:modifySSL",
-              "dds:instance:modifySecurityGroup",
-              "dds:instance:bindPublicIp",
-              "dds:instance:extendVolume",
-              "dds:instance:modifySpec",
-              "dds:instance:extendNode",
-              "dds:instance:reboot",
-              "dds:instance:modifyBackupPolicy",
-              "dds:instance:unbindPublicIp",
-              "dds:instance:renew",
-              "dds:instance:createManualBackup",
-              "dds:backup:list",
-              "dds:backup:createInstanceFromBackup",
-              "dds:backup:modify",
-              "dds:backup:delete",
-              "dds:backup:download",
-              "dds:param:list",
-              "dds:param:modify",
-              "dds:param:create",
-              "dds:param:delete",
-              "vpc:*:*",
-              "dss:*:get",
-              "dss:*:list",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "ecs:cloudServerNics:update",
-              "ecs:serverInterfaces:use"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "DDS",
       "description": "Full permissions for Document Database Service.",
       "display_name": "DDS FullAccess",
-      "id": "8d06bf62acfd4700b1099003c78c5021",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "dds:*:*",
-              "vpc:*:list",
-              "vpc:*:get",
-              "dss:*:list",
-              "dss:*:get",
-              "kms:*:list",
-              "kms:*:get",
-              "ces:*:list",
-              "ces:alarmsOnOff:put",
-              "ces:alarms:create"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "DDS",
-      "description": "The read-only permissions to all Document Database Service resources, which can be used for statistics and survey.",
-      "display_name": "DDS Viewer",
-      "id": "90c0bf75dfb94d4c9a79ec140b6a24ee",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "dds:instance:list",
-              "dds:backup:list",
-              "dds:param:list",
-              "vpc:*:list",
-              "vpc:*:get",
-              "dss:*:get",
-              "dss:*:list",
-              "ecs:*:get*",
-              "ecs:*:list*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "8d06bf62acfd4700b1099003c78c5021"
     },
     {
       "catalog": "DDS",
       "description": "All permissions of Document Database Service.",
       "display_name": "DDS Admin",
-      "id": "b23ce839f4c24f2ab935dd655341dbc4",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "dds:*:*",
-              "vpc:*:*",
-              "dss:*:get",
-              "dss:*:list",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "ecs:cloudServerNics:update",
-              "ecs:serverInterfaces:use"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "b23ce839f4c24f2ab935dd655341dbc4"
     },
     {
       "catalog": "DDS",
       "description": "Document Database Service Administrator",
       "display_name": "DDS Administrator",
-      "id": "fc30b9264ba84b8db02bd01b61191344",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "BASE",
-            "display_name": "Server Administrator"
-          },
-          {
-            "catalog": "BASE",
-            "display_name": "Guest"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "dds:dds:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "fc30b9264ba84b8db02bd01b61191344"
     }
   ],
   "DIS": [
@@ -1766,18 +232,7 @@
       "catalog": "DIS",
       "description": "DIS Administrator",
       "display_name": "DIS Administrator",
-      "id": "861c9190a8134333bc6d1e7c1152b3c9",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "DIS:DIS:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "861c9190a8134333bc6d1e7c1152b3c9"
     }
   ],
   "DLI": [
@@ -1785,178 +240,27 @@
       "catalog": "DLI",
       "description": "All permissions for Data Lake Insight.",
       "display_name": "DLI Admin",
-      "id": "4375975b6a1b467aa2239ed992f8f6c1",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "dli:*:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
-    },
-    {
-      "catalog": "DLI",
-      "description": "Read-only permissions for Data Lake Insight.",
-      "display_name": "DLI ReadOnlyAccess",
-      "id": "63065df6127e4fc8be4686ea3b89abf6",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "dli:*:list*",
-              "dli:*:display*",
-              "dli:*:get*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "4375975b6a1b467aa2239ed992f8f6c1"
     },
     {
       "catalog": "DLI",
       "description": "Full permissions for Data Lake Insight.",
       "display_name": "DLI FullAccess",
-      "id": "98d1b9d1ded04d13b802546df77bbfa0",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "dli:*:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "98d1b9d1ded04d13b802546df77bbfa0"
     }
   ],
   "DMS": [
     {
       "catalog": "DMS",
-      "description": "Common permissions of Distributed Message Service, except install, modify, delete and so on.",
-      "display_name": "DMS UserAccess",
-      "id": "b0d8cf4ff5254873a9448aaaea53f38c",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "dms:instance:get",
-              "dms:instance:list",
-              "dms:instance:listConnectorSinkTask",
-              "dms:instance:createConnectorSinkTask",
-              "dms:instance:getConnectorSinkTask",
-              "dms:instance:deleteConnectorSinkTask",
-              "dms:instance:getBackgroundTask",
-              "dms:instance:deleteBackgroundTask",
-              "dms:instance:modifyAuthInfo",
-              "dms:instance:modifyStatus",
-              "dms:instance:resetAuthInfo",
-              "vpc:vpcs:get",
-              "vpc:vpcs:list",
-              "vpc:ports:get",
-              "vpc:subnets:get",
-              "vpc:securityGroups:get",
-              "vpc:publicIps:get",
-              "vpc:publicIps:list",
-              "obs:*:list*",
-              "obs:*:get*",
-              "ces:*:get*",
-              "ces:*:list*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "DMS",
       "description": "All permissions of DMS service.",
       "display_name": "DMS FullAccess",
-      "id": "c2182a6d2fb14e6db54654fa411b22b4",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "dms:*:*",
-              "vpc:vpcs:get",
-              "vpc:vpcs:list",
-              "vpc:ports:create",
-              "vpc:ports:get",
-              "vpc:ports:delete",
-              "vpc:ports:update",
-              "vpc:subnets:get",
-              "vpc:securityGroups:get",
-              "vpc:publicIps:get",
-              "vpc:publicIps:list",
-              "vpc:publicIps:update",
-              "obs:*:list*",
-              "obs:*:get*",
-              "ces:*:get*",
-              "ces:*:list*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "c2182a6d2fb14e6db54654fa411b22b4"
     },
     {
       "catalog": "DMS",
       "description": "DMS Administrator",
       "display_name": "DMS Administrator",
-      "id": "ca6272aad1424700a70ec68d28effaf7",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "DMS:Queue:*",
-              "DMS:Consumer_Group:*",
-              "DMS:Message:*",
-              "DMS:Quota:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
-    },
-    {
-      "catalog": "DMS",
-      "description": "The read-only permissions to all Distributed Message Service resources.",
-      "display_name": "DMS ReadOnlyAccess",
-      "id": "cdf9c707cab84a698570d41ebac59dd1",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "dms:instance:get",
-              "dms:instance:list",
-              "dms:instance:listConnectorSinkTask",
-              "dms:instance:getConnectorSinkTask",
-              "dms:instance:getBackgroundTask",
-              "vpc:vpcs:get",
-              "vpc:vpcs:list",
-              "vpc:ports:get",
-              "vpc:subnets:get",
-              "vpc:securityGroups:get",
-              "vpc:publicIps:get",
-              "vpc:publicIps:list",
-              "obs:*:list*",
-              "obs:*:get*",
-              "ces:*:get*",
-              "ces:*:list*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "ca6272aad1424700a70ec68d28effaf7"
     }
   ],
   "DNS": [
@@ -1964,30 +268,7 @@
       "catalog": "DNS",
       "description": "DNS Administrator",
       "display_name": "DNS Administrator",
-      "id": "4068e6b1ce3245788279bf01277614ab",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "BASE",
-            "display_name": "Tenant Guest"
-          },
-          {
-            "catalog": "VPC",
-            "display_name": "VPC Administrator"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "DNS:Zone:*",
-              "DNS:RecordSet:*",
-              "DNS:PTRRecord:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "4068e6b1ce3245788279bf01277614ab"
     }
   ],
   "DPS": [
@@ -1995,65 +276,15 @@
       "catalog": "DPS",
       "description": "DPS Administrator",
       "display_name": "DPS Administrator",
-      "id": "e0712f31625d49f9a2f67dbc63df6179",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "DPS:pipeline:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "e0712f31625d49f9a2f67dbc63df6179"
     }
   ],
   "DRS": [
     {
       "catalog": "DRS",
-      "description": "Read-only permissions for Data Replication Service.",
-      "display_name": "DRS ReadOnlyAccess",
-      "id": "0cb3ad324d154711858a09df410b0307",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "drs:*:list",
-              "drs:*:get*",
-              "vpc:*:get",
-              "vpc:*:list",
-              "obs:*:get*",
-              "obs:*:list*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "DRS",
       "description": "Full permissions for  Data Replication Service.",
       "display_name": "DRS FullAccess",
-      "id": "fc29fbf814c24f96abef6d26613d33c8",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "drs:*:*",
-              "vpc:*:get",
-              "vpc:*:list",
-              "smn:topic:*",
-              "obs:*:get*",
-              "obs:*:list*",
-              "obs:*:head*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "fc29fbf814c24f96abef6d26613d33c8"
     }
   ],
   "DSS": [
@@ -2061,234 +292,29 @@
       "catalog": "DSS",
       "description": " Dedicated Storage Service Administrator",
       "display_name": "DSS Administrator",
-      "id": "26ce5e40821a49fdbc01abe430c2b83c",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "BASE",
-            "display_name": "Tenant Guest"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "DSS:pool:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "26ce5e40821a49fdbc01abe430c2b83c"
     }
   ],
   "DWS": [
     {
       "catalog": "DWS",
-      "description": "The read-only permissions to all DWS resources.",
-      "display_name": "DWS ReadOnlyAccess",
-      "id": "105bafe71abd402194eab15c41b94d54",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "dws:*:get*",
-              "dws:*:list*",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "vpc:*:get*",
-              "vpc:*:list*",
-              "evs:*:get*",
-              "evs:*:list*",
-              "mrs:*:get*",
-              "bss:*:list*",
-              "bss:*:get*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "DWS",
       "description": "Data Warehouse Service Administrator",
       "display_name": "DWS Administrator",
-      "id": "2b93dcd503a94bb9994d4862dcd35ef0",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "BASE",
-            "display_name": "Server Administrator"
-          },
-          {
-            "catalog": "BASE",
-            "display_name": "Tenant Guest"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "DWS:DWS:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "2b93dcd503a94bb9994d4862dcd35ef0"
     },
     {
       "catalog": "DWS",
       "description": "All permissions of DWS service.",
       "display_name": "DWS FullAccess",
-      "id": "728efcd0ae454f39aec07633bd16e808",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "dws:*:*",
-              "ecs:*:*",
-              "vpc:*:*",
-              "evs:*:*",
-              "mrs:*:get*",
-              "bss:*:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "728efcd0ae454f39aec07633bd16e808"
     }
   ],
   "ECS": [
     {
       "catalog": "ECS",
-      "description": "Common permissions of ECS service, except installation, delete, reinstallation and so on.",
-      "display_name": "ECS User",
-      "id": "59cf912dd96f493a8e6cdb95705dca08",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "ecs:*:start",
-              "ecs:*:stop",
-              "ecs:*:reboot",
-              "ecs:blockDevice:use",
-              "ecs:cloudServerFpgaImages:relate",
-              "ecs:cloudServerFpgaImages:register",
-              "ecs:cloudServerFpgaImages:delete",
-              "ecs:cloudServerFpgaImags:unrelate",
-              "ecs:cloudServers:setAutoRecovery",
-              "ecs:cloudServerPasswords:reset",
-              "ecs:cloudServerPorts:modify",
-              "ecs:diskConfigs:use",
-              "ecs:securityGroups:use",
-              "ecs:serverGroups:manage",
-              "ecs:serverFloatingIps:use",
-              "ecs:serverKeypairs:*",
-              "ecs:serverPasswords:manage",
-              "ecs:servers:createImage",
-              "ecs:servers:setMetadata",
-              "ecs:servers:setTags",
-              "ecs:serverVolumes:use",
-              "evs:*:get*",
-              "evs:*:list*",
-              "evs:snapshots:create",
-              "evs:volumes:uploadImage",
-              "evs:volumes:delete",
-              "evs:volumes:update",
-              "vpc:*:get*",
-              "vpc:*:list*",
-              "vpc:floatingIps:create",
-              "vpc:floatingIps:update",
-              "vpc:floatingIps:delete",
-              "ims:images:create",
-              "ims:images:delete",
-              "ims:images:get",
-              "ims:images:list",
-              "ims:images:update",
-              "ims:images:upload"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "ECS",
       "description": "All permissions of ECS service.",
       "display_name": "ECS Admin",
-      "id": "9ff4631f0ecc4f67aa6e377bdbb481ce",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "ecs:*:*",
-              "evs:*:get",
-              "evs:*:list",
-              "evs:volumes:create",
-              "evs:volumes:delete",
-              "evs:volumes:attach",
-              "evs:volumes:detach",
-              "evs:volumes:manage",
-              "evs:volumes:update",
-              "evs:volumes:use",
-              "evs:volumes:uploadImage",
-              "evs:snapshots:create",
-              "vpc:*:get",
-              "vpc:*:list",
-              "vpc:networks:create",
-              "vpc:networks:update",
-              "vpc:subnets:update",
-              "vpc:subnets:create",
-              "vpc:ports:*",
-              "vpc:routers:get",
-              "vpc:routers:update",
-              "vpc:securityGroups:*",
-              "vpc:securityGroupRules:*",
-              "vpc:floatingIps:*",
-              "vpc:publicIps:*",
-              "ims:images:create",
-              "ims:images:delete",
-              "ims:images:get",
-              "ims:images:list",
-              "ims:images:update",
-              "ims:images:upload"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "ECS",
-      "description": "The read-only permissions to all ECS resources, which can be used for statistics and survey.",
-      "display_name": "ECS Viewer",
-      "id": "bd470a1ea9464679a25c971012d286b4",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "ecs:blockDevice:use",
-              "ecs:serverGroups:manage",
-              "ecs:serverVolumes:use",
-              "evs:*:get*",
-              "evs:*:list*",
-              "vpc:*:get*",
-              "vpc:*:list*",
-              "ims:*:get*",
-              "ims:*:list*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "9ff4631f0ecc4f67aa6e377bdbb481ce"
     }
   ],
   "ELB": [
@@ -2296,86 +322,13 @@
       "catalog": "ELB",
       "description": "ELB Service Administrator",
       "display_name": "ELB Administrator",
-      "id": "23d4e18f8bfe46e6b68d9348ff273c8a",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "OBS",
-            "display_name": "Tenant Administrator"
-          },
-          {
-            "catalog": "VPC",
-            "display_name": "VPC Administrator"
-          },
-          {
-            "catalog": "CES",
-            "display_name": "CES Administrator"
-          },
-          {
-            "catalog": "BASE",
-            "display_name": "Server Administrator"
-          },
-          {
-            "catalog": "BASE",
-            "display_name": "Guest"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "ELB:ELB:*",
-              "ELB:Listener:*",
-              "ELB:Healthcheck:*",
-              "ELB:Member:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "23d4e18f8bfe46e6b68d9348ff273c8a"
     },
     {
       "catalog": "ELB",
       "description": "All permissions of ELB service.",
       "display_name": "ELBFullAccess",
-      "id": "8f04037885d04b8fbe1044e4d6da1c23",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "elb:*:*",
-              "vpc:*:get*",
-              "vpc:*:list*",
-              "ecs:*:get*",
-              "ecs:*:list*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "ELB",
-      "description": "The read-only permissions to all ELB resources, which can be used for statistics and survey.",
-      "display_name": "ELB ReadOnlyAccess",
-      "id": "9559622d004645b1a017b4cc66b78839",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "elb:*:get",
-              "elb:*:list",
-              "vpc:*:get*",
-              "vpc:*:list*",
-              "ecs:*:get*",
-              "ecs:*:list*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "8f04037885d04b8fbe1044e4d6da1c23"
     }
   ],
   "EPS": [
@@ -2383,275 +336,23 @@
       "catalog": "EPS",
       "description": "EnterprisePorject Management Service Management Permission",
       "display_name": "EPS FullAccess",
-      "id": "4d42587d155e4043b90893403d900923",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "eps:enterpriseProjects:update",
-              "eps:enterpriseProjects:create",
-              "eps:enterpriseProjects:enable",
-              "eps:enterpriseProjects:disable",
-              "eps:resources:list",
-              "eps:resources:add",
-              "eps:resources:remove",
-              "iam:groups:list",
-              "iam:policies:list",
-              "iam:enterpriseProjectGroups:combine",
-              "iam:enterpriseProjectGroups:listGroups",
-              "iam:enterpriseProjectGroups:listPolicies"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "EPS",
-      "description": "ReadOnly permissions of EPS service.",
-      "display_name": "EPS ReadOnlyAccess",
-      "id": "5345dcfb6b42490fb6ef315d4143a45c",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "eps:resources:list",
-              "iam:enterpriseProjectGroups:listGroups",
-              "iam:enterpriseProjectGroups:listPolicies"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "4d42587d155e4043b90893403d900923"
     }
   ],
   "EVS": [
     {
       "catalog": "EVS",
-      "description": "Read-only permissions for Elastic Volume Service.",
-      "display_name": "EVS ReadOnlyAccess",
-      "id": "07fb4e3e259e4b1dba4cfbe40fb55a51",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "evs:*:get*",
-              "evs:*:list",
-              "evs:*:count",
-              "ecs:servers:get",
-              "ecs:servers:list",
-              "ecs:cloudServers:get",
-              "ecs:cloudServers:list",
-              "ecs:cloudServerFlavors:get",
-              "bms:servers:get",
-              "bms:servers:list",
-              "bms:serverFlavors:get",
-              "vpc:publicIps:list",
-              "cbr:vaults:list",
-              "cbr:policies:list"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "EVS",
       "description": "Full permissions for Elastic Volume Service, including creating, expanding, attaching, detaching, querying, and deleting EVS disks.",
       "display_name": "EVS FullAccess",
-      "id": "98e3f1f7b6f443b6bbdcb8a231ced6a6",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "evs:*:*",
-              "ecs:*:get",
-              "ecs:*:list",
-              "ecs:cloudServers:attach",
-              "ecs:cloudServers:detachVolume",
-              "ecs:serverVolumes:use",
-              "ecs:serverGroups:manage",
-              "vpc:vpcs:list",
-              "vpc:ports:get",
-              "ims:images:create",
-              "ims:images:delete",
-              "ims:images:get",
-              "ims:images:list",
-              "ims:images:update",
-              "ims:images:upload",
-              "cbr:vaults:list",
-              "cbr:policies:list",
-              "bms:serverFlavors:get",
-              "bms:servers:get",
-              "bms:servers:attachVolume",
-              "bms:servers:detachVolume",
-              "vpc:publicIps:list"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "98e3f1f7b6f443b6bbdcb8a231ced6a6"
     }
   ],
   "FunctionGraph": [
     {
       "catalog": "FunctionGraph",
-      "description": "The read-only permissions to all functiongraph resources",
-      "display_name": "FunctionGraph ReadOnlyAccess",
-      "id": "5a321da6d0b046689806ef9002feae7e",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "functiongraph:*:get*",
-              "functiongraph:*:list*",
-              "eps:*:list",
-              "obs:*:*",
-              "vpc:*:get",
-              "vpc:*:list",
-              "aom:*:get",
-              "aom:*:list",
-              "apm:*:get*",
-              "apm:*:list*",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "sfs:*:get*",
-              "sfsturbo:*:get*",
-              "smn:*:get*",
-              "smn:*:list*",
-              "dms:*:get",
-              "dms:*:list",
-              "lts:*:list",
-              "apig:*:get*",
-              "apig:*:list*",
-              "dds:*:list",
-              "roma:*:list",
-              "roma:*:get",
-              "nosql:instance:list"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "FunctionGraph",
       "description": "All permissions of FunctionGraph service",
       "display_name": "FunctionGraph FullAccess",
-      "id": "6709814117c14b9a9825d8fffa74b714",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "functiongraph:*:*",
-              "eps:*:list",
-              "obs:*:*",
-              "vpc:*:*",
-              "aom:*:*",
-              "apm:*:*",
-              "ecs:*:*",
-              "sfs:*:*",
-              "sfsturbo:*:*",
-              "smn:*:*",
-              "lts:*:*",
-              "apig:*:*",
-              "dds:*:*",
-              "roma:*:*",
-              "nosql:instance:list"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "FunctionGraph",
-      "description": "The read-only permissions to all functiongraph resources",
-      "display_name": "FunctionGraph ReadOnlyAccess",
-      "id": "8ec37990551544869620b2c8eb1f01f8",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "functiongraph:*:get*",
-              "functiongraph:*:list*",
-              "eps:*:list",
-              "obs:*:*",
-              "vpc:*:get",
-              "vpc:*:list",
-              "aom:*:get",
-              "aom:*:list",
-              "apm:*:get*",
-              "apm:*:list*",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "sfs:*:get*",
-              "sfsturbo:*:get*",
-              "smn:*:get*",
-              "smn:*:list*",
-              "dms:*:get",
-              "dms:*:list",
-              "lts:*:list",
-              "apig:*:get*",
-              "apig:*:list*",
-              "dds:*:list",
-              "roma:*:list",
-              "roma:*:get",
-              "nosql:instance:list"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "FunctionGraph",
-      "description": "Common operations for functiongraph service, include query and invoke function",
-      "display_name": "FunctionGraph CommonOperations",
-      "id": "9cbea7a1643d419b9bb11c7307659f9f",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "functiongraph:*:get*",
-              "functiongraph:*:list*",
-              "functiongraph:function:invoke*",
-              "eps:*:list",
-              "obs:*:*",
-              "vpc:*:get",
-              "vpc:*:list",
-              "aom:*:get",
-              "aom:*:list",
-              "apm:*:get*",
-              "apm:*:list*",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "sfs:*:get*",
-              "sfsturbo:*:get*",
-              "smn:*:get*",
-              "smn:*:list*",
-              "dms:*:get",
-              "dms:*:list",
-              "lts:*:list",
-              "apig:*:get*",
-              "apig:*:list*",
-              "dds:*:list",
-              "roma:*:list",
-              "roma:*:get",
-              "nosql:instance:list"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "6709814117c14b9a9825d8fffa74b714"
     }
   ],
   "GES": [
@@ -2659,66 +360,7 @@
       "catalog": "GES",
       "description": "Full permissions for Graph Engine Service.",
       "display_name": "GES FullAccess",
-      "id": "2ad14cc8d3664fa2808c7600ddb800a3",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "ges:*:*",
-              "ecs:*:*",
-              "vpc:*:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "GES",
-      "description": "Usage permissions for Graph Engine Service.",
-      "display_name": "GES Development",
-      "id": "e0d36162e44d45f08ae5b3a4dc6e014e",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "ges:*:get*",
-              "ges:*:list*",
-              "ges:*:operate*",
-              "ges:*:access*",
-              "ges:metadata:*",
-              "ges:backup:*",
-              "ecs:*:*",
-              "vpc:*:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "GES",
-      "description": "Read-only permissions for Graph Engine Service.",
-      "display_name": "GES ReadOnlyAccess",
-      "id": "f86a3f814fb14c97805a28d4d4854f76",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "ges:*:get*",
-              "ges:*:list*",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "vpc:*:get*",
-              "vpc:*:list*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "2ad14cc8d3664fa2808c7600ddb800a3"
     }
   ],
   "GaussDB": [
@@ -2726,79 +368,7 @@
       "catalog": "GaussDB",
       "description": "Full permissions for GaussDB",
       "display_name": "GaussDB FullAccess",
-      "id": "4b73f1d406874a248e02b70a17c46211",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "gaussdb:*:*",
-              "vpc:*:get",
-              "vpc:*:list",
-              "bss:order:update",
-              "bss:order:pay"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "GaussDB",
-      "description": "Read-only permissions for GaussDB",
-      "display_name": "GaussDB ReadOnlyAccess",
-      "id": "c23f21d7eea74c918d5d42bb819b1e74",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "gaussdb:*:list",
-              "vpc:*:list",
-              "vpc:*:get"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    }
-  ],
-  "IAM": [
-    {
-      "catalog": "IAM",
-      "description": "Agent Operator",
-      "display_name": "Agent Operator",
-      "id": "1d73f76974d940cea19ed3180c2049df",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "identity:assume role"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
-    },
-    {
-      "catalog": "IAM",
-      "description": "Read-only permissions for Identity and Access Management.",
-      "display_name": "IAM ReadOnlyAccess",
-      "id": "51e89a12ca524205addb639ca85adcc8",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "iam:*:get*",
-              "iam:*:list*",
-              "iam:*:check*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "4b73f1d406874a248e02b70a17c46211"
     }
   ],
   "IMS": [
@@ -2806,83 +376,13 @@
       "catalog": "IMS",
       "description": "IMS Administrator",
       "display_name": "IMS Administrator",
-      "id": "3635c0aa788a419a88c70fb43880890b",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "BASE",
-            "display_name": "Guest"
-          },
-          {
-            "catalog": "BASE",
-            "display_name": "Server Administrator"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "IMS:Image:*",
-              "IMS:Member:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
-    },
-    {
-      "catalog": "IMS",
-      "description": "The read-only permissions to all IMS resources",
-      "display_name": "IMS ReadOnlyAccess",
-      "id": "94819f4505dd42b0b5082377288f1345",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "ims:*:get",
-              "ims:*:list"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "3635c0aa788a419a88c70fb43880890b"
     },
     {
       "catalog": "IMS",
       "description": "All permissions of Image Management Service",
       "display_name": "IMS FullAccess",
-      "id": "be7d22f859794edb80c588f3f36a93bc",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "ims:*:*",
-              "ecs:cloudServers:list",
-              "ecs:cloudServers:get",
-              "ecs:servers:list",
-              "ecs:servers:get",
-              "ecs:serverVolumeAttachments:list",
-              "ecs:serverVolumeAttachments:get",
-              "ecs:serverVolumes:use",
-              "evs:volumes:get",
-              "evs:volumes:list",
-              "bms:servers:list",
-              "bms:serverFlavors:get",
-              "cbr:vaults:listProtectables",
-              "cbr:vaults:listResourceInstances",
-              "cbr:vaults:getProtectables",
-              "cbr:vaults:get",
-              "cbr:vaults:list",
-              "cbr:backups:list",
-              "cbr:backups:get",
-              "cbr:vaults:listExternalVaults"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "be7d22f859794edb80c588f3f36a93bc"
     }
   ],
   "KMS": [
@@ -2890,18 +390,7 @@
       "catalog": "KMS",
       "description": "KMS Administrator",
       "display_name": "KMS Administrator",
-      "id": "2fc084cee199455b9b8769e619bd6f4e",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "KMS:KMS:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "2fc084cee199455b9b8769e619bd6f4e"
     }
   ],
   "MLS": [
@@ -2909,187 +398,21 @@
       "catalog": "MLS",
       "description": "Machine Learning Service Administrator",
       "display_name": "MLS Administrator",
-      "id": "e6c8332eb23b40babc7e2af2cff12e63",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "BASE",
-            "display_name": "Server Administrator"
-          },
-          {
-            "catalog": "BASE",
-            "display_name": "Tenant Guest"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "MLS:MLS:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "e6c8332eb23b40babc7e2af2cff12e63"
     }
   ],
   "MRS": [
     {
       "catalog": "MRS",
-      "description": "Read-only permissions for MapReduceService, including permissions for querying cluster sandread-only permissions for ECS, BMS, EVS, and VPC",
-      "display_name": "MRS ReadOnlyAccess",
-      "id": "589e30ad61424a6389b771c997af653c",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "mrs:*:get*",
-              "mrs:*:list*",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "bms:*:get*",
-              "bms:*:list*",
-              "evs:*:get*",
-              "evs:*:list*",
-              "vpc:*:get*",
-              "vpc:*:list*"
-            ],
-            "Effect": "Allow"
-          },
-          {
-            "Action": [
-              "mrs:cluster:create",
-              "mrs:cluster:resize",
-              "mrs:cluster:scaleUp",
-              "mrs:cluster:delete",
-              "mrs:cluster:policy",
-              "mrs:job:submit",
-              "mrs:job:stop",
-              "mrs:job:delete",
-              "mrs:job:batchDelete",
-              "mrs:file:create",
-              "mrs:file:delete",
-              "mrs:tag:batchOperate",
-              "mrs:tag:create",
-              "mrs:tag:delete",
-              "mrs:manager:access",
-              "mrs:patch:install",
-              "mrs:patch:uninstall",
-              "mrs:ops:grant",
-              "mrs:ops:shareLog",
-              "mrs:alarm:subscribe"
-            ],
-            "Effect": "Deny"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "MRS",
       "description": "Administrator permissions for MapReduce Service, including permissions to perform all operations on clusters, such as creating, scaling out, scaling in, scaling up, deleting, and querying the clusters, as well as all permissions for ECS, BMS, EVS, and VPC",
       "display_name": "MRS FullAccess",
-      "id": "8733266842e84dde9843a5e3031032e7",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "mrs:*:*",
-              "ecs:*:*",
-              "evs:*:*",
-              "vpc:*:*",
-              "bms:*:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "8733266842e84dde9843a5e3031032e7"
     },
     {
       "catalog": "MRS",
       "description": "MRS Administrator",
       "display_name": "MRS Administrator",
-      "id": "a8b68b33734744af9bd0d2b125d80a99",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "BASE",
-            "display_name": "Guest"
-          },
-          {
-            "catalog": "BASE",
-            "display_name": "Server Administrator"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "MRS:MRS:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
-    },
-    {
-      "catalog": "MRS",
-      "description": "Permissions for using MapReduce Service, including operation permissions on cluster query, tasks, files, tags, patches, operation and maintenance, and alarm configuration as well as read-only permissions for ECS, BMS, EVS, and VPC",
-      "display_name": "MRS CommonOperations",
-      "id": "b460e26e1b3b4100a14450eca6f79506",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "mrs:*:get*",
-              "mrs:*:list*",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "bms:*:get*",
-              "bms:*:list*",
-              "evs:*:get*",
-              "evs:*:list*",
-              "vpc:*:get*",
-              "vpc:*:list*",
-              "mrs:job:submit",
-              "mrs:job:stop",
-              "mrs:job:delete",
-              "mrs:job:batchDelete",
-              "mrs:file:create",
-              "mrs:file:delete",
-              "mrs:tag:batchOperate",
-              "mrs:tag:create",
-              "mrs:tag:delete",
-              "mrs:manager:access",
-              "mrs:patch:install",
-              "mrs:patch:uninstall",
-              "mrs:ops:grant",
-              "mrs:ops:shareLog",
-              "mrs:alarm:subscribe",
-              "mrs:bootstrap:*",
-              "bss:*:get*",
-              "bss:*:list*",
-              "kms:*:get*",
-              "kms:*:list*",
-              "rds:*:get*",
-              "rds:*:list*"
-            ],
-            "Effect": "Allow"
-          },
-          {
-            "Action": [
-              "mrs:cluster:create",
-              "mrs:cluster:resize",
-              "mrs:cluster:scaleUp",
-              "mrs:cluster:delete",
-              "mrs:cluster:policy"
-            ],
-            "Effect": "Deny"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "a8b68b33734744af9bd0d2b125d80a99"
     }
   ],
   "ModelArts": [
@@ -3097,67 +420,7 @@
       "catalog": "ModelArts",
       "description": "All permissions of ModelArts service.",
       "display_name": "ModelArts FullAccess",
-      "id": "18daa23182c84bb78304fad474b722f0",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "modelarts:*:*"
-            ],
-            "Effect": "Allow"
-          },
-          {
-            "Action": [
-              "swr:*:*"
-            ],
-            "Effect": "Allow"
-          },
-          {
-            "Action": [
-              "smn:*:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "ModelArts",
-      "description": "Common permissions of ModelArts service,except create,update,delete pool.",
-      "display_name": "ModelArts CommonOperations",
-      "id": "c68d48ffd0d64c9a8a73f7de6caadf20",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "modelarts:*:*"
-            ],
-            "Effect": "Allow"
-          },
-          {
-            "Action": [
-              "swr:*:*"
-            ],
-            "Effect": "Allow"
-          },
-          {
-            "Action": [
-              "smn:*:*"
-            ],
-            "Effect": "Allow"
-          },
-          {
-            "Action": [
-              "modelarts:pool:create",
-              "modelarts:pool:update",
-              "modelarts:pool:delete"
-            ],
-            "Effect": "Deny"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "18daa23182c84bb78304fad474b722f0"
     }
   ],
   "NAT": [
@@ -3165,74 +428,15 @@
       "catalog": "NAT",
       "description": "NAT Gateway Administrator",
       "display_name": "NAT Gateway Administrator",
-      "id": "73a1ad2c21c946d3a8c3d8b248cc37c0",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "BASE",
-            "display_name": "Tenant Guest"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "NAT:nat_gateway:*",
-              "NAT:snat_rule:*",
-              "NAT:dnat_rule:*",
-              "VPC:router:*",
-              "VPC:port:*",
-              "VPC:floatingip:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "73a1ad2c21c946d3a8c3d8b248cc37c0"
     }
   ],
   "NoSQL": [
     {
       "catalog": "NoSQL",
-      "description": "Read-only access for Distributed Multi-Model NoSQL Database Service",
-      "display_name": "GaussDB NoSQL ReadOnlyAccess",
-      "id": "4e9ab802bb8f4ff8a0658b2e33ccd1a2",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "nosql:*:list",
-              "nosql:*:download*",
-              "vpc:*:list",
-              "vpc:*:get",
-              "dss:pools:get",
-              "dss:pools:list"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "NoSQL",
       "description": "All permissions for Distributed Multi-Model NoSQL Database Service",
       "display_name": "GaussDB NoSQL FullAccess",
-      "id": "ad516147373443309b8dca144411a88d",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "nosql:*:*",
-              "vpc:*:list",
-              "vpc:*:get",
-              "dss:pools:get",
-              "dss:pools:list"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "ad516147373443309b8dca144411a88d"
     }
   ],
   "OBS": [
@@ -3240,302 +444,27 @@
       "catalog": "OBS",
       "description": "All permissions of  Object Storage Service.",
       "display_name": "OBS FullAccess",
-      "id": "7e573fea4da7427d8ca3d41e699290d7",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "obs:*:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "OBS",
-      "description": "Permissions to view the bucket list, obtain bucket metadata, and query bucket location",
-      "display_name": "OBS Buckets Viewer",
-      "id": "a8bf9da569214beaaf41dee679b8dea7",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "obs:bucket:ListAllMyBuckets",
-              "obs:bucket:HeadBucket",
-              "obs:bucket:GetBucketLocation"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
-    },
-    {
-      "catalog": "OBS",
-      "description": "Permissions to view the bucket list, obtain bucket metadata, list objects in a bucket, and query bucket location",
-      "display_name": "OBS ReadOnlyAccess",
-      "id": "e51ba0a05d104322a3851e1b1961f68f",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "obs:bucket:ListAllMybuckets",
-              "obs:bucket:HeadBucket",
-              "obs:bucket:ListBucket",
-              "obs:bucket:GetBucketLocation"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "OBS",
-      "description": "Basic operation permissions to view the bucket list, obtain bucket metadata, list objects in a bucket, query bucket location, upload objects, download objects, delete objects, and obtain object ACLs",
-      "display_name": "OBS OperateAccess",
-      "id": "f0ffdb70c84b4e11a8a4dbe393463b90",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "obs:bucket:ListAllMybuckets",
-              "obs:bucket:HeadBucket",
-              "obs:bucket:ListBucket",
-              "obs:bucket:GetBucketLocation",
-              "obs:object:GetObject",
-              "obs:object:GetObjectVersion",
-              "obs:object:PutObject",
-              "obs:object:DeleteObject",
-              "obs:object:DeleteObjectVersion",
-              "obs:object:ListMultipartUploadParts",
-              "obs:object:AbortMultipartUpload",
-              "obs:object:GetObjectAcl",
-              "obs:object:GetObjectVersionAcl"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "7e573fea4da7427d8ca3d41e699290d7"
     }
   ],
   "RDS": [
     {
       "catalog": "RDS",
-      "description": "The read-only permissions to all Relational Database Service resources, which can be used for statistics and survey.",
-      "display_name": "RDS Viewer",
-      "id": "605ebdd070194602a6077dd797a77de0",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "rds:instance:list",
-              "rds:backup:list",
-              "rds:param:list",
-              "dss:*:get",
-              "dss:*:list",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "vpc:*:list",
-              "vpc:*:get"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "RDS",
       "description": "Full permissions for Relational Database Service.",
       "display_name": "RDS FullAccess",
-      "id": "7b545aba6d0e4718bc1e997a72cdf4ca",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "rds:*:*",
-              "vpc:*:list",
-              "vpc:*:get",
-              "dss:pools:get",
-              "dss:pools:list",
-              "kms:cmk:get",
-              "kms:cmk:list",
-              "ces:*:list",
-              "ces:alarmsOnOff:put",
-              "ces:alarms:create"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "7b545aba6d0e4718bc1e997a72cdf4ca"
     },
     {
       "catalog": "RDS",
       "description": "RDS Administrator",
       "display_name": "RDS Administrator",
-      "id": "845596b566934ef58430f43603b0e67a",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "BASE",
-            "display_name": "Server Administrator"
-          },
-          {
-            "catalog": "BASE",
-            "display_name": "Guest"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "RDS:RDS:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
-    },
-    {
-      "catalog": "RDS",
-      "description": "DBA permissions of Relational Database Service, except delete.",
-      "display_name": "RDS DBA",
-      "id": "8ab0d8964db8439b90acd15aae7199ab",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "rds:instance:list",
-              "rds:instance:modify",
-              "rds:instance:create",
-              "rds:instance:switchover",
-              "rds:instance:modifySwitchoverPriority",
-              "rds:instance:modifySynchronizeModel",
-              "rds:instance:modifyPort",
-              "rds:instance:resetPasswd",
-              "rds:instance:modifyParameter",
-              "rds:instance:modifyPublicAccess",
-              "rds:instance:modifySSL",
-              "rds:instance:modifySecurityGroup",
-              "rds:instance:extendSpace",
-              "rds:instance:modifySpec",
-              "rds:instance:restoreInPlace",
-              "rds:instance:createManualBackup",
-              "rds:instance:modifyBackupPolicy",
-              "rds:backup:list",
-              "rds:backup:createInstanceFromBackup",
-              "rds:backup:modify",
-              "rds:backup:delete",
-              "rds:backup:download",
-              "rds:param:list",
-              "rds:param:modify",
-              "rds:param:create",
-              "rds:param:delete",
-              "vpc:*:*",
-              "dss:*:get",
-              "dss:*:list",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "ecs:cloudServerNics:update",
-              "ecs:serverInterfaces:use"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "845596b566934ef58430f43603b0e67a"
     },
     {
       "catalog": "RDS",
       "description": "All permissions of Relational Database Service.",
       "display_name": "RDS Admin",
-      "id": "96fe85b7a33f4665befe3adf7ef9e7fa",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "rds:*:*",
-              "vpc:*:*",
-              "dss:*:get",
-              "dss:*:list",
-              "ecs:*:get*",
-              "ecs:*:list*",
-              "ecs:cloudServerNics:update",
-              "ecs:serverInterfaces:use"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "RDS",
-      "description": "Read-only permissions for Relational Database Service.",
-      "display_name": "RDS ReadOnlyAccess",
-      "id": "cc10c247662a4661ab521bcb70a20edd",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "rds:*:list*",
-              "rds:*:get*",
-              "dss:pools:list",
-              "dss:pools:get",
-              "vpc:*:list",
-              "vpc:*:get",
-              "kms:cmk:get",
-              "kms:cmk:list",
-              "ces:*:list"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "RDS",
-      "description": "Database administrator permissions for all operations except deleting RDS resources.",
-      "display_name": "RDS ManageAccess",
-      "id": "fdaddb09af424b5ea27b9dca7d0927b6",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "vpc:*:list",
-              "vpc:*:get",
-              "kms:cmk:get",
-              "kms:cmk:list",
-              "ces:*:list",
-              "ces:alarmsOnOff:put",
-              "ces:alarms:create",
-              "dss:pools:get",
-              "dss:pools:list"
-            ],
-            "Effect": "Allow"
-          },
-          {
-            "Condition": {
-              "StringEqualsIgnoreCase": {
-                "g:ServiceName": [
-                  "rds"
-                ]
-              }
-            },
-            "Effect": "Allow",
-            "NotAction": [
-              "rds:*:delete*"
-            ]
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "96fe85b7a33f4665befe3adf7ef9e7fa"
     }
   ],
   "RTS": [
@@ -3543,42 +472,7 @@
       "catalog": "RTS",
       "description": "RTS Service Administrator",
       "display_name": "RTS Administrator",
-      "id": "b6c64c09d11943e7a6d0290ace3d1ce0",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "BASE",
-            "display_name": "Server Administrator"
-          },
-          {
-            "catalog": "ELB",
-            "display_name": "ELB Administrator"
-          },
-          {
-            "catalog": "CES",
-            "display_name": "CES Administrator"
-          },
-          {
-            "catalog": "IMS",
-            "display_name": "IMS Administrator"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "RTS:cloudformation:*",
-              "RTS:cloudwatch:*",
-              "RTS:events:*",
-              "RTS:resource:*",
-              "RTS:stacks:*",
-              "RTS:software_configs:*",
-              "RTS:software_deployments:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "b6c64c09d11943e7a6d0290ace3d1ce0"
     }
   ],
   "SDRS": [
@@ -3586,28 +480,7 @@
       "catalog": "SDRS",
       "description": "Storage Disaster Recovery Service Administrator",
       "display_name": "SDRS Administrator",
-      "id": "bef40fe4a0c942ce8a66a46128b9a2af",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "BASE",
-            "display_name": "Tenant Guest"
-          },
-          {
-            "catalog": "BASE",
-            "display_name": "Server Administrator"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "SDRS:*:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "bef40fe4a0c942ce8a66a46128b9a2af"
     }
   ],
   "SFS": [
@@ -3615,68 +488,15 @@
       "catalog": "SFS",
       "description": "Scalable File Service Administrator",
       "display_name": "SFS Administrator",
-      "id": "9bc22c983a2b467bbcd32a9dcc1ad862",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "BASE",
-            "display_name": "Guest"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "SFS:share:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "9bc22c983a2b467bbcd32a9dcc1ad862"
     }
   ],
   "SFSTurbo": [
     {
       "catalog": "SFSTurbo",
-      "description": "The read-only permissions to all Scalable File Service (SFS Turbo) resources.",
-      "display_name": "SFS Turbo ReadOnlyAccess",
-      "id": "220a7a5cbed5445790d74da364aae560",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "sfsturbo:*:get*",
-              "vpc:*:get",
-              "vpc:*:list",
-              "dss:*:get",
-              "dss:*:list"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "SFSTurbo",
       "description": "All permissions of Scalable File Service (SFS Turbo).",
       "display_name": "SFS Turbo FullAccess",
-      "id": "3912a55742f04fb7b9482b5d3e3c5c8c",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "sfsturbo:*:*",
-              "vpc:*:*",
-              "dss:*:get",
-              "dss:*:list",
-              "dss:*:count"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "3912a55742f04fb7b9482b5d3e3c5c8c"
     }
   ],
   "SMN": [
@@ -3684,83 +504,15 @@
       "catalog": "SMN",
       "description": "SMN Administrator",
       "display_name": "SMN Administrator",
-      "id": "a5e4eb719ed1494bbdcd9acdd7239b62",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "SMN:Topic:*",
-              "SMN:Sms:*",
-              "SMN:Email:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "a5e4eb719ed1494bbdcd9acdd7239b62"
     }
   ],
   "SVCSTG": [
     {
       "catalog": "SVCSTG",
-      "description": "ServiceStage Operator",
-      "display_name": "SvcStg Operator",
-      "id": "c4f258ef7a124db8add493819859b323",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "SVCSTG:app_status:query",
-              "SVCSTG:service_status:query",
-              "SVCSTG:stack_status:query",
-              "SVCSTG:pipeline_status:query"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
-    },
-    {
-      "catalog": "SVCSTG",
-      "description": "ServiceStage Developer",
-      "display_name": "SvcStg Developer",
-      "id": "ee0d6a68d4484245b78d33ffe0929fcb",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "SVCSTG:app:*",
-              "SVCSTG:service:*",
-              "SVCSTG:stack:*",
-              "SVCSTG:pipeline:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
-    },
-    {
-      "catalog": "SVCSTG",
       "description": "ServiceStage Admin",
       "display_name": "SvcStg Admin",
-      "id": "ff9a6ec147714f8cbc10b7d7d57906e8",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "SVCSTG:service:*",
-              "SVCSTG:app:*",
-              "SVCSTG:node:*",
-              "SVCSTG:stack:*",
-              "SVCSTG:pipeline:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "ff9a6ec147714f8cbc10b7d7d57906e8"
     }
   ],
   "SWR": [
@@ -3768,19 +520,7 @@
       "catalog": "SWR",
       "description": "Software Repository Admin",
       "display_name": "SWR Admin",
-      "id": "1c65a47d9c7a4f77b47ce84cc1638392",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "SWR:software:*",
-              "SWR:dockerimage:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "1c65a47d9c7a4f77b47ce84cc1638392"
     }
   ],
   "TMS": [
@@ -3788,53 +528,7 @@
       "catalog": "TMS",
       "description": "Tag Management Service Administrator",
       "display_name": "TMS Administrator",
-      "id": "0cd3367cdca345a7aa8607b9d1645232",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "BASE",
-            "display_name": "Tenant Guest"
-          },
-          {
-            "catalog": "BASE",
-            "display_name": "Server Administrator"
-          },
-          {
-            "catalog": "IMS",
-            "display_name": "IMS Administrator"
-          },
-          {
-            "catalog": "Auto Scaling",
-            "display_name": "AutoScaling Administrator"
-          },
-          {
-            "catalog": "VPC",
-            "display_name": "VPC Administrator"
-          },
-          {
-            "catalog": "VBS",
-            "display_name": "VBS Administrator"
-          },
-          {
-            "catalog": "OBS",
-            "display_name": "Tenant Administrator"
-          },
-          {
-            "catalog": "OBS",
-            "display_name": "Tenant Guest"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "TMS:predefine_tag:*",
-              "TMS:resource_tag:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "0cd3367cdca345a7aa8607b9d1645232"
     }
   ],
   "VBS": [
@@ -3842,99 +536,21 @@
       "catalog": "VBS",
       "description": "Volume Backup Service Administrator",
       "display_name": "VBS Administrator",
-      "id": "0c2160eaea8a48d7a7d3654b194abd3b",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "BASE",
-            "display_name": "Server Administrator"
-          },
-          {
-            "catalog": "BASE",
-            "display_name": "Guest"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "VBS:backup:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "0c2160eaea8a48d7a7d3654b194abd3b"
     }
   ],
   "VPC": [
     {
       "catalog": "VPC",
-      "description": "The read-only permissions to all VPC resources, which can be used for statistics and survey.",
-      "display_name": "VPC Viewer",
-      "id": "677dae6d1f624fd08014b76c1f86a114",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "vpc:*:get",
-              "vpc:*:list",
-              "ecs:*:get*",
-              "ecs:*:list*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "VPC",
       "description": "VPC Administrator",
       "display_name": "VPC Administrator",
-      "id": "b02fb78d12584e37ab575180ed7d541c",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "BASE",
-            "display_name": "Guest"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "VPC:vpc:*",
-              "VPC:router:*",
-              "VPC:network:*",
-              "VPC:subnet:*",
-              "VPC:privateip:*",
-              "VPC:port:*",
-              "VPC:vpn:*",
-              "VPC:lbaas:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "b02fb78d12584e37ab575180ed7d541c"
     },
     {
       "catalog": "VPC",
       "description": "All permissions of VPC service.",
       "display_name": "VPC Admin",
-      "id": "ef8ff7463e4544a69fd57020bb893bb0",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "vpc:*:*",
-              "ecs:*:get*",
-              "ecs:*:list*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "ef8ff7463e4544a69fd57020bb893bb0"
     }
   ],
   "VPCEP": [
@@ -3942,32 +558,7 @@
       "catalog": "VPCEP",
       "description": "VPCEndpoint service enables you to privately connect your VPC to supported services.",
       "display_name": "VPCEndpoint Administrator",
-      "id": "6407c8eb9cda495982d184e09f1e98be",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "BASE",
-            "display_name": "Server Administrator"
-          },
-          {
-            "catalog": "VPC",
-            "display_name": "VPC Administrator"
-          },
-          {
-            "catalog": "DNS",
-            "display_name": "DNS Administrator"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "VPCEP:endpoint_services:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "6407c8eb9cda495982d184e09f1e98be"
     }
   ],
   "VPN": [
@@ -3975,28 +566,7 @@
       "catalog": "VPN",
       "description": "Virtual Private Network Administrator",
       "display_name": "VPN Administrator",
-      "id": "850c932deddd4c2bb8d939e909108d0b",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "BASE",
-            "display_name": "Tenant Guest"
-          },
-          {
-            "catalog": "VPC",
-            "display_name": "VPC Administrator"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "vpn:*:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "850c932deddd4c2bb8d939e909108d0b"
     }
   ],
   "WAF": [
@@ -4004,79 +574,13 @@
       "catalog": "WAF",
       "description": "Web application firewall service.",
       "display_name": "WAF Administrator",
-      "id": "2f1f94f663b04d0d8b50d74dd33c6570",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "SMN",
-            "display_name": "SMN Administrator"
-          },
-          {
-            "catalog": "BASE",
-            "display_name": "Server Administrator"
-          },
-          {
-            "catalog": "BASE",
-            "display_name": "Tenant Guest"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "WAF:*:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "2f1f94f663b04d0d8b50d74dd33c6570"
     },
     {
       "catalog": "WAF",
       "description": "All permissions of waf service.",
       "display_name": "WAF FullAccess",
-      "id": "733c49ce5323496db523667fdda0e318",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "waf:*:*",
-              "lts:groups:get",
-              "lts:groups:list",
-              "lts:topics:get",
-              "lts:topics:list",
-              "smn:*:get*",
-              "smn:*:list*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
-    },
-    {
-      "catalog": "WAF",
-      "description": "The read-only permissions to all Web application firewall resources, which can be used for statistics and survey.",
-      "display_name": "WAF ReadOnlyAccess",
-      "id": "92e82ced61b54366a7e82ebf299113d9",
-      "policy": {
-        "Statement": [
-          {
-            "Action": [
-              "waf:*:get*",
-              "waf:*:list*",
-              "lts:groups:get",
-              "lts:groups:list",
-              "lts:topics:get",
-              "lts:topics:list",
-              "smn:*:get*",
-              "smn:*:list*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.1"
-      }
+      "id": "733c49ce5323496db523667fdda0e318"
     }
   ],
   "WKS": [
@@ -4084,36 +588,7 @@
       "catalog": "WKS",
       "description": "Workspace Administrator",
       "display_name": "Workspace Administrator",
-      "id": "4c408e1233f542f0b0f377c3627d2fe6",
-      "policy": {
-        "Depends": [
-          {
-            "catalog": "VPC",
-            "display_name": "VPC Administrator"
-          },
-          {
-            "catalog": "BASE",
-            "display_name": "Server Administrator"
-          },
-          {
-            "catalog": "BASE",
-            "display_name": "Tenant Guest"
-          }
-        ],
-        "Statement": [
-          {
-            "Action": [
-              "WKS:workspaces:*",
-              "WKS:desktops:*",
-              "WKS:users:*",
-              "WKS:policies:*",
-              "WKS:products:*"
-            ],
-            "Effect": "Allow"
-          }
-        ],
-        "Version": "1.0"
-      }
+      "id": "4c408e1233f542f0b0f377c3627d2fe6"
     }
   ]
 }
