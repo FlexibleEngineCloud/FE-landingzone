@@ -1,7 +1,4 @@
-variable "users" {
-  type = map(string)
-}
-
-variable "groups" {
-  type = map(list(string))
+# Group names variable
+variable "group_names" {
+  type = list(string)
 }

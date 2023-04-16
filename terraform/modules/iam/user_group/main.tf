@@ -1,3 +1,5 @@
+# User Groups Module
+
 # FE provider
 terraform {
   required_providers {
@@ -7,20 +9,14 @@ terraform {
   }
 }
 
-
+# Provision User Groups resource
 resource "flexibleengine_identity_group_v3" "group" {
-  for_each = var.groups
+  for_each = toset(var.group_names)
 
-  name        = each.key
-  description = "${each.key} group"
+  name        = each.value
+  description = "${each.value} group"
+
+  # any other attributes you need to set for each group
 }
 
-resource "flexibleengine_identity_group_membership_v3" "membership" {
-  for_each = var.groups
-  
-  group = flexibleengine_identity_group_v3.group[each.key].id
-  users = [
-      for user in var.groups[each.key]:
-      var.users[user]
-  ]
-}
+
