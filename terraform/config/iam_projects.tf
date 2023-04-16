@@ -7,7 +7,7 @@ module "iam_projects" {
   source = "../modules/iam/project"
 
   project_names = local.project_names
-  region = var.region
+  region        = var.region
 }
 
 # Get project IDs via API call.

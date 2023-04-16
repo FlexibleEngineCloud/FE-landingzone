@@ -1,8 +1,8 @@
 # Groups variable
 variable "groups" {
   type = list(object({
-    name    = string
-    users   = list(object({
+    name = string
+    users = list(object({
       name = string
       id   = string
     }))

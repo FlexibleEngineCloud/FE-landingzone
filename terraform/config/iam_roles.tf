@@ -10,6 +10,6 @@ module "iam_roles" {
   ]
 
   source = "../modules/iam/role"
-  
+
   role_assignments = local.role_assignments
 }

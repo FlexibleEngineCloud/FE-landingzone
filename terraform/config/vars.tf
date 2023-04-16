@@ -1,24 +1,24 @@
 # Provider variables
 variable "ak" {
-  type = string
+  type        = string
   description = "The access key of the FlexibleEngine cloud"
-  sensitive = true
+  sensitive   = true
 }
 variable "sk" {
-  type = string
+  type        = string
   description = "The secret key of the FlexibleEngine cloud"
-  sensitive = true
+  sensitive   = true
 }
 variable "domain_name" {
-  type = string
+  type        = string
   description = "The Name of the Domain to scope to"
 }
 variable "tenant_name" {
-  type = string
+  type        = string
   description = "The Name of the Project to login with"
 }
 variable "region" {
-  type = string
+  type        = string
   description = "Region of the FlexibleEngine cloud"
-  default = "eu-west-0"
+  default     = "eu-west-0"
 }

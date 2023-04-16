@@ -9,7 +9,7 @@ terraform {
   }
 }
 
-
+/*
 # Provision Project resource
 resource "flexibleengine_identity_project_v3" "project" {
   for_each = toset(var.project_names)
@@ -19,3 +19,4 @@ resource "flexibleengine_identity_project_v3" "project" {
 
   # any other attributes you need to set for each project
 }
+*/

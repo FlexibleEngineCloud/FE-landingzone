@@ -9,7 +9,7 @@ terraform {
 
 # Configuration of FE provider
 provider "flexibleengine" {
-  alias = "fe"
+  alias       = "fe"
   access_key  = var.ak
   secret_key  = var.sk
   domain_name = var.domain_name
