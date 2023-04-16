@@ -6,6 +6,7 @@ terraform {
     }
   }
 }
+
 # Configuration of FE provider
 provider "flexibleengine" {
   alias = "fe"

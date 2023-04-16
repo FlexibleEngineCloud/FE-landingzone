@@ -20,4 +20,5 @@ variable "tenant_name" {
 variable "region" {
   type = string
   description = "Region of the FlexibleEngine cloud"
+  default = "eu-west-0"
 }

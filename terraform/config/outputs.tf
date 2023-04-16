@@ -1,12 +1,14 @@
+# Group IDs as output
 output "groups_ids" {
   value = data.external.get_group_ids.result
 }
-output "groups" {
-  value = local.groups
+
+# Project IDs as output
+output "project_ids" {
+  value = local.project_ids
 }
-output "projects" {
-  value = local.projects
-}
-output "users" {
-  value = local.users
+
+# Role Assignments as output
+output "role_assignments" {
+  value = local.role_assignments
 }
