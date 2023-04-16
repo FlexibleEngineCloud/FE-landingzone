@@ -1,3 +1,5 @@
+# Role Assgnments Module
+
 # FE provider
 terraform {
   required_providers {
@@ -7,39 +9,17 @@ terraform {
   }
 }
 
-/*
-resource "flexibleengine_identity_group_v3" "group" {
-  for_each = var.groups
+# Provision Role Assignments resource
+resource "flexibleengine_identity_role_assignment_v3" "role_assignment" {
+  for_each = {
+    for idx, assignment in var.role_assignments : "assignment_${idx}" => assignment
+  }
 
-  name        = each.key
-  description = "${each.key} group"
+  group_id   = each.value.group_id
+  project_id = each.value.project_id
+  role_id    = each.value.role_id
+
+  # any other attributes you need to set for each role assignments
 }
 
-resource "flexibleengine_identity_group_membership_v3" "membership" {
-  for_each = var.groups
-  
-  group = flexibleengine_identity_group_v3.group[each.key].id
-  users = [
-      for user in var.groups[each.key]:
-      var.users[user]
-  ]
-}
 
-{
-    "Version": "1.1",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "WAF:*:*"
-            ]
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "CBR:*:*"
-            ]
-        }
-    ]
-}
-*/
