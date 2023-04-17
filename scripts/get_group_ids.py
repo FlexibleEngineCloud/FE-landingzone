@@ -1,13 +1,11 @@
 try:
     import requests
     import json
-    from authentication import authenticate
+    from authentication import authenticate,IAM_ENDPOINT
     import sys
 except ImportError as e:
     print(f"Failed to import: {str(e)}")
     exit(1)
-
-IAM_ENDPOINT = "https://iam.eu-west-0.prod-cloud-ocb.orange-business.com/v3"
 
 
 def get_group_ids():
