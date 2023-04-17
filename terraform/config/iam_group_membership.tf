@@ -10,6 +10,5 @@ module "group_membership" {
 
   source = "../modules/iam/group_membership"
 
-  groups_ids = local.group_ids
-  groups     = local.groups
+  group_membership = local.group_membership
 }

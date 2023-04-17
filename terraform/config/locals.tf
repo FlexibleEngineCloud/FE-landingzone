@@ -8,6 +8,14 @@ locals {
   # Load Group IDs
   group_ids = data.external.get_group_ids.result
 
+  # Mapping Group IDs with their associated User IDs
+  group_membership = { 
+    for group in local.groups : group.name => {
+      group_id = local.group_ids[group.name]
+      user_ids = [for user in group.users : user.id]
+    }
+  }
+  
   /*
   # Extract User IDs
   user_ids = flatten([

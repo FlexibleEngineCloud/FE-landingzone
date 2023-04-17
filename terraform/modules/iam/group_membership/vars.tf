@@ -1,19 +1,7 @@
-# Groups variable
-variable "groups" {
-  type = list(object({
-    name = string
-    users = list(object({
-      name = string
-      id   = string
-    }))
-    projects = list(object({
-      name        = string
-      permissions = list(string)
-    }))
+# Group membership variable
+variable "group_membership" {
+  type = map(object({
+    group_id = string
+    user_ids = list(string)
   }))
-}
-
-# Groups IDs variable
-variable "groups_ids" {
-  type = map(string)
 }
