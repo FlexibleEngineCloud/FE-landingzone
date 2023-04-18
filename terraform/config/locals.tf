@@ -16,6 +16,9 @@ locals {
     }
   }
 
+  # Load Group memeberships
+  group_membership_ids = module.group_membership.group_memberships
+
   /*
   # Extract User IDs
   user_ids = flatten([

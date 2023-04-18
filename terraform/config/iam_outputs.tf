@@ -10,7 +10,7 @@ output "groups_ids" {
 
 # Group memberships as output
 output "group_membership" {
-  value = local.group_membership
+  value = local.group_membership_ids
 }
 
 # Role Assignments as output
