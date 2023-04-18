@@ -1,0 +1,132 @@
+[
+  {
+    "name": "adminn",
+    "projects": [],
+    "users": [
+      {
+        "id": "user-id1",
+        "name": "user-name1"
+      },
+      {
+        "id": "user-id2",
+        "name": "user-name2"
+      }
+    ]
+  },
+  {
+    "name": "network",
+    "projects": [
+      {
+        "name": "eu-west-0_Netowrk",
+        "permissions": [
+          "AS",
+          "Anti-DDoS",
+          "CCE",
+          "DCS",
+          "DNS",
+          "ECS",
+          "ELB"
+        ]
+      }
+    ],
+    "users": [
+      {
+        "id": "user-id3",
+        "name": "user-name3"
+      }
+    ]
+  },
+  {
+    "name": "security",
+    "projects": [
+      {
+        "name": "eu-west-0_Security_Management",
+        "permissions": [
+          "CES",
+          "CTS",
+          "TMS",
+          "KMS",
+          "VBS",
+          "CSBS",
+          "CBR"
+        ]
+      }
+    ],
+    "users": [
+      {
+        "id": "user-id4",
+        "name": "user-name4"
+      }
+    ]
+  },
+  {
+    "name": "database",
+    "projects": [
+      {
+        "name": "eu-west-0_Database",
+        "permissions": [
+          "VPC",
+          "MRS",
+          "GaussDB",
+          "DIS",
+          "DAYU",
+          "DAS",
+          "RDS"
+        ]
+      }
+    ],
+    "users": [
+      {
+        "id": "user-id5",
+        "name": "user-name5"
+      }
+    ]
+  },
+  {
+    "name": "app_dev",
+    "projects": [
+      {
+        "name": "eu-west-0_App_Dev",
+        "permissions": [
+          "VPC",
+          "VPCEP",
+          "AS",
+          "CCE",
+          "SWR",
+          "BMS"
+        ]
+      }
+    ],
+    "users": [
+      {
+        "id": "user-id6",
+        "name": "user-name6"
+      },
+      {
+        "id": "user-id7",
+        "name": "user-name7"
+      },
+      {
+        "id": "user-id8",
+        "name": "user-name8"
+      }
+    ]
+  },
+  {
+    "name": "shared_services",
+    "projects": [
+      {
+        "name": "eu-west-0_Shared_Services",
+        "permissions": [
+          "VPC"
+        ]
+      }
+    ],
+    "users": [
+      {
+        "id": "user-id9",
+        "name": "user-name9"
+      }
+    ]
+  }
+]
