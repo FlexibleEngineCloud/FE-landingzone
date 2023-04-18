@@ -5,7 +5,7 @@ module "group_membership" {
   }
 
   depends_on = [
-    data.external.get_group_ids
+    module.iam_groups
   ]
 
   source = "../modules/iam/group_membership"

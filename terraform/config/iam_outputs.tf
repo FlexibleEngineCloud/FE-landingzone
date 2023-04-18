@@ -5,7 +5,7 @@ output "project_ids" {
 
 # Group IDs as output
 output "groups_ids" {
-  value = data.external.get_group_ids.result
+  value = local.group_ids
 }
 
 # Group memberships as output
@@ -17,4 +17,3 @@ output "group_membership" {
 output "role_assignments" {
   value = local.role_assignments
 }
-

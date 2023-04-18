@@ -6,7 +6,7 @@ locals {
   policies = jsondecode(file("../../policies.json"))
 
   # Load Group IDs
-  group_ids = data.external.get_group_ids.result
+  group_ids = module.iam_groups.group_ids
 
   # Mapping Group IDs with their associated User IDs
   group_membership = { 
@@ -15,7 +15,7 @@ locals {
       user_ids = [for user in group.users : user.id]
     }
   }
-  
+
   /*
   # Extract User IDs
   user_ids = flatten([
@@ -47,8 +47,8 @@ locals {
     ]
   }
 
-  # Extract project IDs
-  project_ids = data.external.get_project_ids.result
+  # Load project IDs
+  project_ids = module.iam_projects.project_ids
 
   # Combining Group IDs, Project IDs, and Policy IDs
   groups_roles = [
