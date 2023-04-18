@@ -4,7 +4,7 @@ module "network_vpc" {
     flexibleengine = flexibleengine.fe
   }
 
-  source = "../modules/network/vpc"
+  source = "../modules/vpc"
 
   vpc_name = "vpc"
   vpc_cidr = "192.168.0.0/16"
