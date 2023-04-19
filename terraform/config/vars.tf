@@ -49,3 +49,11 @@ variable "sharedservices_tenant_name" {
   description = "shared services project name to login with"
   default = "eu-west-0_Shared_Services2"
 }
+
+# Security Group variables
+
+
+# Firewall instances variables
+
+
+# Tenant Names
