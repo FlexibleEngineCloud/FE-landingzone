@@ -1,7 +1,7 @@
 # Provision User Groups
 module "iam_groups" {
   providers = {
-    flexibleengine = flexibleengine.fe
+    flexibleengine = flexibleengine.home_fe
   }
 
   source = "../modules/iam/user_group"

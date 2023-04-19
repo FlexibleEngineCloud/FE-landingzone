@@ -1,7 +1,7 @@
 # Provision Group Memberships
 module "group_membership" {
   providers = {
-    flexibleengine = flexibleengine.fe
+    flexibleengine = flexibleengine.home_fe
   }
 
   depends_on = [

@@ -2,7 +2,7 @@
 # Assinging Roles module
 module "iam_roles" {
   providers = {
-    flexibleengine = flexibleengine.fe
+    flexibleengine = flexibleengine.home_fe
   }
 
   depends_on = [
