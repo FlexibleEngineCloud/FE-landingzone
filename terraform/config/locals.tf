@@ -9,7 +9,7 @@ locals {
   group_ids = module.iam_groups.group_ids
 
   # Mapping Group IDs with their associated User IDs
-  group_membership = { 
+  group_membership = {
     for group in local.groups : group.name => {
       group_id = local.group_ids[group.name]
       user_ids = [for user in group.users : user.id]
