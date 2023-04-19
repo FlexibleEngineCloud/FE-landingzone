@@ -1,7 +1,7 @@
 # Provision projects
 module "iam_projects" {
   providers = {
-    flexibleengine = flexibleengine.fe
+    flexibleengine = flexibleengine.home_fe
   }
 
   source = "../modules/iam/project"
