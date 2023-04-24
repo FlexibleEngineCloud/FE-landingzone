@@ -58,30 +58,3 @@ module "sg_firewall" {
     }
   ]
 }
-
-
-module "firewall_eip" {
-  source = "../modules/eip"
-  providers = {
-    flexibleengine = flexibleengine.network_fe
-  }
-
-  eip_count = 3
-  eip_name = "external-eip"
-  eip_bandwidth = 1000
-  protect_eip = true
-}
-
-
-module "antiddos" {
-  source = "../modules/antiddos"
-  providers = {
-    flexibleengine = flexibleengine.network_fe
-  }
-
-  eip_ids = module.firewall_eip.ids
-
-  depends_on = [
-    module.firewall_eip
-  ]
-}

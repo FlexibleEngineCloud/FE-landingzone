@@ -29,7 +29,7 @@ output "secgroup_name" {
 # KeyPair outputs
 output "keypair_id" {
   description = "The ID of the KeyPair"
-  value       =  module.keypair.id
+  value       = module.keypair.id
 }
 
 # EIP outputs
@@ -49,4 +49,36 @@ output "public_ips_antiddos" {
   value       = module.antiddos.ids
 }
 
+# Inbound Virtual IP outputs
+output "vip_in_id" {
+  description = "The inbound Virtual IP ID"
+  value       = module.network_vip_in.id
+}
+
+output "vip_in_ip_address" {
+  description = "The IP address in the subnet for the inbound vip"
+  value       = module.network_vip_in.ip_address
+}
+
+# Outbound Virtual IP outputs
+output "vip_out_id" {
+  description = "The oubound Virtual IP ID"
+  value       = module.network_vip_in.id
+}
+
+output "vip_out_ip_address" {
+  description = "The IP address in the subnet for the outbound vip"
+  value       = module.network_vip_in.ip_address
+}
+
+
 # Firewall instances outputs
+output "firewalls_network" {
+  description = "Network block of the provisioned ECS instance"
+  value       = module.ecs_cluster.network
+}
+
+output "firewalls_id" {
+  value       = module.ecs_cluster.id
+  description = "The ID of the provisioned ECS instances"
+}
