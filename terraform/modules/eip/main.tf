@@ -20,17 +20,4 @@ resource "flexibleengine_vpc_eip" "eip_protected" {
     share_type  = "PER"
     charge_mode = "traffic"
   }
-  lifecycle {
-    prevent_destroy = true
-  }
-}
-
-# Enable AntiDDOS on EIP
-resource "flexibleengine_antiddos_v1" "antiddos" {
-  floating_ip_id         = flexibleengine_vpc_eip.eip_protected[count.index].id
-  enable_l7              = true
-  traffic_pos_id         = 1
-  http_request_pos_id    = 3
-  cleaning_access_pos_id = 2
-  app_type_id            = 0
 }
