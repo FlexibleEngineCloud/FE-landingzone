@@ -33,15 +33,20 @@ output "keypair_id" {
 }
 
 # EIP outputs
-output "firewall_public_ip" {
-  description = "firewall Elastic IP Address"
-  value       = module.firewall_eip.public_ip
+output "firewall_public_ips" {
+  description = "firewall Elastic IP Addresses"
+  value       = module.firewall_eip.public_ips
 }
 
-output "firewall_eip_id" {
-  description = "firewall Elastic IP ID"
-  value       = module.firewall_eip.id
+output "firewall_eip_ids" {
+  description = "firewall Elastic IP IDs"
+  value       = module.firewall_eip.ids
+}
+
+# AntiDDOS outputs
+output "public_ips_antiddos" {
+  description = "AntiDDOS IDs atteched to firewall EIPs"
+  value       = module.antiddos.ids
 }
 
 # Firewall instances outputs
-

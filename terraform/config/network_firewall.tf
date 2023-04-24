@@ -24,6 +24,10 @@ module "ecs_cluster" {
     Terraform = "true"
     Environment = "landingzone"
   }
+
+  depends_on = [
+    module.keypair,module.sg_firewall,module.network_vpc
+  ]
 }
 
 module "keypair" {
@@ -62,9 +66,22 @@ module "firewall_eip" {
     flexibleengine = flexibleengine.network_fe
   }
 
-  eip_count = 1
+  eip_count = 3
   eip_name = "external-eip"
   eip_bandwidth = 1000
   protect_eip = true
 }
 
+
+module "antiddos" {
+  source = "../modules/antiddos"
+  providers = {
+    flexibleengine = flexibleengine.network_fe
+  }
+
+  eip_ids = module.firewall_eip.ids
+
+  depends_on = [
+    module.firewall_eip
+  ]
+}
