@@ -38,6 +38,10 @@ module "network_vip_in" {
   ip_address = "192.168.1.100"
   subnet_id  = module.network_vpc.network_ids[0]
   port_ids   = [for instance_network in module.ecs_cluster.network : instance_network.0.port]
+
+  depends_on = [
+    module.network_vpc, module.ecs_cluster
+  ]
 }
 
 # Provision Virtual outbound IP
@@ -51,6 +55,10 @@ module "network_vip_out" {
   ip_address = "192.168.2.100"
   subnet_id  = module.network_vpc.network_ids[1]
   port_ids   = [for instance_network in module.ecs_cluster.network : instance_network.1.port]
+
+  depends_on = [
+    module.network_vpc, module.ecs_cluster
+  ]
 }
 
 
@@ -61,10 +69,14 @@ module "firewall_eip" {
     flexibleengine = flexibleengine.network_fe
   }
 
-  eip_count     = 3
+  eip_count     = 1
   eip_name      = "external-eip"
   eip_bandwidth = 1000
   protect_eip   = true
+
+  depends_on = [
+    module.network_vip_in,module.network_vip_out
+  ]
 }
 
 # Assign AntiDDOS
@@ -80,3 +92,4 @@ module "antiddos" {
     module.firewall_eip
   ]
 }
+
