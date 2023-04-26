@@ -16,6 +16,22 @@ module "network_vpc_dmz" {
   ]
 }
 
+// if you haven't setted yet CCE on this tenant, you should have an agency for CCE service.
+// this agency could be created as well, in console automatically the first time you use CCE. if you have already setted up CCE, consider commenting this module deployment.
+module "cce_agency" {
+  providers = {
+    flexibleengine = flexibleengine.home_fe
+  }
+
+  source = "../modules/iam/agency"
+
+  name = "cce_admin_trust"
+  delegated_service_name = "op_svc_cce"
+  tenant_name = var.network_tenant_name
+  roles = [ "Tenant Administrator" ]
+  domain_roles = [ "OBS OperateAccess" ]
+  duration = "FOREVER"
+}
 
 
 // CCE Cluster
@@ -61,6 +77,6 @@ module "dmz_cce_cluster" {
   ]
 
   depends_on = [
-    module.keypair, module.network_vpc_dmz
+    module.keypair, module.network_vpc_dmz, module.cce_agency
   ]
 }
