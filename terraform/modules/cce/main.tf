@@ -9,24 +9,6 @@ terraform {
   }
 }
 
-
-// Create Agency for CCE provisioning
-resource "flexibleengine_identity_agency_v3" "agency" {
-  name                   = "cce_admin_trust"
-  description            = "Create by Terraform"
-  delegated_service_name = "op_svc_cce"
-
-  project_role {
-    project = "eu-west-0_Netowrk2"
-    roles = [
-      "Tenant Administrator",
-    ]
-  }
-  domain_roles = [
-    "OBS OperateAccess",
-  ]
-}
-
 # Provision CCE Cluster
 resource "flexibleengine_cce_cluster_v3" "cce_cluster" {
   name                   = var.cluster_name
@@ -43,10 +25,6 @@ resource "flexibleengine_cce_cluster_v3" "cce_cluster" {
     create = "60m"
     delete = "60m"
   }
-
-  depends_on = [
-    flexibleengine_identity_agency_v3.agency
-  ]
 }
 
 # Provision CCE Cluster nodes
