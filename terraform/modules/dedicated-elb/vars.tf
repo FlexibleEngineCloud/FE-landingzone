@@ -91,6 +91,20 @@ variable "domain" {
   default     = ""
 }
 
+
+// ipgroups vars
+variable "ipgroups" {
+  description = "Ip Address Group list"
+  type = list(object({
+    name           = string
+    description    = optional(string)
+    listener_index = number
+
+    ip = string
+    ip_description = optional(string)
+  }))
+}
+
 // listeners vars
 variable "listeners" {
   description = "Listeners list"
@@ -109,7 +123,8 @@ variable "listeners" {
 
     forward_eip                 = optional(bool)
     access_policy                 = optional(string)
-    ip_group              = optional(string)
+    
+    ipgroup_index              = optional(number)
     
     server_certificate             = optional(string)
     ca_certificate           = optional(string)

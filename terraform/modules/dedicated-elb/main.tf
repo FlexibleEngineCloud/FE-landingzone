@@ -50,8 +50,20 @@ resource "flexibleengine_elb_certificate" "cert" {
   certificate = var.certificate
 }
 
+// Create Ip address Groups
+resource "flexibleengine_elb_ipgroup" "ipgroup" {
+  count = length(var.ipgroups)
 
-# Create HTTP listener
+  name        = element(var.ipgroups.*.name, count.index)
+  description = element(var.ipgroups.*.description, count.index) == "" ? null : element(var.ipgroups.*.description, count.index)
+  
+  ip_list {
+    ip          = element(var.ipgroups.*.ip, count.index)
+    description = element(var.ipgroups.*.ip_description, count.index) == "" ? null : element(var.ipgroups.*.ip_description, count.index)
+  }
+}
+
+# Create listeners
 resource "flexibleengine_lb_listener_v3" "listeners" {
   count = length(var.listeners)
 
@@ -68,10 +80,10 @@ resource "flexibleengine_lb_listener_v3" "listeners" {
   tls_ciphers_policy           = var.listeners[count.index].tls_ciphers_policy == null ? null : element(var.listeners.*.protocol, count.index) == "HTTPS" ? element(var.listeners.*.tls_ciphers_policy, count.index) : null  
   
   forward_eip = var.listeners[count.index].forward_eip == null ? null : element(var.listeners.*.protocol, count.index) == "HTTP" || var.listeners[count.index].forward_eip == "HTTPS" ? var.listeners[count.index].forward_eip : null
+  
   access_policy = var.listeners[count.index].access_policy == null ? null : element(var.listeners.*.access_policy, count.index)
-  ip_group = flexibleengine_elb_ipgroup.ipgroup.id
-
-
+  ip_group = var.listeners[count.index].access_policy != null ? var.listeners[count.index].ipgroup_index != null ? var.listeners[count.index].ipgroup_index : flexibleengine_elb_ipgroup.ipgroup[element([for i, group in var.ipgroups : i if group.listener_index == count.index], 0)].id : null
+  
   server_certificate = flexibleengine_elb_certificate.cert[0].id
   //server_certificate = var.listeners[count.index].server_certificate == null ? null : element(var.listeners.*.protocol, count.index) == "HTTPS" ? element(var.listeners.*.server_certificate, count.index) : null
   ca_certificate = var.listeners[count.index].ca_certificate == null ? null : element(var.listeners.*.protocol, count.index) == "HTTPS" ? element(var.listeners.*.ca_certificate, count.index) : null
@@ -136,15 +148,4 @@ resource "flexibleengine_lb_monitor_v3" "monitor" {
   #expected_codes = var.monitors[count.index].expected_codes == null ? null : var.monitors[count.index].protocol == "HTTP" || var.monitors[count.index].protocol == "HTTPS" ? element(var.monitors.*.expected_codes, count.index) : null
 
   depends_on = [flexibleengine_lb_pool_v3.pools, flexibleengine_lb_member_v3.members]
-}
-
-
-resource "flexibleengine_elb_ipgroup" "ipgroup" {
-  name        = "basic"
-  description = "basic example"
-
-  ip_list {
-    ip          = "192.168.10.10"
-    description = "ECS01"
-  }
 }
