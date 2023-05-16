@@ -40,7 +40,7 @@ variable "security_group_ids" {
 variable "availability_zones" {
   description = "A list of security group IDs to apply to the loadbalancer"
   type        = list(string)
-  default     = [
+  default = [
     "eu-west-0a",
     "eu-west-0b"
   ]
@@ -100,7 +100,7 @@ variable "ipgroups" {
     description    = optional(string)
     listener_index = number
 
-    ip = string
+    ip             = string
     ip_description = optional(string)
   }))
 }
@@ -115,22 +115,22 @@ variable "listeners" {
     hasCert     = bool
     description = string
 
-    http2_enable                 = optional(bool)
-    idle_timeout                 = optional(number)
-    request_timeout              = optional(number)
-    response_timeout             = optional(number)
-    tls_ciphers_policy           = optional(string)
+    http2_enable       = optional(bool)
+    idle_timeout       = optional(number)
+    request_timeout    = optional(number)
+    response_timeout   = optional(number)
+    tls_ciphers_policy = optional(string)
 
-    forward_eip                 = optional(bool)
-    access_policy                 = optional(string)
-    
-    ipgroup_index              = optional(number)
-    
-    server_certificate             = optional(string)
-    ca_certificate           = optional(string)
-    sni_certificate           = optional(list(string))
-    
-    advanced_forwarding_enabled           = optional(bool)
+    forward_eip   = optional(bool)
+    access_policy = optional(string)
+
+    ipgroup_index = optional(number)
+
+    server_certificate = optional(string)
+    ca_certificate     = optional(string)
+    sni_certificate    = optional(list(string))
+
+    advanced_forwarding_enabled = optional(bool)
 
     tags = optional(map(string))
   }))
@@ -145,7 +145,7 @@ variable "pools" {
     lb_method      = string # Load Balancing method (ROUND_ROBIN recommended)
     listener_index = number # Listenerused in this pool (Can be null)
 
-    description    = optional(string)
+    description = optional(string)
 
     //type        = optional(string)
     //cookie_name = optional(string)
@@ -164,7 +164,7 @@ variable "backends" {
     pool_index    = number
     subnet_id     = string
 
-    weight         = optional(number)
+    weight = optional(number)
   }))
 }
 
@@ -179,14 +179,14 @@ variable "monitors" {
   type = list(object({
     pool_index  = number
     protocol    = string
-    interval       = number
+    interval    = number
     timeout     = number
     max_retries = number
 
     port = optional(number)
 
     // required only when protocol is set to HTTP or HTTPS.
-    url_path       = optional(string)
+    url_path = optional(string)
     #http_method    = optional(string)
     #expected_codes = optional(string)
   }))
