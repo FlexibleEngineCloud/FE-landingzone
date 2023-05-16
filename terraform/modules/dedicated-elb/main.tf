@@ -57,9 +57,13 @@ resource "flexibleengine_elb_ipgroup" "ipgroup" {
   name        = element(var.ipgroups.*.name, count.index)
   description = element(var.ipgroups.*.description, count.index) == "" ? null : element(var.ipgroups.*.description, count.index)
 
-  ip_list {
-    ip          = element(var.ipgroups.*.ip, count.index)
-    description = element(var.ipgroups.*.ip_description, count.index) == "" ? null : element(var.ipgroups.*.ip_description, count.index)
+  dynamic "ip_list" {
+    for_each = var.ipgroups[count.index].ips
+
+    content {
+      ip          = ip_list.value.ip
+      description = ip_list.value.description == null ? null : ip_list.value.description
+    }
   }
 }
 
@@ -143,8 +147,6 @@ resource "flexibleengine_lb_monitor_v3" "monitor" {
 
   port     = var.monitors[count.index].port == null ? null : element(var.monitors.*.port, count.index)
   url_path = var.monitors[count.index].url_path == null ? null : var.monitors[count.index].protocol == "HTTP" || var.monitors[count.index].protocol == "HTTPS" ? element(var.monitors.*.url_path, count.index) : null
-  #http_method    = var.monitors[count.index].http_method == null ? null : var.monitors[count.index].protocol == "HTTP" || var.monitors[count.index].protocol == "HTTPS" ? element(var.monitors.*.http_method, count.index) : null
-  #expected_codes = var.monitors[count.index].expected_codes == null ? null : var.monitors[count.index].protocol == "HTTP" || var.monitors[count.index].protocol == "HTTPS" ? element(var.monitors.*.expected_codes, count.index) : null
 
   depends_on = [flexibleengine_lb_pool_v3.pools, flexibleengine_lb_member_v3.members]
 }

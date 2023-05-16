@@ -100,8 +100,10 @@ variable "ipgroups" {
     description    = optional(string)
     listener_index = number
 
-    ip             = string
-    ip_description = optional(string)
+    ips = list(object({
+      ip          = string
+      description = optional(string)
+    }))
   }))
 }
 
@@ -187,8 +189,6 @@ variable "monitors" {
 
     // required only when protocol is set to HTTP or HTTPS.
     url_path = optional(string)
-    #http_method    = optional(string)
-    #expected_codes = optional(string)
   }))
   default = []
 }
