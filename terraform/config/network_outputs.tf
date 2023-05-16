@@ -148,3 +148,33 @@ output "testtt" {
   description = "ID of the created CCE agency"
   value       = locals.antiddos_instances
 }*/
+
+
+// Shared load balancer outputs
+
+
+// Dedicated Load balancer outputs
+output "dedicated-lb-id" {
+  description = "The Load Balancer ID"
+  value       = module.dedicated-elb.id
+}
+
+output "dedicated-lb-listeners" {
+  description = "The LB listeners"
+  value       = module.dedicated-elb.listeners
+}
+
+output "dedicated-lb-pools" {
+  description = "The LB pools"
+  value       = module.dedicated-elb.pools
+}
+
+output "dedicated-lb-members" {
+  description = "The LB members"
+  value       = module.dedicated-elb.members
+}
+
+output "dedicated-lb-monitors" {
+  description = "The LB monitors"
+  value       = module.dedicated-elb.monitors
+}

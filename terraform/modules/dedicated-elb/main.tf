@@ -1,4 +1,4 @@
-# EIP Module
+# Dedicate Elastic Load Balancer Module
 
 # FE provider
 terraform {
@@ -17,7 +17,7 @@ data "flexibleengine_elb_flavors" "l4_flavors" {
   type = "L4"
 }
 
-# Create loadbalancer
+# Create Dediacted loadbalancer
 resource "flexibleengine_lb_loadbalancer_v3" "loadbalancer" {
   name              = var.loadbalancer_name
   description       = var.description == "" ? "${var.loadbalancer_name} dedicated load balancer" : var.description
@@ -40,7 +40,7 @@ resource "flexibleengine_lb_loadbalancer_v3" "loadbalancer" {
   tags              = var.tags
 }
 
-
+// Create server certificate
 resource "flexibleengine_elb_certificate" "cert" {
   count = var.cert && var.certId == null ? 1 : 0
 
@@ -120,7 +120,7 @@ resource "flexibleengine_lb_pool_v3" "pools" {
 
 }
 
-
+// Create load balancer member
 resource "flexibleengine_lb_member_v3" "members" {
   count = length(var.backends)
 
@@ -135,8 +135,8 @@ resource "flexibleengine_lb_member_v3" "members" {
   depends_on = [flexibleengine_lb_pool_v3.pools]
 }
 
-
-resource "flexibleengine_lb_monitor_v3" "monitor" {
+// Create load balancer monitor
+resource "flexibleengine_lb_monitor_v3" "monitors" {
   count = length(var.monitors)
 
   pool_id     = flexibleengine_lb_pool_v3.pools[lookup(var.monitors[count.index], "pool_index", count.index)].id
