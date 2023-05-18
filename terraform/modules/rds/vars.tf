@@ -151,7 +151,7 @@ variable "rds_databases_list" {
   description = "RDS Databases list"
   type = list(object({
     name               = optional(string)
-    character_set      = optional(string)
+    char_set      = optional(string)
   }))
 }
 

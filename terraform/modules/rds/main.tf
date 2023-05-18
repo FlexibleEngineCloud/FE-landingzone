@@ -89,10 +89,10 @@ resource "flexibleengine_rds_database_privilege" "privileges" {
   count = length(var.rds_privileges_list) > 0 ? length(var.rds_privileges_list) : 0
 
   instance_id = flexibleengine_rds_instance_v3.instance.id 
-  db_name     = var.rds_databases_list[count.index]["db_name"] == null ? null : var.rds_databases_list[count.index]["db_name"]
+  db_name     = var.rds_privileges_list[count.index]["db_name"] == null ? null : var.rds_privileges_list[count.index]["db_name"]
 
   users {
-    name     = var.rds_databases_list[count.index]["name"] == null ? null : var.rds_databases_list[count.index]["name"]
-    readonly = var.rds_databases_list[count.index]["readonly"] == null ? null : var.rds_databases_list[count.index]["readonly"]
+    name     = var.rds_privileges_list[count.index]["name"] == null ? null : var.rds_privileges_list[count.index]["name"]
+    readonly = var.rds_privileges_list[count.index]["readonly"] == null ? null : var.rds_privileges_list[count.index]["readonly"]
   }
 }
