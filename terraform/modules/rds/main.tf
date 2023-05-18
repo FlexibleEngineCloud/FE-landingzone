@@ -65,6 +65,8 @@ resource "flexibleengine_rds_read_replica_v3" "read_instances" {
     type               = var.rds_read_replicat_list[count.index]["volume_type"] == null ? null : var.rds_read_replicat_list[count.index]["volume_type"]
     disk_encryption_id = var.rds_read_replicat_list[count.index]["disk_encryption_id"] == null ? null : var.rds_read_replicat_list[count.index]["disk_encryption_id"]
   }
+
+  depends_on = [ flexibleengine_rds_database_privilege.privileges ]
 }
 
 
@@ -74,6 +76,8 @@ resource "flexibleengine_rds_account" "accounts" {
   instance_id = flexibleengine_rds_instance_v3.instance.id
   name        =  var.rds_accounts_list[count.index]["name"] == null ? null : var.rds_accounts_list[count.index]["name"]
   password    =  var.rds_accounts_list[count.index]["password"] == null ? null : var.rds_accounts_list[count.index]["password"]
+
+  depends_on = [ flexibleengine_rds_instance_v3.instance ]
 }
 
 resource "flexibleengine_rds_database" "databases" {
@@ -82,6 +86,8 @@ resource "flexibleengine_rds_database" "databases" {
   instance_id = flexibleengine_rds_instance_v3.instance.id
   name        =  var.rds_databases_list[count.index]["name"] == null ? null : var.rds_databases_list[count.index]["name"] 
   character_set    =  var.rds_databases_list[count.index]["char_set"] == null ? null : var.rds_databases_list[count.index]["char_set"]
+  
+  depends_on = [ flexibleengine_rds_instance_v3.instance ]
 }
 
 
@@ -95,4 +101,6 @@ resource "flexibleengine_rds_database_privilege" "privileges" {
     name     = var.rds_privileges_list[count.index]["name"] == null ? null : var.rds_privileges_list[count.index]["name"]
     readonly = var.rds_privileges_list[count.index]["readonly"] == null ? null : var.rds_privileges_list[count.index]["readonly"]
   }
+
+  depends_on = [ flexibleengine_rds_database.databases ]
 }

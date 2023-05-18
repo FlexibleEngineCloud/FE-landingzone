@@ -128,17 +128,13 @@ module "rds_appdev" {
     {
       name = "main_db"
       char_set = "utf8"
-    },
-    {
-      name = "dev_db"
-      char_set = "utf8"
     }
   ]
 
   rds_privileges_list = [
     {
       db_name = "main_db"
-      name = "abdelmoumen.drici"
+      name = "account2"
       readonly = true
     }
   ]
@@ -159,13 +155,6 @@ module "rds_appdev" {
       name = "read1"
       flavor = "rds.mysql.s3.medium.4.rr"
       availability_zone = "eu-west-0a"
-
-      volume_type = "ULTRAHIGH"
-    },
-    {
-      name = "read2"
-      flavor = "rds.mysql.s3.medium.4.rr"
-      availability_zone = "eu-west-0b"
 
       volume_type = "ULTRAHIGH"
     }
