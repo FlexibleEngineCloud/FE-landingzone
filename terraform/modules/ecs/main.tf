@@ -40,3 +40,10 @@ resource "flexibleengine_compute_instance_v2" "instances" {
     },
   )
 }
+/*
+resource "flexibleengine_compute_interface_attach_v2" "example_interface_attach" {
+  instance_id = flexibleengine_compute_instance_v2.instances[0].id
+  network_id  = var.network_uuids[0]
+  fixed_ip    = "192.168.1.165"
+}
+*/
