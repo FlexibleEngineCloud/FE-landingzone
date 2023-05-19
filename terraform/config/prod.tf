@@ -1,30 +1,30 @@
 
-# Provision AppDev Network VPC and Subnets
-module "vpc_appdev" {
+# Provision Prod Network VPC and Subnets
+module "vpc_prod" {
   providers = {
-    flexibleengine = flexibleengine.appdev_fe
+    flexibleengine = flexibleengine.prod_fe
   }
 
   source = "../modules/vpc"
 
   vpc_name = "vpc-appdev"
-  vpc_cidr = "192.174.0.0/16"
+  vpc_cidr = "192.168.3.0/24"
   vpc_subnets = [{
-    subnet_cidr       = "192.174.1.0/24"
-    subnet_gateway_ip = "192.174.1.1"
-    subnet_name       = "subnet-appdev"
+    subnet_cidr       = "192.168.3.0/27"
+    subnet_gateway_ip = "192.168.3.1"
+    subnet_name       = "subnet-prod"
     }
   ]
 }
 
-module "sg_appdev" {
+module "sg_prod" {
   source = "../modules/secgroup"
   providers = {
-    flexibleengine = flexibleengine.appdev_fe
+    flexibleengine = flexibleengine.prod_fe
   }
 
-  name                        = "sg_appdev"
-  description                 = "Security group for appdev instances"
+  name                        = "sg_prod"
+  description                 = "Security group for prod instances"
   delete_default_egress_rules = false
 
   ingress_with_source_cidr = [
@@ -40,20 +40,20 @@ module "sg_appdev" {
 
 /*
 # Provision RDS instance
-module "rds_appdev" {
+module "rds_prod" {
   providers = {
-    flexibleengine = flexibleengine.appdev_fe
+    flexibleengine = flexibleengine.prod_fe
   }
 
   source = "../modules/rds"
 
-  vpc_id    = module.vpc_appdev.vpc_id
-  subnet_id = module.vpc_appdev.network_ids[0]
+  vpc_id    = module.vpc_prod.vpc_id
+  subnet_id = module.vpc_prod.network_ids[0]
 
   db_type             = "MySQL"
   db_version          = "5.7"
   db_flavor           = "rds.mysql.s3.medium.4"
-  secgroup_id         = module.sg_appdev.id
+  secgroup_id         = module.sg_prod.id
   db_tcp_port         = "8635"
   db_backup_starttime = "08:00-09:00"
   db_backup_keepdays  = 4
@@ -78,26 +78,26 @@ module "rds_appdev" {
   rds_accounts_list = []
   rds_read_replicat_list = []
 
-  depends_on = [ module.vpc_appdev, module.sg_appdev ]
+  depends_on = [ module.vpc_prod, module.sg_prod ]
 }
 */
 
 
 # Provision RDS advanced instance
-module "rds_appdev" {
+module "rds_prod_ha" {
   providers = {
-    flexibleengine = flexibleengine.appdev_fe
+    flexibleengine = flexibleengine.prod_fe
   }
 
   source = "../modules/rds"
 
-  vpc_id    = module.vpc_appdev.vpc_id
-  subnet_id = module.vpc_appdev.network_ids[0]
+  vpc_id    = module.vpc_prod.vpc_id
+  subnet_id = module.vpc_prod.network_ids[0]
 
   db_type             = "MySQL"
   db_version          = "5.7"
   db_flavor           = "rds.mysql.s3.medium.4.ha"
-  secgroup_id         = module.sg_appdev.id
+  secgroup_id         = module.sg_prod.id
   db_tcp_port         = "8635"
   db_backup_starttime = "08:00-09:00"
   db_backup_keepdays  = 4
@@ -160,5 +160,5 @@ module "rds_appdev" {
     }
   ]
 
-  depends_on = [ module.vpc_appdev, module.sg_appdev ]
+  depends_on = [ module.vpc_prod, module.sg_prod ]
 }
