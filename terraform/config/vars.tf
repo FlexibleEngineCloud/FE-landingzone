@@ -34,15 +34,20 @@ variable "security_tenant_name" {
   description = "security project name to login with"
   default = "eu-west-0_Security_Management2"
 }
-variable "database_tenant_name" {
+variable "dev_tenant_name" {
   type        = string
-  description = "database project name to login with"
-  default = "eu-west-0_Database2"
+  description = "dev project name to login with"
+  default = "eu-west-0_Dev2"
 }
-variable "appdev_tenant_name" {
+variable "preprod_tenant_name" {
   type        = string
-  description = "appdev project name to login with"
-  default = "eu-west-0_App_Dev2"
+  description = "preprod project name to login with"
+  default = "eu-west-0_PreProd2"
+}
+variable "prod_tenant_name" {
+  type        = string
+  description = "prod project name to login with"
+  default = "eu-west-0_Prod2"
 }
 variable "sharedservices_tenant_name" {
   type        = string
