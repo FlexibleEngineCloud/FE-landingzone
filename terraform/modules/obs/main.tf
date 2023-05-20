@@ -123,8 +123,10 @@ resource "flexibleengine_s3_bucket_policy" "policy" {
 }
 
 // OBS Bucket notifications
+// SMN topic must has agency to allow OBS
+// https://docs.prod-cloud-ocb.orange-business.com/en-us/usermanual/smn/en-us_topic_0043394891.html
 resource "flexibleengine_obs_bucket_notifications" "notifications" {
-  count = length(var.notifications)
+  count  = length(var.notifications)
   bucket = flexibleengine_obs_bucket.bucket[0].id
 
   notifications {
@@ -136,3 +138,21 @@ resource "flexibleengine_obs_bucket_notifications" "notifications" {
   }
 }
 
+// OBS bucket replica
+resource "flexibleengine_obs_bucket_replication" "replica" {
+  count = var.create_replica ? 1 : 0
+
+  bucket             = element(var.replica.*.bucket, count.index) == null ? null : element(var.replica.*.bucket, count.index)
+  destination_bucket = element(var.replica.*.destination_bucket, count.index) == null ? null : element(var.replica.*.destination_bucket, count.index)
+  agency             = element(var.replica.*.agency, count.index) == null ? null : element(var.replica.*.agency, count.index)
+
+  dynamic "rule" {
+    for_each = var.replica[count.index].rules
+
+    content {
+      enabled       = lookup(rule.value, "enabled", null)
+      prefix        = lookup(rule.value, "prefix", null)
+      storage_class = lookup(rule.value, "storage_class", null)
+    }
+  }
+}

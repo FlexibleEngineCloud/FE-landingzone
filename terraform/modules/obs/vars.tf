@@ -106,3 +106,16 @@ variable "notifications" {
   }))
   default = []
 }
+
+
+variable "create_replica" {
+  description = "Create Bucket replica true/false."
+  type        = bool
+  default     = false
+}
+
+variable "replica" {
+  description = "maps containing OBS bucket replica"
+  type = any
+  default = {}
+}
