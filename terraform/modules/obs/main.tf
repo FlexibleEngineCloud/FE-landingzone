@@ -9,12 +9,13 @@ terraform {
   }
 }
 
-
+// KMS key
 data "flexibleengine_kms_key_v1" "key" {
   count     = var.kms_key_alias == null ? 0 : 1
   key_alias = var.kms_key_alias
 }
 
+// OBS Bucket
 resource "flexibleengine_obs_bucket" "bucket" {
   count = var.create_bucket ? 1 : 0
 
@@ -113,9 +114,25 @@ resource "flexibleengine_obs_bucket" "bucket" {
   }
 }
 
+// S3 Bucket policy to apply to OBS bucket
 resource "flexibleengine_s3_bucket_policy" "policy" {
   count = var.create_bucket && var.attach_policy ? 1 : 0
 
   bucket = flexibleengine_obs_bucket.bucket[0].id
   policy = var.policy
 }
+
+// OBS Bucket notifications
+resource "flexibleengine_obs_bucket_notifications" "notifications" {
+  count = length(var.notifications)
+  bucket = flexibleengine_obs_bucket.bucket[0].id
+
+  notifications {
+    name      = element(var.notifications.*.name, count.index) == null ? null : element(var.notifications.*.name, count.index)
+    events    = element(var.notifications.*.events, count.index) == null ? null : element(var.notifications.*.events, count.index)
+    prefix    = element(var.notifications.*.prefix, count.index) == null ? null : element(var.notifications.*.prefix, count.index)
+    suffix    = element(var.notifications.*.suffix, count.index) == null ? null : element(var.notifications.*.suffix, count.index)
+    topic_urn = element(var.notifications.*.topic_urn, count.index) == null ? null : element(var.notifications.*.topic_urn, count.index)
+  }
+}
+

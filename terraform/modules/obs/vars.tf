@@ -94,3 +94,15 @@ variable "multi_az" {
   type        = bool
   default     = false
 }
+
+variable "notifications" {
+  description = "List of maps containing OBS bucket notifications"
+  type = list(object({
+    name      = optional(string)
+    topic_urn = optional(string)
+    events    = optional(list(string))
+    prefix    = optional(string)
+    suffix    = optional(string)
+  }))
+  default = []
+}
