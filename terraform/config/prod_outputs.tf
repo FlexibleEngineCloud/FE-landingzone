@@ -27,6 +27,7 @@ output "prod_secgroup_name" {
   value       = module.sg_prod.name
 }
 
+/*
 // Prod RDS outputs
 output "rds_nodes" {
   description = "List of RDS nodes"
@@ -46,4 +47,27 @@ output "rds_private_ips" {
 output "rds_public_ips" {
   description = "RDS Public IP address list of nodes"
   value       = module.rds_prod_ha.public_ips
+}
+*/
+
+
+// OBS outputs
+output "bucket_id" {
+  description = "The name of the bucket."
+  value       = module.obs_prod_bucket_adv.id
+}
+
+output "bucket_domain_name" {
+  description = "The bucket domain name. Will be of format <bucket-name>.oss.<region>.prod-cloud-ocb.orange-business.com."
+  value       = module.obs_prod_bucket_adv.domain_name
+}
+
+output "bucket_region" {
+  description = "The Flexible Engine region this bucket resides in."
+  value       = module.obs_prod_bucket_adv.region
+}
+
+output "bucket_details" {
+  description = "The Flexible Engine bucket details"
+  value       = module.obs_prod_bucket_adv.bucket_details
 }

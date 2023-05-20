@@ -185,20 +185,6 @@ module "obs_prod_bucket" {
   versioning = true
 }
 
-# Provision basic OBS Bucket
-module "obs_prod_bucket2" {
-  providers = {
-    flexibleengine = flexibleengine.prod_fe
-  }
-
-  source = "../modules/obs"
-
-  bucket = "bucket-prod2-${random_string.id.result}"
-  acl    = "private"
-
-  versioning = true
-}
-
 # Provision advanced OBS Bucket
 module "obs_prod_bucket_adv" {
   providers = {
