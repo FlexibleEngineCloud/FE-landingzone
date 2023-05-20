@@ -82,7 +82,7 @@ module "rds_prod" {
 }
 */
 
-
+/*
 # Provision RDS advanced instance
 module "rds_prod_ha" {
   providers = {
@@ -161,4 +161,135 @@ module "rds_prod_ha" {
   ]
 
   depends_on = [ module.vpc_prod, module.sg_prod ]
+}
+*/
+
+# Random string
+resource "random_string" "id" {
+  length  = 4
+  special = false
+  upper   = false
+}
+
+# Provision basic OBS Bucket
+module "obs_prod_bucket" {
+  providers = {
+    flexibleengine = flexibleengine.prod_fe
+  }
+
+  source = "../modules/obs"
+
+  bucket = "bucket-prod-${random_string.id.result}"
+  acl    = "private"
+
+  versioning = true
+}
+
+# Provision basic OBS Bucket
+module "obs_prod_bucket2" {
+  providers = {
+    flexibleengine = flexibleengine.prod_fe
+  }
+
+  source = "../modules/obs"
+
+  bucket = "bucket-prod2-${random_string.id.result}"
+  acl    = "private"
+
+  versioning = true
+}
+
+# Provision advanced OBS Bucket
+module "obs_prod_bucket_adv" {
+  providers = {
+    flexibleengine = flexibleengine.prod_fe
+  }
+
+  source = "../modules/obs"
+
+  bucket        = "bucket-prod-advanced-${random_string.id.result}"
+  storage_class = "STANDARD"
+  versioning    = true
+  acl           = "log-delivery-write"
+  multi_az      = true
+  force_destroy = false
+  encryption    = true
+
+  attach_policy = true
+  policy        = <<POLICY
+  {
+    "Id": "MYBUCKETPOLICY",
+    "Statement": [
+      {
+        "Sid": "IPAllow",
+        "Effect": "Deny",
+        "Principal": "*",
+        "Action": "*",
+        "Resource": "arn:aws:s3:::bucket-prod-advanced-${random_string.id.result}/*", 
+        "Condition": {
+          "IpAddress": {"aws:SourceIp": "8.8.8.8/32"}
+        } 
+      } 
+    ]
+  }
+  POLICY
+
+  logging = {
+    target_bucket = "bucket-prod-advanced-${random_string.id.result}"
+    target_prefix = "prefix"
+  }
+  website = {
+    index_document = "*"
+    error_document = "HTML"
+  }
+
+  cors_rule = [{
+    allowed_methods = ["PUT"]
+    allowed_origins = ["*"]
+    max_age_seconds = "100"
+  }]
+
+  lifecycle_rule = [{
+    name    = "rule-bucket-prod-advanced-${random_string.id.result}"
+    prefix  = "file"
+    enabled = true
+
+    expiration = {
+      days = 25
+    }
+    transition = {
+      days          = 10
+      storage_class = "GLACIER"
+    }
+    noncurrent_version_expiration = {
+      days = 60
+    }
+    noncurrent_version_transition = {
+      days          = 40
+      storage_class = "STANDARD_IA"
+    }
+
+  }]
+
+  notifications = [{
+    name      = "notifiactin_name1"
+    topic_urn = "urn:smn:eu-west-0:ce6b52a3710d4ea28eb45f637930db7a:test_topic"
+    events    = ["ObjectCreated:*"]
+    prefix    = "file"
+    suffix    = ".jpg"
+  }]
+
+  // replica must not be on the current bucket, the bucket must be created before.
+  create_replica = true
+  replica = [{
+    bucket      = "bucket-prod-${random_string.id.result}"
+    destination_bucket = "bucket-prod2-${random_string.id.result}"
+    agency    = "obs-agency"
+    rules = [ {
+      enabled       = true
+      prefix        = "file"
+      storage_class = "WARM"
+    } ]
+  }]
+
 }
