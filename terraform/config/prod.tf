@@ -278,18 +278,4 @@ module "obs_prod_bucket_adv" {
     prefix    = "file"
     suffix    = ".jpg"
   }]
-
-  // replica must not be on the current bucket, the bucket must be created before.
-  create_replica = true
-  replica = [{
-    bucket      = "bucket-prod-${random_string.id.result}"
-    destination_bucket = "bucket-prod2-${random_string.id.result}"
-    agency    = "obs-agency"
-    rules = [ {
-      enabled       = true
-      prefix        = "file"
-      storage_class = "WARM"
-    } ]
-  }]
-
 }

@@ -137,22 +137,3 @@ resource "flexibleengine_obs_bucket_notifications" "notifications" {
     topic_urn = element(var.notifications.*.topic_urn, count.index) == null ? null : element(var.notifications.*.topic_urn, count.index)
   }
 }
-
-// OBS bucket replica
-resource "flexibleengine_obs_bucket_replication" "replica" {
-  count = var.create_replica ? 1 : 0
-
-  bucket             = element(var.replica.*.bucket, count.index) == null ? null : element(var.replica.*.bucket, count.index)
-  destination_bucket = element(var.replica.*.destination_bucket, count.index) == null ? null : element(var.replica.*.destination_bucket, count.index)
-  agency             = element(var.replica.*.agency, count.index) == null ? null : element(var.replica.*.agency, count.index)
-
-  dynamic "rule" {
-    for_each = var.replica[count.index].rules
-
-    content {
-      enabled       = lookup(rule.value, "enabled", null)
-      prefix        = lookup(rule.value, "prefix", null)
-      storage_class = lookup(rule.value, "storage_class", null)
-    }
-  }
-}
