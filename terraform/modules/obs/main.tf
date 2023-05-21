@@ -9,11 +9,13 @@ terraform {
   }
 }
 
+/*
 // KMS key
 data "flexibleengine_kms_key_v1" "key" {
-  count     = var.kms_key_alias == null ? 0 : 1
+  count     = var.kms_key_alias == null ? 1 : 0
   key_alias = var.kms_key_alias
 }
+*/
 
 // OBS Bucket
 resource "flexibleengine_obs_bucket" "bucket" {
@@ -32,8 +34,7 @@ resource "flexibleengine_obs_bucket" "bucket" {
 
   encryption = var.encryption
 
-  // if not existing KMS, create one
-  kms_key_id = var.kms_key_alias == null ? null : data.flexibleengine_kms_key_v1.key[0].id
+  kms_key_id = var.kms_key_id
 
   dynamic "website" {
     for_each = length(keys(var.website)) == 0 ? [] : [var.website]
@@ -120,6 +121,8 @@ resource "flexibleengine_s3_bucket_policy" "policy" {
 
   bucket = flexibleengine_obs_bucket.bucket[0].id
   policy = var.policy
+
+  depends_on = [ flexibleengine_obs_bucket.bucket ]
 }
 
 // OBS Bucket notifications
@@ -136,4 +139,26 @@ resource "flexibleengine_obs_bucket_notifications" "notifications" {
     suffix    = element(var.notifications.*.suffix, count.index) == null ? null : element(var.notifications.*.suffix, count.index)
     topic_urn = element(var.notifications.*.topic_urn, count.index) == null ? null : element(var.notifications.*.topic_urn, count.index)
   }
+
+  depends_on = [ flexibleengine_obs_bucket.bucket ]
 }
+
+
+// OBS Bucket objects
+resource "flexibleengine_obs_bucket_object" "objects" {
+  count  = length(var.objects)
+  bucket = flexibleengine_obs_bucket.bucket[0].id
+  key    = element(var.objects.*.key, count.index) == null ? null : element(var.objects.*.key, count.index)
+  encryption = element(var.objects.*.encryption, count.index) == null ? null : element(var.objects.*.encryption, count.index)
+  acl = element(var.objects.*.acl, count.index) == null ? null : element(var.objects.*.acl, count.index)
+  storage_class = element(var.objects.*.storage_class, count.index) == null ? null : element(var.objects.*.storage_class, count.index)
+  kms_key_id = element(var.objects.*.kms_key_id, count.index) == null ? null : element(var.objects.*.kms_key_id, count.index)
+  etag = element(var.objects.*.etag, count.index) == null ? null : element(var.objects.*.etag, count.index)
+
+  source = element(var.objects.*.source, count.index) == null ? null : element(var.objects.*.source, count.index)
+
+  content = element(var.objects.*.content, count.index) == null ? null : element(var.objects.*.content, count.index)
+  content_type = element(var.objects.*.content_type, count.index) == null ? null : element(var.objects.*.content_type, count.index)
+
+  depends_on = [ flexibleengine_obs_bucket.bucket ]
+} 

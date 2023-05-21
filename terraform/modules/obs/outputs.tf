@@ -17,3 +17,8 @@ output "bucket_details" {
   description = "The Flexible Engine bucket details"
   value       = [for bucket in flexibleengine_obs_bucket.bucket : bucket]
 }
+
+output "bucket_objects" {
+  description = "The Flexible Engine bucket objects"
+  value       = [for obj in flexibleengine_obs_bucket_object.objects : obj]
+}

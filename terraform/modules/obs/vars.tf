@@ -82,8 +82,8 @@ variable "encryption" {
   default     = false
 }
 
-variable "kms_key_alias" {
-  description = "Alias of existing KMS key used for encryption"
+variable "kms_key_id" {
+  description = "Existing KMS key ID used for encryption"
   type        = string
   default     = null
 }
@@ -103,6 +103,23 @@ variable "notifications" {
     events    = optional(list(string))
     prefix    = optional(string)
     suffix    = optional(string)
+  }))
+  default = []
+}
+
+variable "objects" {
+  description = "List of maps containing OBS bucket objects"
+  type = list(object({
+    key      = optional(string)
+    encryption = optional(bool)
+    acl = optional(string)
+    storage_class = optional(string)
+    kms_key_id = optional(string)
+    etag = optional(string)
+
+    source    = optional(string)
+    content    = optional(string)
+    content_type    = optional(string)
   }))
   default = []
 }
