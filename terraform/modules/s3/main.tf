@@ -15,7 +15,7 @@ resource "flexibleengine_s3_bucket" "bucket" {
 
   bucket        = var.bucket
   bucket_prefix = var.bucket_prefix
-  policy = var.policy
+  policy        = var.policy
 
   acl = var.acl != "null" ? var.acl : null
 
@@ -57,7 +57,7 @@ resource "flexibleengine_s3_bucket" "bucket" {
     for_each = length(keys(var.versioning)) == 0 ? [] : [var.versioning]
 
     content {
-      enabled = lookup(versioning.value, "enabled", null)
+      enabled    = lookup(versioning.value, "enabled", null)
       mfa_delete = lookup(versioning.value, "mfa_delete", null)
     }
   }
@@ -66,9 +66,9 @@ resource "flexibleengine_s3_bucket" "bucket" {
     for_each = var.lifecycle_rule
 
     content {
-      id    = lookup(lifecycle_rule.value, "id", null)
-      prefix  = lookup(lifecycle_rule.value, "prefix", null)
-      enabled = lifecycle_rule.value.enabled
+      id                                     = lookup(lifecycle_rule.value, "id", null)
+      prefix                                 = lookup(lifecycle_rule.value, "prefix", null)
+      enabled                                = lifecycle_rule.value.enabled
       abort_incomplete_multipart_upload_days = lookup(lifecycle_rule.value, "abort_incomplete_multipart_upload_days", null)
 
       # Max 1 block - expiration
@@ -76,8 +76,8 @@ resource "flexibleengine_s3_bucket" "bucket" {
         for_each = length(keys(lookup(lifecycle_rule.value, "expiration", {}))) == 0 ? [] : [lookup(lifecycle_rule.value, "expiration", {})]
 
         content {
-          date = lookup(expiration.value, "date", null)
-          days = lookup(expiration.value, "days", null)
+          date                         = lookup(expiration.value, "date", null)
+          days                         = lookup(expiration.value, "days", null)
           expired_object_delete_marker = lookup(expiration.value, "expired_object_delete_marker", null)
         }
       }
@@ -101,7 +101,7 @@ resource "flexibleengine_s3_bucket_policy" "policy" {
   bucket = flexibleengine_s3_bucket.bucket[0].id
   policy = var.policy
 
-  depends_on = [ flexibleengine_s3_bucket.bucket ]
+  depends_on = [flexibleengine_s3_bucket.bucket]
 }
 
 
@@ -113,5 +113,5 @@ resource "flexibleengine_s3_bucket_object" "objects" {
 
   content = element(var.objects.*.content, count.index) == null ? null : element(var.objects.*.content, count.index)
 
-  depends_on = [ flexibleengine_s3_bucket.bucket ]
+  depends_on = [flexibleengine_s3_bucket.bucket]
 } 

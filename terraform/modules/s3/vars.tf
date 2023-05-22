@@ -11,31 +11,31 @@ variable "attach_policy" {
 }
 
 variable "bucket" {
-  description = "(Optional, Forces new resource) The name of the bucket. If omitted, Terraform will assign a random, unique name."
+  description = "The name of the bucket. If omitted, Terraform will assign a random, unique name."
   type        = string
   default     = null
 }
 
 variable "bucket_prefix" {
-  description = "(Optional, Forces new resource) Creates a unique bucket name beginning with the specified prefix. Conflicts with bucket."
+  description = "Creates a unique bucket name beginning with the specified prefix. Conflicts with bucket."
   type        = string
   default     = null
 }
 
 variable "acl" {
-  description = "(Optional) The canned ACL to apply. Defaults to 'private'. Conflicts with `grant`"
+  description = "The canned ACL to apply. Defaults to 'private'. Conflicts with `grant`"
   type        = string
   default     = "private"
 }
 
 variable "policy" {
-  description = "(Optional) A valid bucket policy JSON document. Note that if the policy document is not specific enough (but still valid), Terraform may view the policy as constantly changing in a terraform plan. In this case, please make sure you use the verbose/specific version of the policy."
+  description = "A valid bucket policy JSON document. Note that if the policy document is not specific enough (but still valid), Terraform may view the policy as constantly changing in a terraform plan. In this case, please make sure you use the verbose/specific version of the policy."
   type        = string
   default     = null
 }
 
 variable "force_destroy" {
-  description = "(Optional, Default:false ) A boolean that indicates all objects should be deleted from the bucket so that the bucket can be destroyed without error. These objects are not recoverable."
+  description = "A boolean that indicates all objects should be deleted from the bucket so that the bucket can be destroyed without error. These objects are not recoverable."
   type        = bool
   default     = false
 }
@@ -72,6 +72,6 @@ variable "lifecycle_rule" {
 
 variable "objects" {
   description = "List of maps containing OBS bucket objects"
-  type = any
-  default = []
+  type        = any
+  default     = []
 }
