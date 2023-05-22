@@ -110,21 +110,8 @@ resource "flexibleengine_s3_bucket_object" "objects" {
   count  = length(var.objects)
   bucket = flexibleengine_s3_bucket.bucket[0].id
   key    = element(var.objects.*.key, count.index) == null ? null : element(var.objects.*.key, count.index)
-  //server_side_encryption = element(var.objects.*.server_side_encryption, count.index) == null ? null : element(var.objects.*.server_side_encryption, count.index)
-  //acl = element(var.objects.*.acl, count.index) == null ? null : element(var.objects.*.acl, count.index)
-  
-  //cache_control = element(var.objects.*.cache_control, count.index) == null ? null : element(var.objects.*.cache_control, count.index)
-  //content_disposition = element(var.objects.*.content_disposition, count.index) == null ? null : element(var.objects.*.content_disposition, count.index)
-  //content_encoding = element(var.objects.*.content_encoding, count.index) == null ? null : element(var.objects.*.content_encoding, count.index)
-  //content_language = element(var.objects.*.content_language, count.index) == null ? null : element(var.objects.*.content_language, count.index)
-  //website_redirect = element(var.objects.*.website_redirect, count.index) == null ? null : element(var.objects.*.website_redirect, count.index)
-
-  //etag = element(var.objects.*.etag, count.index) == null ? null : element(var.objects.*.etag, count.index)
-
-  //source = element(var.objects.*.source, count.index) == null ? null : element(var.objects.*.source, count.index)
 
   content = element(var.objects.*.content, count.index) == null ? null : element(var.objects.*.content, count.index)
-  //content_type = element(var.objects.*.content_type, count.index) == null ? null : element(var.objects.*.content_type, count.index)
 
   depends_on = [ flexibleengine_s3_bucket.bucket ]
 } 
