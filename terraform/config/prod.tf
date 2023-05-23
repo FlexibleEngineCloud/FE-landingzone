@@ -38,6 +38,7 @@ module "sg_prod" {
   ]
 }
 
+
 /*
 # Provision RDS instance
 module "rds_prod" {
@@ -171,6 +172,26 @@ resource "random_string" "id" {
   upper   = false
 }
 
+/*
+# KMS key
+module "kms_key" {
+  providers = {
+    flexibleengine = flexibleengine.prod_fe
+  }
+
+  source = "../modules/kms"
+
+  key_alias       = "obs_key_${random_string.id.result}"
+  pending_days    = "7"
+  key_description = "obs key descritpion"
+  realm           = "eu-west-0"
+  is_enabled      = true
+  rotation_enabled = true
+  rotation_interval = 100
+}
+*/
+
+/*
 # Provision basic OBS Bucket
 module "obs_prod_bucket" {
   providers = {
@@ -182,8 +203,11 @@ module "obs_prod_bucket" {
   bucket = "bucket-prod-${random_string.id.result}"
   acl    = "private"
 
+  encryption    = false
+
   versioning = true
 }
+
 
 # Provision advanced OBS Bucket
 module "obs_prod_bucket_adv" {
@@ -199,7 +223,7 @@ module "obs_prod_bucket_adv" {
   acl           = "log-delivery-write"
   multi_az      = true
   force_destroy = false
-  encryption    = true
+  encryption    = false
 
   attach_policy = true
   policy        = <<POLICY
@@ -263,5 +287,123 @@ module "obs_prod_bucket_adv" {
     events    = ["ObjectCreated:*"]
     prefix    = "file"
     suffix    = ".jpg"
+  }]
+
+  
+  objects = [{
+    key      = "object1"
+    encryption = true
+    acl = "private"
+    storage_class = "STANDARD"
+
+    // Either source or content must be provided
+    //source    = "file.txt"
+    content    = "file content"
+    content_type    = "application/xml"
+  },
+  {
+    key      = "object2"
+    content    = "file content"
+  }]
+}
+*/
+
+
+# Provision basic S3 Bucket
+module "s3_prod_bucket" {
+  providers = {
+    flexibleengine = flexibleengine.prod_fe
+  }
+
+  source = "../modules/s3"
+
+  bucket = "s3bucket-prod-${random_string.id.result}"
+  acl    = "private"
+}
+
+
+# Provision advanced S3 Bucket
+module "s3_prod_bucket_adv" {
+  providers = {
+    flexibleengine = flexibleengine.prod_fe
+  }
+
+  source = "../modules/s3"
+
+  bucket        = "s3bucket-prod-advanced-${random_string.id.result}"
+  acl           = "log-delivery-write"
+  force_destroy = false
+
+  attach_policy = true
+  policy        = <<POLICY
+  {
+    "Id": "MYBUCKETPOLICY",
+    "Statement": [
+      {
+        "Sid": "IPAllow",
+        "Effect": "Deny",
+        "Principal": "*",
+        "Action": "*",
+        "Resource": "arn:aws:s3:::s3bucket-prod-advanced-${random_string.id.result}/*", 
+        "Condition": {
+          "IpAddress": {"aws:SourceIp": "8.8.8.8/32"}
+        } 
+      } 
+    ]
+  }
+  POLICY
+
+  logging = {
+    target_bucket = "s3bucket-prod-advanced-${random_string.id.result}"
+    target_prefix = "prefix"
+  }
+  versioning = {
+    enabled = true
+    mfa_delete = true
+  }
+
+  website = {
+    index_document = "*"
+    error_document = "HTML"
+    routing_rules = <<EOF
+    [{
+        "Condition": {
+            "KeyPrefixEquals": "docs/"
+        },
+        "Redirect": {
+            "ReplaceKeyPrefixWith": "documents/"
+        }
+    }]
+    EOF
+  }
+
+  cors_rule = [{
+    allowed_methods = ["PUT"]
+    allowed_origins = ["*"]
+    max_age_seconds = "100"
+  }]
+
+  lifecycle_rule = [{
+    id    = "tmp"
+    prefix  = "log/"
+    enabled = true
+
+    expiration = {
+      days = 90
+    }
+  }]
+
+  objects = [{
+    key      = "object1"
+    encryption = true
+    acl = "private"
+
+    // Either source or content must be provided
+    //source    = "file.txt"
+    content    = "file content"
+  },
+  {
+    key      = "object2"
+    content    = "file content"
   }]
 }

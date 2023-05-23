@@ -50,7 +50,7 @@ output "rds_public_ips" {
 }
 */
 
-
+/*
 // OBS outputs
 output "bucket_id" {
   description = "The name of the bucket."
@@ -67,7 +67,43 @@ output "bucket_region" {
   value       = module.obs_prod_bucket_adv.region
 }
 
-output "bucket_details" {
-  description = "The Flexible Engine bucket details"
-  value       = module.obs_prod_bucket_adv.bucket_details
+output "bucket_objects" {
+  description = "The Flexible Engine bucket objects"
+  value       = module.obs_prod_bucket_adv.bucket_objects
+}
+*/
+
+/*
+// KMS outputs
+output "kms_id" {
+    value       = module.kms_key.id
+    description = "The globally unique identifier for the key"
+}
+
+output "kms_attributes" {
+    value       = module.kms_key.key
+    description = "KMS attributes"
+}
+*/
+
+
+// S3 outputs
+output "s3bucket_id" {
+  description = "The name of the bucket."
+  value       = module.s3_prod_bucket_adv.id
+}
+
+output "s3bucket_domain_name" {
+  description = "The bucket domain name. Will be of format <bucket-name>.oss.<region>.prod-cloud-ocb.orange-business.com."
+  value       = module.s3_prod_bucket_adv.domain_name
+}
+
+output "s3bucket_region" {
+  description = "The Flexible Engine region this bucket resides in."
+  value       = module.s3_prod_bucket_adv.region
+}
+
+output "s3bucket_objects" {
+  description = "The Flexible Engine bucket objects"
+  value       = module.s3_prod_bucket_adv.bucket_objects
 }
