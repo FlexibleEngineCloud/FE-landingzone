@@ -84,7 +84,6 @@ output "kms_attributes" {
     value       = module.kms_key.key
     description = "KMS attributes"
 }
-*/
 
 
 // S3 outputs
@@ -106,4 +105,26 @@ output "s3bucket_region" {
 output "s3bucket_objects" {
   description = "The Flexible Engine bucket objects"
   value       = module.s3_prod_bucket_adv.bucket_objects
+}
+*/
+
+// SFS outputs
+// SFS file systems shares outputs
+output "sfs_ids" {
+  description = "SFS shares IDs"
+  value       = module.sfs_file_systems.sfs_ids 
+}
+output "sfs" {
+  description = "SFS shares detailed"
+  value       = module.sfs_file_systems.sfs
+}
+
+// SFS Turbo outputs
+output "sfs_turbo_ids" {
+  description = "SFS Turbo IDs"
+  value       = module.sfs_file_systems.sfs_turbo_ids
+}
+output "sfs_turbos" {
+  description = "SFS Turbo detailed"
+  value       = module.sfs_file_systems.sfs_turbos
 }
