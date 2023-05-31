@@ -12,7 +12,7 @@ terraform {
 resource "flexibleengine_sfs_file_system_v2" "sfs" {
   count = length(var.sfs_shares)
 
-  name         = var.sfs_shares[count.index]["name"]
+  name         = var.sfs_shares[count.index]["name"] == null ? null : var.sfs_shares[count.index]["share_protocol"]
   size         = var.sfs_shares[count.index]["size"]
   share_proto  = var.sfs_shares[count.index]["share_protocol"] == null ? null : var.sfs_shares[count.index]["share_protocol"]
   access_level = var.sfs_shares[count.index]["access_level"] == null ? null : var.sfs_shares[count.index]["access_level"]
@@ -26,3 +26,17 @@ resource "flexibleengine_sfs_file_system_v2" "sfs" {
   }
 }
 
+resource "flexibleengine_sfs_turbo" "sfs_turbos" {
+  count = length(var.sfs_turbos)
+
+  name         = var.sfs_turbos[count.index]["name"] 
+  size         = var.sfs_turbos[count.index]["size"]
+  availability_zone = var.sfs_turbos[count.index]["availability_zone"]
+  security_group_id = var.sfs_turbos[count.index]["security_group_id"]
+  vpc_id    = var.sfs_turbos[count.index]["vpc_id"]
+  subnet_id    = var.sfs_turbos[count.index]["subnet_id"]
+
+  share_type = var.sfs_turbos[count.index]["share_type"] == null ? null : var.sfs_turbos[count.index]["share_type"]
+  share_proto  = var.sfs_turbos[count.index]["share_protocol"] == null ? null : var.sfs_turbos[count.index]["share_protocol"]
+  crypt_key_id  = var.sfs_turbos[count.index]["kms_id"] == null ? null : var.sfs_turbos[count.index]["kms_id"]
+}
