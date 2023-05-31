@@ -12,6 +12,12 @@ variable "sfs_shares" {
     kms_id    = optional(string)
     kms_domain_id    = optional(string)
     kms_key_alias = optional(string)
+
+    rules = list(object({
+      access_to = string
+      access_type = optional(string)
+      access_level = optional(string)
+    }))
   }))
   default = []
 }
