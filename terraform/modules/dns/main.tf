@@ -10,7 +10,7 @@ terraform {
 }
 
 resource "flexibleengine_dns_zone_v2" "zones" {
-  count       = length(var.zones)
+  count = length(var.zones)
 
   name        = element(var.zones.*.name, count.index)
   email       = element(var.zones.*.email, count.index) == null ? null : element(var.zones.*.email, count.index)
@@ -28,7 +28,7 @@ resource "flexibleengine_dns_zone_v2" "zones" {
 }
 
 resource "flexibleengine_dns_recordset_v2" "recordsets" {
-  count       = length(var.zones)
+  count = length(var.zones)
 
   zone_id     = flexibleengine_dns_zone_v2.zones[count.index].id
   name        = "${var.zones[count.index].dns_recordsets[count.index].name}.${var.zones[count.index].domain_name}"
