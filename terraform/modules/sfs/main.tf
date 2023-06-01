@@ -26,15 +26,16 @@ resource "flexibleengine_sfs_file_system_v2" "sfs" {
   }
 }
 
-resource "flexibleengine_sfs_access_rule_v2" "rules" {
+/*
+resource "flexibleengine_sfs_access_rule_v2" "rule" {
   count = length(var.sfs_shares)
 
   sfs_id        = flexibleengine_sfs_file_system_v2.sfs[count.index].id
-  access_to     = var.sfs_shares[count.index].rules[0].access_to
-  access_type   = var.sfs_shares[count.index].rules[0].access_type == null ? null : var.sfs_shares[count.index].rules[0].access_type
-  access_level  = var.sfs_shares[count.index].rules[0].access_level == null ? null : var.sfs_shares[count.index].rules[0].access_level
+  access_to     = var.sfs_shares[count.index].access_to == null ? null : var.sfs_shares[count.index].access_to
+  access_type   = var.sfs_shares[count.index].access_type == null ? null : var.sfs_shares[count.index].access_type
+  access_level  = var.sfs_shares[count.index].access_level == null ? null : var.sfs_shares[count.index].access_level
 }
-
+*/
 
 resource "flexibleengine_sfs_turbo" "sfs_turbos" {
   count = length(var.sfs_turbos)

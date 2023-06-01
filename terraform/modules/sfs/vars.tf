@@ -13,11 +13,9 @@ variable "sfs_shares" {
     kms_domain_id    = optional(string)
     kms_key_alias = optional(string)
 
-    rules = list(object({
-      access_to = string
-      access_type = optional(string)
-      access_level = optional(string)
-    }))
+    access_to = optional(string)
+    access_type = optional(string)
+    access_level = optional(string)
   }))
   default = []
 }
@@ -32,10 +30,11 @@ variable "sfs_turbos" {
     security_group_id  = string
     vpc_id     = string
     subnet_id    = string
-
+    /*
     share_protocol    = optional(string)
     share_type    = optional(string)
     kms_id    = optional(string)
+    */
   }))
   default = []
 }
