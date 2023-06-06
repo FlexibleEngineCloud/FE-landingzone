@@ -306,7 +306,7 @@ module "obs_prod_bucket_adv" {
     content    = "file content"
   }]
 }
-*/
+
 
 
 # Provision basic S3 Bucket
@@ -407,3 +407,100 @@ module "s3_prod_bucket_adv" {
     content    = "file content"
   }]
 }
+
+
+
+# Provision DNS Zones
+module "dns_zones" {
+  providers = {
+    flexibleengine = flexibleengine.prod_fe
+  }
+
+  source = "../modules/dns"
+
+  zones = [{
+    name        = "1.example.com."
+    email       = "abdelmoumen.drici@orange.com"
+    description = "my private zone"
+    ttl         = 3000
+    zone_type   = "private"
+    //value_specs = {"ff","ee"}
+    domain_name = "1.example.com"
+
+    router_id     = module.vpc_prod.vpc_id
+    router_region = "eu-west-0"
+
+    dns_recordsets = [{
+      name        = "rssfd"
+      description = "An example record set"
+      ttl         = 3000
+      type        = "A"
+      records     = ["10.0.0.1"]
+    }]
+  },
+  {
+    name        = "2.example2.com."
+    zone_type   = "private"
+    domain_name = "2.example2.com"
+
+    router_id     = module.vpc_prod.vpc_id
+    router_region = "eu-west-0"
+
+    dns_recordsets = [{
+      name        = "rssfd"
+      type        = "A"
+      records     = ["10.0.0.1"]
+    }]
+  }
+  ]
+}
+*/
+
+/*
+# Provision SFS file systems
+module "sfs_file_systems" {
+  providers = {
+    flexibleengine = flexibleengine.prod_fe
+  }
+
+  source = "../modules/sfs"
+
+  sfs_shares = [{
+    name      = "SFS1"
+    size      = 1
+    share_protocol    = "NFS"
+    access_level    = "rw"
+    vpc_id    = module.vpc_prod.vpc_id
+    description = "sfs desc"
+
+    kms_id    = "a4063d8c-df50-44ab-9f92-d1644632b298"
+    kms_domain_id    = "5d32eb30f7074258a43bb55f29a5e337"
+    kms_key_alias = "obs/default"
+
+    access_to = join("#", [module.vpc_prod.vpc_id, "192.168.3.0/24", "0", "no_all_squash,no_root_squash"])
+    access_level = "rw"
+    access_type = "cert"
+  },
+  {
+    name      = "SFS1"
+    size = 2  
+
+    //access_to = module.vpc_prod.vpc_id
+    //access_level = "rw"
+    //access_type = "cert"
+  }]
+  /*
+  sfs_turbos = [{
+    name      = "SFSTurbo1"
+    size      = 500
+    availability_zone = "eu-west-0a"
+    security_group_id = module.sg_prod.id
+    vpc_id    = module.vpc_prod.vpc_id
+    subnet_id = module.vpc_prod.network_ids[0]
+
+    share_protocol    = "NFS"
+    kms_id    = "fedf145f-4c5e-4f9e-a4ee-1fee93b6d097"
+    share_type = "STANDARD"
+  }]
+}
+*/
