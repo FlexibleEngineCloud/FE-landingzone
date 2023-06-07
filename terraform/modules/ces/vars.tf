@@ -1,4 +1,5 @@
 // CES Alarm rules vars
+
 variable "alarm_rules" {
   description = "CES Alarm rules list"
   type = list(object({
@@ -16,6 +17,7 @@ variable "alarm_rules" {
         value = string
       }))
     }))
+
     condition = list(object({
       period              = number
       filter              = string
