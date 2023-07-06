@@ -55,3 +55,34 @@ resource "flexibleengine_cts_tracker_v1" "shared_tracker" {
   bucket_name      = "bucket-cts-landingzone-${random_string.id.result}"
 depends_on = [ module.obs_cts_bucket ]
 }
+
+
+# Provision LTS Group and Topics to collect logs from Hosts.
+resource "flexibleengine_lts_group" "lts_hosts_group" {
+  provider = flexibleengine.home_fe
+  group_name = "Hosts"
+}
+resource "flexibleengine_lts_topic" "lts_prod_hosts_topic" {
+  provider = flexibleengine.home_fe
+
+  group_id   = flexibleengine_lts_group.lts_hosts_group.id
+  topic_name = "Prod_Hosts_Topic"
+}
+resource "flexibleengine_lts_topic" "lts_dev_hosts_topic" {
+  provider = flexibleengine.home_fe
+
+  group_id   = flexibleengine_lts_group.lts_hosts_group.id
+  topic_name = "Dev_Hosts_Topic"
+}
+resource "flexibleengine_lts_topic" "lts_dmz_hosts_topic" {
+  provider = flexibleengine.home_fe
+
+  group_id   = flexibleengine_lts_group.lts_hosts_group.id
+  topic_name = "DMZ_Hosts_Topic"
+}
+resource "flexibleengine_lts_topic" "lts_bastion_hosts_topic" {
+  provider = flexibleengine.home_fe
+
+  group_id   = flexibleengine_lts_group.lts_hosts_group.id
+  topic_name = "Bastion_Hosts_Topic"
+}
