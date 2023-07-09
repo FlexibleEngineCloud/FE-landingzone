@@ -59,30 +59,52 @@ depends_on = [ module.obs_cts_bucket ]
 
 # Provision LTS Group and Topics to collect logs from Hosts.
 resource "flexibleengine_lts_group" "lts_hosts_group" {
-  provider = flexibleengine.home_fe
+  provider = flexibleengine.security_fe
   group_name = "Hosts"
 }
 resource "flexibleengine_lts_topic" "lts_prod_hosts_topic" {
-  provider = flexibleengine.home_fe
+  provider = flexibleengine.security_fe
 
   group_id   = flexibleengine_lts_group.lts_hosts_group.id
   topic_name = "Prod_Hosts_Topic"
 }
 resource "flexibleengine_lts_topic" "lts_dev_hosts_topic" {
-  provider = flexibleengine.home_fe
+  provider = flexibleengine.security_fe
 
   group_id   = flexibleengine_lts_group.lts_hosts_group.id
   topic_name = "Dev_Hosts_Topic"
 }
 resource "flexibleengine_lts_topic" "lts_dmz_hosts_topic" {
-  provider = flexibleengine.home_fe
+  provider = flexibleengine.security_fe
 
   group_id   = flexibleengine_lts_group.lts_hosts_group.id
   topic_name = "DMZ_Hosts_Topic"
 }
 resource "flexibleengine_lts_topic" "lts_bastion_hosts_topic" {
-  provider = flexibleengine.home_fe
+  provider = flexibleengine.security_fe
 
   group_id   = flexibleengine_lts_group.lts_hosts_group.id
   topic_name = "Bastion_Hosts_Topic"
 }
+
+/*
+Roles To Be checked, if it access across multi tenants.
+# ICAgent agency to allow icagent client on ECS hosts access LTS
+# You can either, use AK/SK in icagent command or using this agency.
+module "icagent_agency" {
+  providers = {
+    flexibleengine = flexibleengine.home_fe
+  }
+
+  source = "../modules/iam/agency"
+
+  name                   = "lts_ecm_trust"
+  delegated_service_name = "op_svc_ecs"
+  tenant_name            = var.security_tenant_name
+  roles                  = ["APM Admin"]
+  domain_roles = [
+    "OBS OperateAccess",
+  ]
+  duration               = "FOREVER"
+}
+*/

@@ -26,3 +26,11 @@ output "lts_bastion_topic_id" {
   description = "The ID of LTS Bastion Topic"
   value       = flexibleengine_lts_topic.lts_bastion_hosts_topic.id
 }
+
+/*
+# ICAgenct agency outputs
+output "icagenct_agency_id" {
+  description = "ID of the created ICAgent agency"
+  value       = module.icagent_agency.id
+}
+*/
