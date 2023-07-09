@@ -9,7 +9,7 @@ module "iam_roles" {
     module.group_membership
   ]
 
-  source = "../modules/iam/role"
+  source = "../modules/iam/role_assignment"
 
   role_assignments = local.role_assignments
 }
