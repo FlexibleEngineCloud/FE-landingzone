@@ -1,6 +1,7 @@
 #!/bin/bash
 # Install ICAgent client on Hosts to collect and send logs to LTS
 # Run this script on hosts.
+# You can either set AK/SK or using IAM Agency. more details, https://docs.prod-cloud-ocb.orange-business.com/fr-fr/usermanual/lts/lts_03_0002.html
 
 ak="AK_HERE"
 sk="SK_HERE"
