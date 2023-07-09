@@ -1,8 +1,10 @@
-# Role Assignments variable
-variable "role_assignments" {
+# Roles variable
+variable "roles" {
+  description = "List of maps containing IAM roles"
   type = list(object({
-    group_id   = string
-    project_id = string
-    role_id    = string
+    name   = string
+    description = string
+    type    = string
+    policy    = string
   }))
 }

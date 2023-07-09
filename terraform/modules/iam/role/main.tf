@@ -9,17 +9,12 @@ terraform {
   }
 }
 
-# Provision Role Assignments resource
-resource "flexibleengine_identity_role_assignment_v3" "role_assignment" {
-  for_each = {
-    for idx, assignment in var.role_assignments : "assignment_${idx}" => assignment
-  }
+# Provision Role resource
+resource "flexibleengine_identity_role_v3" "role" {
+  count = length(var.roles)
 
-  group_id   = each.value.group_id
-  project_id = each.value.project_id
-  role_id    = each.value.role_id
-
-  # any other attributes you need to set for each role assignments
+  name = var.roles[count.index]["name"]
+  description = var.roles[count.index]["description"]
+  type = var.roles[count.index]["type"]
+  policy = var.roles[count.index]["policy"]
 }
-
-
