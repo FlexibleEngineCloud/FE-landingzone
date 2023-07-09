@@ -11,20 +11,20 @@ terraform {
 
 resource "flexibleengine_identity_agency_v3" "agency" {
   name                   = var.name
-  description            = "${var.name} agency Create by Terraform"
+  description            = "${var.name} agency created by Terraform"
   
   # Use a conditional expression to set the value of delegated_service_name
   # or delegated_domain_name based on the presence of the corresponding variable.
   delegated_service_name = var.delegated_service_name != null ? var.delegated_service_name : null
   #delegated_domain_name = var.delegated_domain_name != null ? var.delegated_domain_name : null
   
-  duration = var.duration
+  duration = var.duration != null ? var.duration : null
 
   project_role {
-    project = var.tenant_name
-    roles = var.roles
+    project = var.tenant_name != null ? var.tenant_name : null
+    roles = var.roles != null ? var.roles : null
   }
-  domain_roles = var.domain_roles
+  domain_roles = var.domain_roles != null ? var.domain_roles : null
 
   /*
   # If both variables are set, Terraform will throw an error.
