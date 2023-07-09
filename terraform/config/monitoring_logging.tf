@@ -13,6 +13,56 @@ module "obs_cts_bucket" {
   versioning = true
 }
 
+# Provision IAM Policy that grants read access on the CTS OBS bucket.
+module "cts_obs_role" {
+  providers = {
+    flexibleengine = flexibleengine.home_fe
+  }
+
+  source = "../modules/iam/role"
+
+  roles = [{
+    name              = "delegate-cts-obs"
+    description       = "Delegate access on CTS OBS bucket"
+    type              = "AX"
+    policy            = <<EOF
+        {
+        "Version": "1.1",
+        "Statement": [
+                {
+                    "Action": [
+                        "OBS:*:*"
+                    ],
+                    "Resource": [
+                        "OBS:*:*:bucket:bucket-cts-landingzone-${random_string.id.result}",
+                        "OBS:*:*:object:*"
+                    ],
+                    "Effect": "Allow"
+                }
+            ]
+        }
+        EOF
+   }]
+}
+
+
+# Assinging CTS OBS role to Security tenant. 
+# Allow only security tenant to access CTS OBS bucket.
+module "cts_obs_role_assignment" {
+  providers = {
+    flexibleengine = flexibleengine.home_fe
+  }
+
+  source = "../modules/iam/role_assignment"
+  role_assignments = [
+    {
+        group_id   = local.group_ids["security"]
+        project_id = local.project_ids[var.security_tenant_name]
+        role_id    = module.cts_obs_role.id[0]
+    }]
+}
+
+
 # Provision CTS Tracker for Home project
 resource "flexibleengine_cts_tracker_v1" "home_tracker" {
   provider = flexibleengine.home_fe
@@ -108,3 +158,5 @@ module "icagent_agency" {
   duration               = "FOREVER"
 }
 */
+
+
