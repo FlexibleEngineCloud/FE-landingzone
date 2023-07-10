@@ -12,3 +12,7 @@ output "subscription_urns" {
   description = "Subscriptions URNs"
   value       = [for subscription in flexibleengine_smn_subscription_v2.subscriptions : subscription.subscription_urn ]
 }
+output "topic_urns" {
+  description = "Topic URNs"
+  value       = [for subscription in flexibleengine_smn_subscription_v2.subscriptions : subscription.topic_urn ]
+}
