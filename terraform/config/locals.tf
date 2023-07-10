@@ -1,4 +1,7 @@
 locals {
+  # TMS Tags for FE Resources
+  tags = jsondecode(file("${path.module}/tms-tags.json"))
+
   # Load groups JSON file
   groups = jsondecode(file("${path.module}/groups.json"))
 

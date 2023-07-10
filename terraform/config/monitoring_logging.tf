@@ -1,3 +1,16 @@
+# Provision TMS Tags
+resource "flexibleengine_tms_tags" "tags" {
+  provider = flexibleengine.home_fe
+  
+  dynamic "tags" {
+    for_each = local.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
+  }
+}
+
 # Provision CTS OBS Bucket
 module "obs_cts_bucket" {
   providers = {
@@ -158,5 +171,3 @@ module "icagent_agency" {
   duration               = "FOREVER"
 }
 */
-
-
