@@ -1,12 +1,12 @@
 locals {
-  # TMS Tags for FE Resources
-  tags = jsondecode(file("${path.module}/tms-tags.json"))
-
   # Load groups JSON file
   groups = jsondecode(file("${path.module}/groups.json"))
 
   # Load policies JSON file
   policies = jsondecode(file("../../policies.json"))
+
+  # TMS Tags for FE Resources
+  tags = jsondecode(file("${path.module}/tms-tags.json"))
 
   # Load Group IDs
   group_ids = module.iam_groups.group_ids
