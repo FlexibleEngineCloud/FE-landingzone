@@ -171,3 +171,145 @@ module "icagent_agency" {
   duration               = "FOREVER"
 }
 */
+
+
+# Provision CES SMN Topic and Subscriptions
+module "ces_smn" {
+  providers = {
+    flexibleengine = flexibleengine.security_fe
+  }
+
+  source = "../modules/smn"
+
+  topic_name = "ces-topic"
+  topic_display_name = "Cloud Eye SMN Topic"
+
+  subscriptions = [{
+    endpoint  = "abdelmoumen.drici@orange.com"
+    protocol  = "email"
+    remark    = "O&M"
+  }]
+}
+
+// Provision CES rules
+module "ces_rules" {
+  providers = {
+    flexibleengine = flexibleengine.security_fe
+  }
+
+  source = "../modules/ces"
+
+  alarm_rules = [{
+    alarm_name = "firewall1-cpu"
+
+    metric = [{
+      namespace   = "SYS.ECS"
+      metric_name = "cpu_util"
+      dimensions = [{
+        name  = "instance_id"
+        value = module.ecs_cluster.id[0]
+      }]
+    }]
+
+    condition = [{
+      period              = 1
+      filter              = "average"
+      comparison_operator = ">="
+      value               = 80
+      //unit                = "B/s"
+      count               = 1
+    }]
+    
+    alarm_actions = [{
+      type = "notification"
+      notification_list = [
+        module.ces_smn.topic_urns[0]
+      ]
+    }]
+  },
+  {
+    alarm_name = "firewall2-cpu"
+
+    metric = [{
+      namespace   = "SYS.ECS"
+      metric_name = "cpu_util"
+      dimensions = [{
+        name  = "instance_id"
+        value = module.ecs_cluster.id[1]
+      }]
+    }]
+
+    condition = [{
+      period              = 1
+      filter              = "average"
+      comparison_operator = ">="
+      value               = 80
+      //unit                = "B/s"
+      count               = 1
+    }]
+    
+    alarm_actions = [{
+      type = "notification"
+      notification_list = [
+        module.ces_smn.topic_urns[0]
+      ]
+    }]
+  },
+  {
+    alarm_name = "firewall1-mem"
+
+    metric = [{
+      namespace   = "SYS.ECS"
+      metric_name = "mem_util"
+      dimensions = [{
+        name  = "instance_id"
+        value = module.ecs_cluster.id[0]
+      }]
+    }]
+
+    condition = [{
+      period              = 1
+      filter              = "average"
+      comparison_operator = ">="
+      value               = 80
+      //unit                = "B/s"
+      count               = 1
+    }]
+    
+    alarm_actions = [{
+      type = "notification"
+      notification_list = [
+        module.ces_smn.topic_urns[0]
+      ]
+    }]
+  },
+  {
+    alarm_name = "firewall2-mem"
+
+    metric = [{
+      namespace   = "SYS.ECS"
+      metric_name = "mem_util"
+      dimensions = [{
+        name  = "instance_id"
+        value = module.ecs_cluster.id[1]
+      }]
+    }]
+
+    condition = [{
+      period              = 1
+      filter              = "average"
+      comparison_operator = ">="
+      value               = 80
+      //unit                = "B/s"
+      count               = 1
+    }]
+    
+    alarm_actions = [{
+      type = "notification"
+      notification_list = [
+        module.ces_smn.topic_urns[0]
+      ]
+    }]
+  }
+  ]
+}

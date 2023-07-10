@@ -34,3 +34,21 @@ output "icagenct_agency_id" {
   value       = module.icagent_agency.id
 }
 */
+
+// CES SMN outputs
+output "ces_smn_topic" {
+  description = "Topic object"
+  value       = module.ces_smn.topic
+}
+output "ces_smn_subscriptions" {
+  description = "Subscriptions objects"
+  value       = module.ces_smn.subscriptions
+}
+output "ces_smn_subscription_urns" {
+  description = "Subscriptions URNs"
+  value       = module.ces_smn.subscription_urns
+}
+output "ces_smn_topic_urns" {
+  description = "Topic URNs"
+  value       = module.ces_smn.topic_urns
+}
