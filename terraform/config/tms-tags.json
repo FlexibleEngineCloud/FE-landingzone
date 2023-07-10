@@ -1,0 +1,170 @@
+[
+  {
+    "key": "Environment",
+    "value": "development"
+  },
+  {
+    "key": "Environment",
+    "value": "preproduction"
+  },
+  {
+    "key": "Environment",
+    "value": "production"
+  },
+  {
+    "key": "Environment",
+    "value": "staging"
+  },
+  {
+    "key": "Application",
+    "value": "my-app-1"
+  },
+  {
+    "key": "Application",
+    "value": "my-app-2"
+  },
+  {
+    "key": "Application",
+    "value": "my-app-3"
+  },
+  {
+    "key": "Application",
+    "value": "my-app-4"
+  },
+   {
+    "key": "Region",
+    "value": "eu-west-0"
+  },
+  {
+    "key": "Region",
+    "value": "eu-west-1"
+  },
+  {
+    "key": "AvailabilityZone",
+    "value": "eu-west-0a"
+  },
+  {
+    "key": "AvailabilityZone",
+    "value": "eu-west-0b"
+  },
+  {
+    "key": "AvailabilityZone",
+    "value": "eu-west-0c"
+  },
+  {
+    "key": "AvailabilityZone",
+    "value": "eu-west-1a"
+  },
+  {
+    "key": "AvailabilityZone",
+    "value": "eu-west-1b"
+  },
+  {
+    "key": "AvailabilityZone",
+    "value": "eu-west-1c"
+  },
+  {
+    "key": "Component",
+    "value": "backend"
+  },
+  {
+    "key": "Component",
+    "value": "cache"
+  },
+  {
+    "key": "Component",
+    "value": "database"
+  },
+  {
+    "key": "Component",
+    "value": "frontend"
+  },
+  {
+    "key": "Confidentiality",
+    "value": "confidential"
+  },
+  {
+    "key": "Confidentiality",
+    "value": "internal"
+  },
+  {
+    "key": "Confidentiality",
+    "value": "public"
+  },
+  {
+    "key": "CreatedBy",
+    "value": "admin"
+  },
+  {
+    "key": "CreatedBy",
+    "value": "terraform"
+  },
+  {
+    "key": "DataClassification",
+    "value": "public"
+  },
+  {
+    "key": "DataClassification",
+    "value": "sensitive"
+  },
+  {
+    "key": "Department",
+    "value": "Administration"
+  },
+  {
+    "key": "Department",
+    "value": "Customer_Support"
+  },
+  {
+    "key": "Department",
+    "value": "Design"
+  },
+  {
+    "key": "Department",
+    "value": "Engineering"
+  },
+  {
+    "key": "Department",
+    "value": "Finance"
+  },
+  {
+    "key": "Department",
+    "value": "Human_Resources"
+  },
+  {
+    "key": "Department",
+    "value": "IT"
+  },
+  {
+    "key": "Department",
+    "value": "Legal"
+  },
+  {
+    "key": "Department",
+    "value": "Marketing"
+  },
+  {
+    "key": "Department",
+    "value": "Operations"
+  },
+  {
+    "key": "Department",
+    "value": "Project_Management"
+  },
+  {
+    "key": "Department",
+    "value": "Quality_Assurance"
+  },
+  {
+    "key": "Department",
+    "value": "Research_and_Development"
+  },
+  {
+    "key": "Department",
+    "value": "Sales"
+  },
+  {
+    "key": "Department",
+    "value": "Supply_Chain"
+  }
+ ]
