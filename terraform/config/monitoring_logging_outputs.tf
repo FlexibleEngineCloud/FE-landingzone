@@ -1,8 +1,16 @@
+// TMS outputs
+
 // OBS CTS Bucket ID
 output "bucket_id" {
   description = "The name of the bucket."
   value       = module.obs_cts_bucket.id
 }
+
+// CTS OBS IAM Policy
+
+
+// CTS outputs
+
 
 // LTS Group ID
 output "lts_group_id" {
@@ -52,3 +60,5 @@ output "ces_smn_topic_urns" {
   description = "Topic URNs"
   value       = module.ces_smn.topic_urns
 }
+
+// CES Rules outputs

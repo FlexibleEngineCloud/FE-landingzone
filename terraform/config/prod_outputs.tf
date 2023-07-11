@@ -27,6 +27,21 @@ output "prod_secgroup_name" {
   value       = module.sg_prod.name
 }
 
+# VPC Peering outputs
+output "prod_peering_id" {
+  description = "ID of the created peering between Transit and Prod"
+  value       = module.peering_prod.id
+}
+
+// -------
+// Examples Deployments modules for diverse FE Resources to implement to the landing zone.
+// Resources: RDS, CCE, ELB shared, ELB Dedicated, OBS, S3, DNS, SFS,... 
+// Modules To Uncomment and Use as needed.
+// Please don't forget to uncomment outputs as well. from prod_outputs.tf
+// Could be implemented as well in dev/preprod tenants, or transit tenant.
+// -------
+
+
 /*
 // Prod RDS outputs
 output "rds_nodes" {
@@ -49,6 +64,21 @@ output "rds_public_ips" {
   value       = module.rds_prod_ha.public_ips
 }
 */
+
+
+/*
+// KMS outputs
+output "kms_id" {
+    value       = module.kms_key.id
+    description = "The globally unique identifier for the key"
+}
+
+output "kms_attributes" {
+    value       = module.kms_key.key
+    description = "KMS attributes"
+}
+*/
+
 
 /*
 // OBS outputs
@@ -73,19 +103,8 @@ output "bucket_objects" {
 }
 */
 
+
 /*
-// KMS outputs
-output "kms_id" {
-    value       = module.kms_key.id
-    description = "The globally unique identifier for the key"
-}
-
-output "kms_attributes" {
-    value       = module.kms_key.key
-    description = "KMS attributes"
-}
-
-
 // S3 outputs
 output "s3bucket_id" {
   description = "The name of the bucket."
@@ -108,6 +127,15 @@ output "s3bucket_objects" {
 }
 */
 
+
+/*
+// DNS outputs
+
+
+*/
+
+
+/*
 // SFS outputs
 // SFS file systems shares outputs
 output "sfs_ids" {
@@ -128,3 +156,76 @@ output "sfs_turbos" {
   description = "SFS Turbo detailed"
   value       = module.sfs_file_systems.sfs_turbos
 }
+*/
+
+
+
+/*
+# CCE agency outputs
+output "cce_agency_id" {
+  description = "ID of the created CCE agency"
+  value       = module.cce_agency.id
+}
+
+# CCE cluster outputs
+output "cce_cluster_id" {
+  description = "ID of the Cluster created"
+  value       = module.cce_cluster.id
+}
+
+output "cce_nodes_list" {
+  description = "List of nodes"
+  value       = module.cce_cluster.nodes_list
+}
+
+output "cce_nodes_ip" {
+  description = "List of nodes IP addresses"
+  value       = module.cce_cluster.nodes_ip
+}
+
+output "cce_certificate_clusters" {
+  value       = module.cce_cluster.certificate_clusters
+  description = "CCE cluster certificates"
+}
+
+output "cce_certificate_users" {
+  value       = module.cce_cluster.certificate_users
+  description = "CCE user certificates"
+}
+*/
+
+
+/*
+// Shared load balancer outputs
+
+
+*/
+
+
+/*
+// Dedicated Load balancer outputs
+output "dedicated-lb-id" {
+  description = "The Load Balancer ID"
+  value       = module.dedicated-elb.id
+}
+
+output "dedicated-lb-listeners" {
+  description = "The LB listeners"
+  value       = module.dedicated-elb.listeners
+}
+
+output "dedicated-lb-pools" {
+  description = "The LB pools"
+  value       = module.dedicated-elb.pools
+}
+
+output "dedicated-lb-members" {
+  description = "The LB members"
+  value       = module.dedicated-elb.members
+}
+
+output "dedicated-lb-monitors" {
+  description = "The LB monitors"
+  value       = module.dedicated-elb.monitors
+}
+*/

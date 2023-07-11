@@ -79,21 +79,6 @@ module "firewall_eip" {
   ]
 }
 
-/*
-locals {
-    antiddos_instances = {
-    for id in module.firewall_eip.ids : id => {
-      floating_ip_id        = id
-      enable_l7        = true
-      traffic_pos_id    = 3
-      http_request_pos_id     = 3
-      cleaning_access_pos_id = 2
-      app_type_id = 1
-    }
-  }
-}
-*/
-
 # Assign AntiDDOS
 module "antiddos" {
   source = "../modules/antiddos"
@@ -180,3 +165,4 @@ module "ecs_cluster" {
     module.keypair, module.sg_firewall, module.network_vpc
   ]
 }
+

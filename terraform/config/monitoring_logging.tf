@@ -216,7 +216,6 @@ module "ces_rules" {
       filter              = "average"
       comparison_operator = ">="
       value               = 80
-      //unit                = "B/s"
       count               = 1
     }]
     
@@ -244,7 +243,6 @@ module "ces_rules" {
       filter              = "average"
       comparison_operator = ">="
       value               = 80
-      //unit                = "B/s"
       count               = 1
     }]
     
@@ -272,7 +270,6 @@ module "ces_rules" {
       filter              = "average"
       comparison_operator = ">="
       value               = 80
-      //unit                = "B/s"
       count               = 1
     }]
     
@@ -300,7 +297,6 @@ module "ces_rules" {
       filter              = "average"
       comparison_operator = ">="
       value               = 80
-      //unit                = "B/s"
       count               = 1
     }]
     
