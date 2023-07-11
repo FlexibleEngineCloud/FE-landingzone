@@ -26,7 +26,7 @@ module "peering_preprod" {
   }
 
   same_tenant = false
-  // making same_tenant true, no flexibleengine_vpc_peering_connection_accepter_v2 resource created 
+  tenant_acc_id = local.project_ids[var.network_tenant_name]
 
   peer_name = "peering-transit-preprod"
   vpc_req_id = module.vpc_preprod.vpc_id

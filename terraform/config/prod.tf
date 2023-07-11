@@ -13,7 +13,7 @@ module "vpc_prod" {
 
   source = "../modules/vpc"
 
-  vpc_name = "vpc-appdev"
+  vpc_name = "vpc-prod"
   vpc_cidr = "192.168.3.0/24"
   vpc_subnets = [{
     subnet_cidr       = "192.168.3.0/27"
@@ -63,7 +63,7 @@ module "peering_prod" {
   }
 
   same_tenant = false
-  // making same_tenant true, no flexibleengine_vpc_peering_connection_accepter_v2 resource created 
+  tenant_acc_id = local.project_ids[var.network_tenant_name]
 
   peer_name = "peering-transit-prod"
   vpc_req_id = module.vpc_prod.vpc_id
