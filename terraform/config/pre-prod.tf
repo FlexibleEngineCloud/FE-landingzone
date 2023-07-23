@@ -1,3 +1,30 @@
+# Provision KMS key for preprod tenant
+module "kms_key_preprod" {
+  providers = {
+    flexibleengine = flexibleengine.preprod_fe
+  }
+
+  source = "../modules/kms"
+
+  key_alias       = "kms_key_preprod_${random_string.id.result}"
+  pending_days    = "7"
+  key_description = "KMS key for preprod project"
+  realm           = "eu-west-0"
+  is_enabled      = true
+  rotation_enabled = true
+  rotation_interval = 100
+}
+
+# Provision RSA KeyPair 
+module "keypair_preprod" {
+  source = "../modules/keypair"
+  providers = {
+    flexibleengine = flexibleengine.preprod_fe
+  }
+  keyname = "TF-KeyPair-preprod"
+}
+
+
 # Provision PreProd Network VPC and Subnets
 module "vpc_preprod" {
   providers = {

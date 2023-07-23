@@ -1,3 +1,30 @@
+# Provision KMS key for network tenant
+module "kms_key_network" {
+  providers = {
+    flexibleengine = flexibleengine.network_fe
+  }
+
+  source = "../modules/kms"
+
+  key_alias       = "kms_key_network_${random_string.id.result}"
+  pending_days    = "7"
+  key_description = "KMS key for network project"
+  realm           = "eu-west-0"
+  is_enabled      = true
+  rotation_enabled = true
+  rotation_interval = 100
+}
+
+# Provision RSA KeyPair for network tenant
+module "keypair_network" {
+  source = "../modules/keypair"
+  providers = {
+    flexibleengine = flexibleengine.network_fe
+  }
+  keyname = "TF-KeyPair-network"
+}
+
+
 # Provision Network VPC and Subnets
 module "network_vpc" {
   providers = {
@@ -103,14 +130,6 @@ module "antiddos" {
 }
 
 
-module "keypair" {
-  source = "../modules/keypair"
-  providers = {
-    flexibleengine = flexibleengine.network_fe
-  }
-  keyname = "TF-KeyPair-firewall"
-}
-
 module "sg_firewall" {
   source = "../modules/secgroup"
   providers = {
@@ -147,7 +166,7 @@ module "ecs_cluster" {
   availability_zones = ["eu-west-0a", "eu-west-0b"]
 
   flavor_name     = "t2.small"
-  key_name        = module.keypair.id
+  key_name        = module.keypair_network.id
   security_groups = [module.sg_firewall.name]
   network_uuids   = module.network_vpc.network_ids
   image_id        = "caad1499-9388-4222-b604-be2f57a85458"
@@ -162,7 +181,7 @@ module "ecs_cluster" {
   }
 
   depends_on = [
-    module.keypair, module.sg_firewall, module.network_vpc
+    module.keypair_network, module.sg_firewall, module.network_vpc
   ]
 }
 

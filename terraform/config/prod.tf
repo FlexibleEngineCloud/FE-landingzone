@@ -1,9 +1,29 @@
-# Random string
-resource "random_string" "id" {
-  length  = 4
-  special = false
-  upper   = false
+# Provision KMS key for prod tenant
+module "kms_key_prod" {
+  providers = {
+    flexibleengine = flexibleengine.prod_fe
+  }
+
+  source = "../modules/kms"
+
+  key_alias       = "kms_key_prod_${random_string.id.result}"
+  pending_days    = "7"
+  key_description = "KMS key for prod project"
+  realm           = "eu-west-0"
+  is_enabled      = true
+  rotation_enabled = true
+  rotation_interval = 100
 }
+
+# Provision RSA KeyPair 
+module "keypair_prod" {
+  source = "../modules/keypair"
+  providers = {
+    flexibleengine = flexibleengine.prod_fe
+  }
+  keyname = "TF-KeyPair-prod"
+}
+
 
 # Provision Prod Network VPC and Subnets
 module "vpc_prod" {
@@ -23,13 +43,6 @@ module "vpc_prod" {
   ]
 }
 
-module "keypair_prod" {
-  source = "../modules/keypair"
-  providers = {
-    flexibleengine = flexibleengine.prod_fe
-  }
-  keyname = "TF-KeyPair-prod"
-}
 
 // Provision prod Security group
 module "sg_prod" {
@@ -204,25 +217,6 @@ module "rds_prod_ha" {
   ]
 
   depends_on = [ module.vpc_prod, module.sg_prod ]
-}
-*/
-
-/*
-# KMS key
-module "kms_key" {
-  providers = {
-    flexibleengine = flexibleengine.prod_fe
-  }
-
-  source = "../modules/kms"
-
-  key_alias       = "obs_key_${random_string.id.result}"
-  pending_days    = "7"
-  key_description = "obs key descritpion"
-  realm           = "eu-west-0"
-  is_enabled      = true
-  rotation_enabled = true
-  rotation_interval = 100
 }
 */
 

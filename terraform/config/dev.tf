@@ -1,3 +1,30 @@
+# Provision KMS key for dev tenant
+module "kms_key_dev" {
+  providers = {
+    flexibleengine = flexibleengine.dev_fe
+  }
+
+  source = "../modules/kms"
+
+  key_alias       = "kms_key_dev_${random_string.id.result}"
+  pending_days    = "7"
+  key_description = "KMS key for dev project"
+  realm           = "eu-west-0"
+  is_enabled      = true
+  rotation_enabled = true
+  rotation_interval = 100
+}
+
+# Provision RSA KeyPair 
+module "keypair_dev" {
+  source = "../modules/keypair"
+  providers = {
+    flexibleengine = flexibleengine.dev_fe
+  }
+  keyname = "TF-KeyPair-dev"
+}
+
+
 # Provision Dev Network VPC and Subnets
 module "vpc_dev" {
   providers = {
