@@ -1,86 +1,103 @@
 // -------------------------- Transit outputs 
+# KMS project network outptus
+output "network_kms_id" {
+    value       = module.network_kms_key.id
+    description = "The globally unique identifier for the KMS key network project"
+}
+
+output "network_kms_attributes" {
+    value       = module.network_kms_key.key
+    description = "KMS network attributes"
+}
+
+# KeyPair outputs
+output "network_keypair_id" {
+    value       = module.network_keypair.id
+    description = "The ID of the KeyPair network"
+}
+
+output "network_keypair_name" {
+    value       = module.network_keypair.name
+    description = "The name of the keypair network"
+}
+
 # Transit VPCs outputs
-output "vpc_id" {
+output "network_vpc_id" {
   value = module.network_vpc.vpc_id
 }
 
-output "vpc_name" {
+output "network_vpc_name" {
   value = module.network_vpc.vpc_name
 }
 
-output "subnet_ids" {
+output "network_subnet_ids" {
   value = module.network_vpc.subnet_ids
 }
 
-output "network_ids" {
+output "network_network_ids" {
   value = module.network_vpc.network_ids
 }
 
 # Security Group outputs
-output "secgroup_id" {
+output "network_secgroup_id" {
   description = "The ID of the security group"
   value       = module.sg_firewall.id
 }
 
-output "secgroup_name" {
+output "network_secgroup_name" {
   description = "The name of the security group"
   value       = module.sg_firewall.name
 }
 
-# KeyPair outputs
-output "keypair_id" {
-  description = "The ID of the KeyPair"
-  value       = module.keypair.id
-}
 
 # EIP outputs
-output "firewall_public_ips" {
+output "network_firewall_public_ips" {
   description = "firewall Elastic IP Addresses"
   value       = module.firewall_eip.public_ips
 }
 
-output "firewall_eip_ids" {
+output "network_firewall_eip_ids" {
   description = "firewall Elastic IP IDs"
   value       = module.firewall_eip.ids
 }
 
 
 # AntiDDOS outputs
-output "public_ips_antiddos" {
+output "network_public_ips_antiddos" {
   description = "AntiDDOS IDs attached to firewall EIPs"
   value       = module.antiddos.ids
 }
 
 
 # Inbound Virtual IP outputs
-output "vip_in_id" {
+output "network_vip_in_id" {
   description = "The inbound Virtual IP ID"
   value       = module.network_vip_in.id
 }
 
-output "vip_in_ip_address" {
+output "network_vip_in_ip_address" {
   description = "The IP address in the subnet for the inbound vip"
   value       = module.network_vip_in.ip_address
 }
 
 # Outbound Virtual IP outputs
-output "vip_out_id" {
+output "network_vip_out_id" {
   description = "The oubound Virtual IP ID"
   value       = module.network_vip_in.id
 }
 
-output "vip_out_ip_address" {
+output "network_vip_out_ip_address" {
   description = "The IP address in the subnet for the outbound vip"
   value       = module.network_vip_in.ip_address
 }
 
 # Firewall instances outputs
-output "firewalls_network" {
+output "network_firewalls_network" {
   description = "Network block of the provisioned ECS instance"
   value       = module.ecs_cluster.network
 }
 
-output "firewalls_id" {
+output "network_firewalls_id" {
   value       = module.ecs_cluster.id
   description = "The ID of the provisioned ECS instances"
 }

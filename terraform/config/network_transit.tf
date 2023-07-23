@@ -1,27 +1,27 @@
 # Provision KMS key for network tenant
-module "kms_key_network" {
+module "network_kms_key" {
   providers = {
     flexibleengine = flexibleengine.network_fe
   }
 
   source = "../modules/kms"
 
-  key_alias       = "kms_key_network_${random_string.id.result}"
-  pending_days    = "7"
-  key_description = "KMS key for network project"
-  realm           = "eu-west-0"
-  is_enabled      = true
-  rotation_enabled = true
-  rotation_interval = 100
+  key_alias         = "${var.network_kms_key.key_alias}_${random_string.id.result}"
+  pending_days      = var.network_kms_key.pending_days
+  key_description   = var.network_kms_key.key_description
+  realm             = var.network_kms_key.realm
+  is_enabled        = var.network_kms_key.is_enabled
+  rotation_enabled  = var.network_kms_key.rotation_enabled
+  rotation_interval = var.network_kms_key.rotation_interval
 }
 
 # Provision RSA KeyPair for network tenant
-module "keypair_network" {
+module "network_keypair" {
   source = "../modules/keypair"
   providers = {
     flexibleengine = flexibleengine.network_fe
   }
-  keyname = "TF-KeyPair-network"
+  keyname = var.network_keypair
 }
 
 
@@ -33,24 +33,9 @@ module "network_vpc" {
 
   source = "../modules/vpc"
 
-  vpc_name = "vpc"
-  vpc_cidr = "192.168.0.0/16"
-  vpc_subnets = [{
-    subnet_cidr       = "192.168.1.0/24"
-    subnet_gateway_ip = "192.168.1.1"
-    subnet_name       = "subnet-in"
-    },
-    {
-      subnet_cidr       = "192.168.2.0/24"
-      subnet_gateway_ip = "192.168.2.1"
-      subnet_name       = "subnet-out"
-    },
-    {
-      subnet_cidr       = "192.168.3.0/24"
-      subnet_gateway_ip = "192.168.3.1"
-      subnet_name       = "subnet-sync"
-    }
-  ]
+  vpc_name    = var.network_vpc.vpc_name
+  vpc_cidr    = var.network_vpc.vpc_cidr
+  vpc_subnets = var.network_vpc.vpc_subnets
 }
 
 
@@ -61,8 +46,8 @@ module "network_vip_in" {
     flexibleengine = flexibleengine.network_fe
   }
 
-  vip_name   = "inbound-vip"
-  ip_address = "192.168.1.101"
+  vip_name   = var.network_vips.inbound_vip_name
+  ip_address = var.network_vips.inbound
   subnet_id  = module.network_vpc.network_ids[0]
   port_ids   = [for instance_network in module.ecs_cluster.network : instance_network.0.port]
 
@@ -78,8 +63,8 @@ module "network_vip_out" {
     flexibleengine = flexibleengine.network_fe
   }
 
-  vip_name   = "outbound-vip"
-  ip_address = "192.168.2.101"
+  vip_name   = var.network_vips.outbound_vip_name
+  ip_address = var.network_vips.outbound
   subnet_id  = module.network_vpc.network_ids[1]
   port_ids   = [for instance_network in module.ecs_cluster.network : instance_network.1.port]
 
@@ -97,9 +82,9 @@ module "firewall_eip" {
   }
 
   eip_count     = 1
-  eip_name      = "external-eip"
-  eip_bandwidth = 1000
-  protect_eip   = true
+  eip_name      = var.firewall_eip.eip_name
+  eip_bandwidth = var.firewall_eip.eip_bandwidth
+  protect_eip   = var.firewall_eip.protect_eip
 
   depends_on = [
     module.network_vip_in, module.network_vip_out
@@ -112,15 +97,15 @@ module "antiddos" {
   providers = {
     flexibleengine = flexibleengine.network_fe
   }
-  
+
   eips = [
     for id in module.firewall_eip.ids : {
       floating_ip_id         = id
-      enable_l7              = true
-      traffic_pos_id         = 3
-      http_request_pos_id    = 3
-      cleaning_access_pos_id = 2
-      app_type_id            = 1
+      enable_l7              = var.antiddos.enable_l7
+      traffic_pos_id         = var.antiddos.traffic_pos_id
+      http_request_pos_id    = var.antiddos.http_request_pos_id
+      cleaning_access_pos_id = var.antiddos.cleaning_access_pos_id
+      app_type_id            = var.antiddos.app_type_id
     }
   ]
 
@@ -136,19 +121,11 @@ module "sg_firewall" {
     flexibleengine = flexibleengine.network_fe
   }
 
-  name                        = "sg_firewall"
-  description                 = "Security group for firewall instances"
-  delete_default_egress_rules = false
+  name                        = var.sg_firewall.name
+  description                 = var.sg_firewall.description
+  delete_default_egress_rules = var.sg_firewall.delete_default_egress_rules
 
-  ingress_with_source_cidr = [
-    {
-      from_port   = 10
-      to_port     = 1000
-      protocol    = "tcp"
-      ethertype   = "IPv4"
-      source_cidr = "0.0.0.0/0"
-    }
-  ]
+  ingress_with_source_cidr = var.sg_firewall.ingress_with_source_cidr
 }
 
 
@@ -161,27 +138,22 @@ module "ecs_cluster" {
 
   source = "../modules/ecs"
 
-  instance_name      = "firewall"
-  instance_count     = 2
-  availability_zones = ["eu-west-0a", "eu-west-0b"]
+  instance_name      = var.ecs_cluster.instance_name
+  instance_count     = var.ecs_cluster.instance_count
+  availability_zones = var.ecs_cluster.availability_zones
 
-  flavor_name     = "t2.small"
-  key_name        = module.keypair_network.id
+  flavor_name = var.ecs_cluster.flavor_name
+  image_id    = var.ecs_cluster.image_id
+
+  key_name        = module.network_keypair.id
   security_groups = [module.sg_firewall.name]
   network_uuids   = module.network_vpc.network_ids
-  image_id        = "caad1499-9388-4222-b604-be2f57a85458"
 
-  tags = {
-    Environment = "landingzone"
-  }
+  tags = var.ecs_cluster.tags
 
-  metadata = {
-    Terraform   = "true"
-    Environment = "landingzone"
-  }
+  metadata = var.ecs_cluster.metadata
 
   depends_on = [
-    module.keypair_network, module.sg_firewall, module.network_vpc
+    module.network_keypair, module.sg_firewall, module.network_vpc
   ]
 }
-

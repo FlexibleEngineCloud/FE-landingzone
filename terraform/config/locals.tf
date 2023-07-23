@@ -1,3 +1,10 @@
+# Random string unique identifier for landing zone resources
+resource "random_string" "id" {
+  length  = 4
+  special = false
+  upper   = false
+}
+
 locals {
   # Load groups JSON file
   groups = jsondecode(file("${path.module}/groups.json"))

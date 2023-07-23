@@ -1,4 +1,3 @@
-
 # Provision DMZ Network VPC and Subnets
 module "network_vpc_dmz" {
   providers = {
@@ -7,14 +6,9 @@ module "network_vpc_dmz" {
 
   source = "../modules/vpc"
 
-  vpc_name = "vpc-dmz"
-  vpc_cidr = "192.169.0.0/16"
-  vpc_subnets = [{
-    subnet_cidr       = "192.169.1.0/24"
-    subnet_gateway_ip = "192.169.1.1"
-    subnet_name       = "subnet-dmz"
-    }
-  ]
+  vpc_name    = var.network_vpc_dmz.vpc_name
+  vpc_cidr    = var.network_vpc_dmz.vpc_cidr
+  vpc_subnets = var.network_vpc_dmz.vpc_subnets
 }
 
 
@@ -27,11 +21,10 @@ module "peering_dmz" {
     flexibleengine.accepter  = flexibleengine.network_fe
   }
 
-  same_tenant = true
+  same_tenant = var.peering_dmz.same_tenant
   // making same_tenant true, no flexibleengine_vpc_peering_connection_accepter_v2 resource created 
 
-  peer_name = "peering-transit-dmz"
+  peer_name   = var.peering_dmz.peer_name
   vpc_req_id = module.network_vpc_dmz.vpc_id
   vpc_acc_id = module.network_vpc.vpc_id
 }
-

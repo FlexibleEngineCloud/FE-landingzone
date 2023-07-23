@@ -1,4 +1,26 @@
 // -------------------------- Prod outputs 
+# KMS project prod outptus
+output "prod_kms_id" {
+    value       = module.kms_key_prod.id
+    description = "The globally unique identifier for the KMS key prod project"
+}
+
+output "prod_kms_attributes" {
+    value       = module.kms_key_prod.key
+    description = "KMS prod attributes"
+}
+
+# KeyPair outputs
+output "prod_keypair_id" {
+    value       = module.keypair_prod.id
+    description = "The ID of the KeyPair prod"
+}
+
+output "prod_keypair_name" {
+    value       = module.keypair_prod.name
+    description = "The name of the keypair prod"
+}
+
 # Prod VPC outputs
 output "prod_vpc_id" {
   value = module.vpc_prod.vpc_id
@@ -62,20 +84,6 @@ output "rds_private_ips" {
 output "rds_public_ips" {
   description = "RDS Public IP address list of nodes"
   value       = module.rds_prod_ha.public_ips
-}
-*/
-
-
-/*
-// KMS outputs
-output "kms_id" {
-    value       = module.kms_key.id
-    description = "The globally unique identifier for the key"
-}
-
-output "kms_attributes" {
-    value       = module.kms_key.key
-    description = "KMS attributes"
 }
 */
 
