@@ -6,13 +6,13 @@ module "kms_key_dev" {
 
   source = "../modules/kms"
 
-  key_alias       = "kms_key_dev_${random_string.id.result}"
-  pending_days    = "7"
-  key_description = "KMS key for dev project"
-  realm           = "eu-west-0"
-  is_enabled      = true
-  rotation_enabled = true
-  rotation_interval = 100
+  key_alias       = "${var.kms_key_dev.key_alias}_${random_string.id.result}"
+  pending_days    = var.kms_key_dev.pending_days
+  key_description = var.kms_key_dev.key_description
+  realm           = var.kms_key_dev.realm
+  is_enabled      = var.kms_key_dev.is_enabled
+  rotation_enabled = var.kms_key_dev.rotation_enabled
+  rotation_interval = var.kms_key_dev.rotation_interval
 }
 
 # Provision RSA KeyPair 
@@ -21,7 +21,7 @@ module "keypair_dev" {
   providers = {
     flexibleengine = flexibleengine.dev_fe
   }
-  keyname = "TF-KeyPair-dev"
+  keyname = var.keypair_dev
 }
 
 
@@ -33,14 +33,9 @@ module "vpc_dev" {
 
   source = "../modules/vpc"
 
-  vpc_name = "vpc-dev"
-  vpc_cidr = "192.168.4.0/24"
-  vpc_subnets = [{
-    subnet_cidr       = "192.168.4.0/27"
-    subnet_gateway_ip = "192.168.4.1"
-    subnet_name       = "subnet-dev"
-    }
-  ]
+  vpc_name    = var.vpc_dev.vpc_name
+  vpc_cidr    = var.vpc_dev.vpc_cidr
+  vpc_subnets = var.vpc_dev.vpc_subnets
 }
 
 // Create VPC Peering from Dev to Transit VPC
@@ -52,10 +47,10 @@ module "peering_dev" {
     flexibleengine.accepter  = flexibleengine.network_fe
   }
 
-  same_tenant = false
+  same_tenant   = var.peering_dev.same_tenant
   tenant_acc_id = local.project_ids[var.network_tenant_name]
 
-  peer_name = "peering-transit-dev"
+  peer_name     = var.peering_dev.peer_name
   vpc_req_id = module.vpc_dev.vpc_id
   vpc_acc_id = module.network_vpc.vpc_id
 }

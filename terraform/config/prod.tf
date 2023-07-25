@@ -6,13 +6,13 @@ module "kms_key_prod" {
 
   source = "../modules/kms"
 
-  key_alias       = "kms_key_prod_${random_string.id.result}"
-  pending_days    = "7"
-  key_description = "KMS key for prod project"
-  realm           = "eu-west-0"
-  is_enabled      = true
-  rotation_enabled = true
-  rotation_interval = 100
+  key_alias       = "${var.kms_key_prod.key_alias}_${random_string.id.result}"
+  pending_days    = var.kms_key_prod.pending_days
+  key_description = var.kms_key_prod.key_description
+  realm           = var.kms_key_prod.realm
+  is_enabled      = var.kms_key_prod.is_enabled
+  rotation_enabled = var.kms_key_prod.rotation_enabled
+  rotation_interval = var.kms_key_prod.rotation_interval
 }
 
 # Provision RSA KeyPair 
@@ -21,7 +21,7 @@ module "keypair_prod" {
   providers = {
     flexibleengine = flexibleengine.prod_fe
   }
-  keyname = "TF-KeyPair-prod"
+  keyname = var.keypair_prod
 }
 
 
@@ -33,14 +33,10 @@ module "vpc_prod" {
 
   source = "../modules/vpc"
 
-  vpc_name = "vpc-prod"
-  vpc_cidr = "192.168.3.0/24"
-  vpc_subnets = [{
-    subnet_cidr       = "192.168.3.0/27"
-    subnet_gateway_ip = "192.168.3.1"
-    subnet_name       = "subnet-prod"
-    }
-  ]
+  vpc_name    = var.vpc_prod.vpc_name
+  vpc_cidr    = var.vpc_prod.vpc_cidr
+  vpc_subnets = var.vpc_prod.vpc_subnets
+
 }
 
 
@@ -51,19 +47,11 @@ module "sg_prod" {
     flexibleengine = flexibleengine.prod_fe
   }
 
-  name                        = "sg_prod"
-  description                 = "Security group for prod instances"
-  delete_default_egress_rules = false
+  name                        = var.sg_prod.name
+  description                 = var.sg_prod.description
+  delete_default_egress_rules = var.sg_prod.delete_default_egress_rules
 
-  ingress_with_source_cidr = [
-    {
-      from_port   = 10
-      to_port     = 1000
-      protocol    = "tcp"
-      ethertype   = "IPv4"
-      source_cidr = "0.0.0.0/0"
-    }
-  ]
+  ingress_with_source_cidr = var.sg_prod.ingress_with_source_cidr
 }
 
 // Create VPC Peering from Prod to Transit VPC
@@ -75,10 +63,10 @@ module "peering_prod" {
     flexibleengine.accepter  = flexibleengine.network_fe
   }
 
-  same_tenant = false
+  same_tenant   = var.peering_prod.same_tenant
   tenant_acc_id = local.project_ids[var.network_tenant_name]
 
-  peer_name = "peering-transit-prod"
+  peer_name     = var.peering_prod.peer_name
   vpc_req_id = module.vpc_prod.vpc_id
   vpc_acc_id = module.network_vpc.vpc_id
 }

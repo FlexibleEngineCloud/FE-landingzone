@@ -275,15 +275,454 @@ variable "peering_dmz" {
 
 
 // ------------------------- Dev variables
+variable "kms_key_dev" {
+  type = object({
+    key_alias          = string
+    pending_days       = string
+    key_description    = string
+    realm              = string
+    is_enabled         = bool
+    rotation_enabled   = bool
+    rotation_interval  = number
+  })
+
+  default = {
+    key_alias          = "kms_key_dev"
+    pending_days       = "7"
+    key_description    = "KMS key for dev project"
+    realm              = "eu-west-0"
+    is_enabled         = true
+    rotation_enabled   = true
+    rotation_interval  = 100
+  }
+}
+
+variable "keypair_dev" {
+  type = string
+
+  default = "TF-KeyPair-dev"
+}
+
+variable "vpc_dev" {
+  type = object({
+    vpc_name    = string
+    vpc_cidr    = string
+    vpc_subnets = list(object({
+      subnet_cidr       = string
+      subnet_gateway_ip = string
+      subnet_name       = string
+    }))
+  })
+
+  default = {
+    vpc_name    = "vpc-dev"
+    vpc_cidr    = "192.168.4.0/24"
+    vpc_subnets = [
+      {
+        subnet_cidr       = "192.168.4.0/27"
+        subnet_gateway_ip = "192.168.4.1"
+        subnet_name       = "subnet-dev"
+      }
+    ]
+  }
+}
+
+variable "peering_dev" {
+  type = object({
+    same_tenant  = bool
+    peer_name    = string
+  })
+
+  default = {
+    same_tenant  = false
+    peer_name    = "peering-transit-dev"
+  }
+}
 
 
 
 // ------------------------- PreProd variables
+variable "kms_key_preprod" {
+  type = object({
+    key_alias          = string
+    pending_days       = string
+    key_description    = string
+    realm              = string
+    is_enabled         = bool
+    rotation_enabled   = bool
+    rotation_interval  = number
+  })
+
+  default = {
+    key_alias          = "kms_key_preprod"
+    pending_days       = "7"
+    key_description    = "KMS key for preprod project"
+    realm              = "eu-west-0"
+    is_enabled         = true
+    rotation_enabled   = true
+    rotation_interval  = 100
+  }
+}
+
+variable "keypair_preprod" {
+  type = string
+
+  default = "TF-KeyPair-preprod"
+}
+
+variable "vpc_preprod" {
+  type = object({
+    vpc_name    = string
+    vpc_cidr    = string
+    vpc_subnets = list(object({
+      subnet_cidr       = string
+      subnet_gateway_ip = string
+      subnet_name       = string
+    }))
+  })
+
+  default = {
+    vpc_name    = "vpc-preprod"
+    vpc_cidr    = "192.168.5.0/24"
+    vpc_subnets = [
+      {
+        subnet_cidr       = "192.168.5.0/27"
+        subnet_gateway_ip = "192.168.5.1"
+        subnet_name       = "subnet-preprod"
+      }
+    ]
+  }
+}
+
+variable "peering_preprod" {
+  type = object({
+    same_tenant  = bool
+    peer_name    = string
+  })
+
+  default = {
+    same_tenant  = false
+    peer_name    = "peering-transit-preprod"
+  }
+}
 
 
 
 // ------------------------- Prod variables
+variable "kms_key_prod" {
+  type = object({
+    key_alias          = string
+    pending_days       = string
+    key_description    = string
+    realm              = string
+    is_enabled         = bool
+    rotation_enabled   = bool
+    rotation_interval  = number
+  })
+
+  default = {
+    key_alias          = "kms_key_prod"
+    pending_days       = "7"
+    key_description    = "KMS key for prod project"
+    realm              = "eu-west-0"
+    is_enabled         = true
+    rotation_enabled   = true
+    rotation_interval  = 100
+  }
+}
+
+variable "keypair_prod" {
+  type = string
+
+  default = "TF-KeyPair-prod"
+}
+
+variable "vpc_prod" {
+  type = object({
+    vpc_name    = string
+    vpc_cidr    = string
+    vpc_subnets = list(object({
+      subnet_cidr       = string
+      subnet_gateway_ip = string
+      subnet_name       = string
+    }))
+  })
+
+  default = {
+    vpc_name    = "vpc-prod"
+    vpc_cidr    = "192.168.3.0/24"
+    vpc_subnets = [
+      {
+        subnet_cidr       = "192.168.3.0/27"
+        subnet_gateway_ip = "192.168.3.1"
+        subnet_name       = "subnet-prod"
+      }
+    ]
+  }
+}
+
+variable "sg_prod" {
+  type = object({
+    name                        = string
+    description                 = string
+    delete_default_egress_rules = bool
+    ingress_with_source_cidr    = list(object({
+      from_port   = number
+      to_port     = number
+      protocol    = string
+      ethertype   = string
+      source_cidr = string
+    }))
+  })
+
+  default = {
+    name                        = "sg_prod"
+    description                 = "Security group for prod instances"
+    delete_default_egress_rules = false
+    ingress_with_source_cidr = [
+      {
+        from_port   = 10
+        to_port     = 1000
+        protocol    = "tcp"
+        ethertype   = "IPv4"
+        source_cidr = "0.0.0.0/0"
+      }
+    ]
+  }
+}
+
+variable "peering_prod" {
+  type = object({
+    same_tenant  = bool
+    peer_name    = string
+  })
+
+  default = {
+    same_tenant  = false
+    peer_name    = "peering-transit-prod"
+  }
+}
 
 
 
 // ------------------------- Monitoring & Logging variables
+variable "obs_cts_bucket" {
+  type = object({
+    bucket    = string
+    acl       = string
+    encryption    = bool
+    versioning = bool
+  })
+
+  default = {
+    bucket    = "bucket-cts-landingzone"
+    acl       = "private"
+    encryption    = false
+    versioning = true
+  }
+}
+
+variable "cts_obs_role" {
+  type = object({
+    name        = string
+    description = string
+    type        = string
+  })
+
+  default = {
+    name        = "delegate-cts-obs"
+    description = "Delegate access on CTS OBS bucket"
+    type        = "AX"
+  }
+}
+
+variable "cts_bucket_name" {
+  type = string
+
+  default = "bucket-cts-landingzone"
+}
+
+
+variable "lts_group_name" {
+  type = string
+
+  default = "Hosts"
+}
+
+variable "lts_topic_names" {
+  type = object({
+    prod = string
+    dev = string
+    preprod = string
+    dmz = string
+    bastion = string
+  })
+
+  default = {
+    prod   = "Prod_Hosts_Topic"
+    dev   = "Dev_Hosts_Topic"
+    preprod   = "PreProd_Hosts_Topic"
+    dmz   = "DMZ_Hosts_Topic"
+    bastion   = "Bastion_Hosts_Topic"
+  }
+}
+
+
+variable "ces_smn" {
+  type = object({
+    topic_name         = string
+    topic_display_name = string
+    subscriptions      = list(object({
+      endpoint = string
+      protocol = string
+      remark   = string
+    }))
+  })
+
+  default = {
+    topic_name         = "ces-topic"
+    topic_display_name = "Cloud Eye SMN Topic"
+    subscriptions      = [{
+      endpoint  = "abdelmoumen.drici@orange.com"
+      protocol  = "email"
+      remark    = "O&M"
+    }]
+  }
+}
+
+
+/*
+variable "ces_rules" {
+  type = list(object({
+    alarm_name      = string
+    metric          = list(object({
+      namespace   = string
+      metric_name = string
+      dimensions  = list(object({
+        name  = string
+        value = string
+      }))
+    }))
+    condition       = list(object({
+      period              = number
+      filter              = string
+      comparison_operator = string
+      value               = number
+      count               = number
+    }))
+    alarm_actions   = list(object({
+      type               = string
+      notification_list  = list(string)
+    }))
+  }))
+
+  default = [{
+    alarm_name = "firewall1-cpu"
+
+    metric = [{
+      namespace   = "SYS.ECS"
+      metric_name = "cpu_util"
+      dimensions = [{
+        name  = "instance_id"
+        value = module.ecs_cluster.id[0]
+      }]
+    }]
+
+    condition = [{
+      period              = 1
+      filter              = "average"
+      comparison_operator = ">="
+      value               = 80
+      count               = 1
+    }]
+    
+    alarm_actions = [{
+      type = "notification"
+      notification_list = [
+        module.ces_smn.topic_urns[0]
+      ]
+    }]
+  },
+  {
+    alarm_name = "firewall2-cpu"
+
+    metric = [{
+      namespace   = "SYS.ECS"
+      metric_name = "cpu_util"
+      dimensions = [{
+        name  = "instance_id"
+        value = module.ecs_cluster.id[1]
+      }]
+    }]
+
+    condition = [{
+      period              = 1
+      filter              = "average"
+      comparison_operator = ">="
+      value               = 80
+      count               = 1
+    }]
+    
+    alarm_actions = [{
+      type = "notification"
+      notification_list = [
+        module.ces_smn.topic_urns[0]
+      ]
+    }]
+  },
+  {
+    alarm_name = "firewall1-mem"
+
+    metric = [{
+      namespace   = "SYS.ECS"
+      metric_name = "mem_util"
+      dimensions = [{
+        name  = "instance_id"
+        value = module.ecs_cluster.id[0]
+      }]
+    }]
+
+    condition = [{
+      period              = 1
+      filter              = "average"
+      comparison_operator = ">="
+      value               = 80
+      count               = 1
+    }]
+    
+    alarm_actions = [{
+      type = "notification"
+      notification_list = [
+        module.ces_smn.topic_urns[0]
+      ]
+    }]
+  },
+  {
+    alarm_name = "firewall2-mem"
+
+    metric = [{
+      namespace   = "SYS.ECS"
+      metric_name = "mem_util"
+      dimensions = [{
+        name  = "instance_id"
+        value = module.ecs_cluster.id[1]
+      }]
+    }]
+
+    condition = [{
+      period              = 1
+      filter              = "average"
+      comparison_operator = ">="
+      value               = 80
+      count               = 1
+    }]
+    
+    alarm_actions = [{
+      type = "notification"
+      notification_list = [
+        module.ces_smn.topic_urns[0]
+      ]
+    }]
+  }]
+}
+*/

@@ -6,13 +6,13 @@ module "kms_key_preprod" {
 
   source = "../modules/kms"
 
-  key_alias       = "kms_key_preprod_${random_string.id.result}"
-  pending_days    = "7"
-  key_description = "KMS key for preprod project"
-  realm           = "eu-west-0"
-  is_enabled      = true
-  rotation_enabled = true
-  rotation_interval = 100
+  key_alias       = "${var.kms_key_preprod.key_alias}_${random_string.id.result}"
+  pending_days    = var.kms_key_preprod.pending_days
+  key_description = var.kms_key_preprod.key_description
+  realm           = var.kms_key_preprod.realm
+  is_enabled      = var.kms_key_preprod.is_enabled
+  rotation_enabled = var.kms_key_preprod.rotation_enabled
+  rotation_interval = var.kms_key_preprod.rotation_interval
 }
 
 # Provision RSA KeyPair 
@@ -21,7 +21,7 @@ module "keypair_preprod" {
   providers = {
     flexibleengine = flexibleengine.preprod_fe
   }
-  keyname = "TF-KeyPair-preprod"
+  keyname = var.keypair_preprod
 }
 
 
@@ -33,14 +33,9 @@ module "vpc_preprod" {
 
   source = "../modules/vpc"
 
-  vpc_name = "vpc-preprod"
-  vpc_cidr = "192.168.5.0/24"
-  vpc_subnets = [{
-    subnet_cidr       = "192.168.5.0/27"
-    subnet_gateway_ip = "192.168.5.1"
-    subnet_name       = "subnet-preprod"
-    }
-  ]
+  vpc_name    = var.vpc_preprod.vpc_name
+  vpc_cidr    = var.vpc_preprod.vpc_cidr
+  vpc_subnets = var.vpc_preprod.vpc_subnets
 }
 
 // Create VPC Peering from PreProd to Transit VPC
@@ -52,10 +47,10 @@ module "peering_preprod" {
     flexibleengine.accepter  = flexibleengine.network_fe
   }
 
-  same_tenant = false
+  same_tenant   = var.peering_preprod.same_tenant
   tenant_acc_id = local.project_ids[var.network_tenant_name]
 
-  peer_name = "peering-transit-preprod"
+  peer_name     = var.peering_preprod.peer_name
   vpc_req_id = module.vpc_preprod.vpc_id
   vpc_acc_id = module.network_vpc.vpc_id
 }

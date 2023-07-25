@@ -19,11 +19,10 @@ module "obs_cts_bucket" {
 
   source = "../modules/obs"
 
-  bucket = "bucket-cts-landingzone-${random_string.id.result}"
-  acl    = "private"
-
-  encryption    = false
-  versioning = true
+  bucket = "${var.obs_cts_bucket.bucket}-${random_string.id.result}"
+  acl    = var.obs_cts_bucket.acl
+  encryption    = var.obs_cts_bucket.encryption
+  versioning = var.obs_cts_bucket.versioning
 }
 
 # Provision IAM Policy that grants read access on the CTS OBS bucket.
@@ -35,10 +34,10 @@ module "cts_obs_role" {
   source = "../modules/iam/role"
 
   roles = [{
-    name              = "delegate-cts-obs"
-    description       = "Delegate access on CTS OBS bucket"
-    type              = "AX"
-    policy            = <<EOF
+    name              = var.cts_obs_role.name
+    description       = var.cts_obs_role.description
+    type              = var.cts_obs_role.type
+    policy      = <<EOF
         {
         "Version": "1.1",
         "Statement": [
@@ -47,7 +46,7 @@ module "cts_obs_role" {
                         "OBS:*:*"
                     ],
                     "Resource": [
-                        "OBS:*:*:bucket:bucket-cts-landingzone-${random_string.id.result}",
+                        "OBS:*:*:bucket:${var.obs_cts_bucket.bucket}-${random_string.id.result}",
                         "OBS:*:*:object:*"
                     ],
                     "Effect": "Allow"
@@ -79,75 +78,81 @@ module "cts_obs_role_assignment" {
 # Provision CTS Tracker for Home project
 resource "flexibleengine_cts_tracker_v1" "home_tracker" {
   provider = flexibleengine.home_fe
-  bucket_name      = "bucket-cts-landingzone-${random_string.id.result}"
+  bucket_name      = "${var.obs_cts_bucket.bucket}-${random_string.id.result}"
   depends_on = [ module.obs_cts_bucket ]
 }
 # Provision CTS Tracker for Security project
 resource "flexibleengine_cts_tracker_v1" "security_tracker" {
   provider = flexibleengine.security_fe
-  bucket_name      = "bucket-cts-landingzone-${random_string.id.result}"
+  bucket_name      = "${var.obs_cts_bucket.bucket}-${random_string.id.result}"
   depends_on = [ module.obs_cts_bucket ]
 }
 # Provision CTS Tracker for Network project
 resource "flexibleengine_cts_tracker_v1" "network_tracker" {
   provider = flexibleengine.network_fe
-  bucket_name      = "bucket-cts-landingzone-${random_string.id.result}"
-depends_on = [ module.obs_cts_bucket ]
+  bucket_name      = "${var.obs_cts_bucket.bucket}-${random_string.id.result}"
+  depends_on = [ module.obs_cts_bucket ]
 }
 # Provision CTS Tracker for Production project
 resource "flexibleengine_cts_tracker_v1" "prod_tracker" {
   provider = flexibleengine.prod_fe
-  bucket_name      = "bucket-cts-landingzone-${random_string.id.result}"
-depends_on = [ module.obs_cts_bucket ]
+  bucket_name      = "${var.obs_cts_bucket.bucket}-${random_string.id.result}"
+  depends_on = [ module.obs_cts_bucket ]
 }
 # Provision CTS Tracker for PreProd project
 resource "flexibleengine_cts_tracker_v1" "preprod_tracker" {
   provider = flexibleengine.preprod_fe
-  bucket_name      = "bucket-cts-landingzone-${random_string.id.result}"
-depends_on = [ module.obs_cts_bucket ]
+  bucket_name      = "${var.obs_cts_bucket.bucket}-${random_string.id.result}"
+  depends_on = [ module.obs_cts_bucket ]
 }
 # Provision CTS Tracker for Dev project
 resource "flexibleengine_cts_tracker_v1" "dev_tracker" {
   provider = flexibleengine.dev_fe
-  bucket_name      = "bucket-cts-landingzone-${random_string.id.result}"
-depends_on = [ module.obs_cts_bucket ]
+  bucket_name      = "${var.obs_cts_bucket.bucket}-${random_string.id.result}"
+  depends_on = [ module.obs_cts_bucket ]
 }
 # Provision CTS Tracker for Shared Services project
 resource "flexibleengine_cts_tracker_v1" "shared_tracker" {
   provider = flexibleengine.sharedservices_fe
-  bucket_name      = "bucket-cts-landingzone-${random_string.id.result}"
-depends_on = [ module.obs_cts_bucket ]
+  bucket_name      = "${var.obs_cts_bucket.bucket}-${random_string.id.result}"
+  depends_on = [ module.obs_cts_bucket ]
 }
 
 
 # Provision LTS Group and Topics to collect logs from Hosts.
 resource "flexibleengine_lts_group" "lts_hosts_group" {
   provider = flexibleengine.security_fe
-  group_name = "Hosts"
+  group_name = var.lts_group_name
 }
 resource "flexibleengine_lts_topic" "lts_prod_hosts_topic" {
   provider = flexibleengine.security_fe
 
   group_id   = flexibleengine_lts_group.lts_hosts_group.id
-  topic_name = "Prod_Hosts_Topic"
+  topic_name = var.lts_topic_names.prod
+}
+resource "flexibleengine_lts_topic" "lts_preprod_hosts_topic" {
+  provider = flexibleengine.security_fe
+
+  group_id   = flexibleengine_lts_group.lts_hosts_group.id
+  topic_name = var.lts_topic_names.preprod
 }
 resource "flexibleengine_lts_topic" "lts_dev_hosts_topic" {
   provider = flexibleengine.security_fe
 
   group_id   = flexibleengine_lts_group.lts_hosts_group.id
-  topic_name = "Dev_Hosts_Topic"
+  topic_name = var.lts_topic_names.dev
 }
 resource "flexibleengine_lts_topic" "lts_dmz_hosts_topic" {
   provider = flexibleengine.security_fe
 
   group_id   = flexibleengine_lts_group.lts_hosts_group.id
-  topic_name = "DMZ_Hosts_Topic"
+  topic_name = var.lts_topic_names.dmz
 }
 resource "flexibleengine_lts_topic" "lts_bastion_hosts_topic" {
   provider = flexibleengine.security_fe
 
   group_id   = flexibleengine_lts_group.lts_hosts_group.id
-  topic_name = "Bastion_Hosts_Topic"
+  topic_name = var.lts_topic_names.bastion
 }
 
 /*
@@ -181,14 +186,9 @@ module "ces_smn" {
 
   source = "../modules/smn"
 
-  topic_name = "ces-topic"
-  topic_display_name = "Cloud Eye SMN Topic"
-
-  subscriptions = [{
-    endpoint  = "abdelmoumen.drici@orange.com"
-    protocol  = "email"
-    remark    = "O&M"
-  }]
+  topic_name    = var.ces_smn.topic_name
+  topic_display_name = var.ces_smn.topic_display_name
+  subscriptions = var.ces_smn.subscriptions
 }
 
 // Provision CES rules
@@ -198,7 +198,6 @@ module "ces_rules" {
   }
 
   source = "../modules/ces"
-
   alarm_rules = [{
     alarm_name = "firewall1-cpu"
 
