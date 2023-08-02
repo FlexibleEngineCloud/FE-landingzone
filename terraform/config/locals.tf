@@ -76,7 +76,7 @@ locals {
           id   = local.project_ids[project.name]
           roles = flatten([
             for role in project.permissions :
-            local.policy_ids[role]
+              role == "Tenant_Admin" ? ["c0783d60df5440a7acc4b1eb5b2a1913"] : local.policy_ids[role]
           ])
         }
       ]

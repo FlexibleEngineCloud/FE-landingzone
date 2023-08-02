@@ -1,84 +1,24 @@
 [
   {
-    "name": "adminn",
-    "projects": [],
-    "users": [
-      {
-        "id": "user-id1",
-        "name": "user-name1"
-      },
-      {
-        "id": "user-id2",
-        "name": "user-name2"
-      }
-    ]
-  },
-  {
     "name": "network",
     "projects": [
       {
-        "name": "eu-west-0_Netowrk",
+        "name": "eu-west-0_Netowrk2",
         "permissions": [
-          "AS",
           "Anti-DDoS",
-          "CCE",
-          "DCS",
           "DNS",
           "ECS",
-          "ELB"
-        ]
-      }
-    ],
-    "users": [
-      {
-        "id": "user-id3",
-        "name": "user-name3"
-      }
-    ]
-  },
-  {
-    "name": "security",
-    "projects": [
-      {
-        "name": "eu-west-0_Security_Management",
-        "permissions": [
-          "CES",
-          "CTS",
-          "TMS",
-          "KMS",
-          "VBS",
-          "CSBS",
-          "CBR"
-        ]
-      }
-    ],
-    "users": [
-      {
-        "id": "user-id4",
-        "name": "user-name4"
-      }
-    ]
-  },
-  {
-    "name": "database",
-    "projects": [
-      {
-        "name": "eu-west-0_Database",
-        "permissions": [
+          "WAF",
+          "VPN",
           "VPC",
-          "MRS",
-          "GaussDB",
-          "DIS",
-          "DAYU",
-          "DAS",
-          "RDS"
+          "KMS"
         ]
       }
     ],
     "users": [
       {
-        "id": "user-id5",
-        "name": "user-name5"
+        "id": "41e437b403404796af1c5cde52b25aca",
+        "name": "vincent"
       }
     ]
   },
@@ -86,29 +26,30 @@
     "name": "app_dev",
     "projects": [
       {
-        "name": "eu-west-0_App_Dev",
+        "name": "eu-west-0_Prod2",
         "permissions": [
-          "VPC",
-          "VPCEP",
-          "AS",
-          "CCE",
-          "SWR",
-          "BMS"
+          "Tenant_Admin"
+        ]
+      },
+
+      {
+        "name": "eu-west-0_Dev2",
+        "permissions": [
+          "Tenant_Admin"
+        ]
+      },
+
+      {
+        "name": "eu-west-0_PreProd2",
+        "permissions": [
+          "Tenant_Admin"
         ]
       }
     ],
     "users": [
       {
-        "id": "user-id6",
-        "name": "user-name6"
-      },
-      {
-        "id": "user-id7",
-        "name": "user-name7"
-      },
-      {
-        "id": "user-id8",
-        "name": "user-name8"
+        "id": "baf1dc435a634040840cf85537a2951a",
+        "name": "abdel"
       }
     ]
   },
@@ -116,16 +57,89 @@
     "name": "shared_services",
     "projects": [
       {
-        "name": "eu-west-0_Shared_Services",
+        "name": "eu-west-0_Shared_Services2",
         "permissions": [
-          "VPC"
+          "VPC",
+          "ECS"
         ]
       }
     ],
     "users": [
       {
-        "id": "user-id9",
-        "name": "user-name9"
+        "id": "41e437b403404796af1c5cde52b25aca",
+        "name": "vincent"
+      }
+    ]
+  },
+
+  {
+    "name": "security",
+    "projects": [
+      {
+        "name": "eu-west-0_Netowrk2",
+        "permissions": [
+          "CES",
+          "CTS",
+          "KMS",
+          "CBR",
+          "CSBS",
+          "RTS",
+          "WAF"
+        ]
+      },
+      {
+        "name": "eu-west-0_PreProd2",
+        "permissions": [
+          "CES",
+          "CTS",
+          "KMS",
+          "CBR",
+          "CSBS",
+          "RTS",
+          "WAF"
+        ]
+      },
+      {
+        "name": "eu-west-0_Dev2",
+        "permissions": [
+          "CES",
+          "CTS",
+          "KMS",
+          "CBR",
+          "CSBS",
+          "RTS",
+          "WAF"
+        ]
+      },
+      {
+        "name": "eu-west-0_Prod2",
+        "permissions": [
+          "CES",
+          "CTS",
+          "KMS",
+          "CBR",
+          "CSBS",
+          "RTS",
+          "WAF"
+        ]
+      },
+      {
+        "name": "eu-west-0_Shared_Services2",
+        "permissions": [
+          "CES",
+          "CTS",
+          "KMS",
+          "CBR",
+          "CSBS",
+          "RTS",
+          "WAF"
+        ]
+      }
+    ],
+    "users": [
+      {
+        "id": "41e437b403404796af1c5cde52b25aca",
+        "name": "vincent"
       }
     ]
   }
