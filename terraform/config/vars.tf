@@ -536,17 +536,24 @@ variable "cts_obs_role" {
   }
 }
 
-variable "cts_bucket_name" {
-  type = string
-
-  default = "bucket-cts-landingzone"
-}
 
 
-variable "lts_group_name" {
-  type = string
+variable "lts_group_names" {
+  type = object({
+    prod = string
+    dev = string
+    preprod = string
+    network = string
+    shared = string
+  })
 
-  default = "Hosts"
+  default = {
+    prod   = "Prod_Group"
+    dev   = "Dev_Group"
+    preprod   = "PreProd_Group"
+    network   = "Network_Group"
+    shared   = "ShardServices_Group"
+  }
 }
 
 variable "lts_topic_names" {
@@ -556,6 +563,8 @@ variable "lts_topic_names" {
     preprod = string
     dmz = string
     bastion = string
+    transit = string
+    shared = string
   })
 
   default = {
@@ -564,6 +573,8 @@ variable "lts_topic_names" {
     preprod   = "PreProd_Hosts_Topic"
     dmz   = "DMZ_Hosts_Topic"
     bastion   = "Bastion_Hosts_Topic"
+    transit = "Transit_Hosts_Topic"
+    shared = "SharedServices_Hosts_Topic"
   }
 }
 

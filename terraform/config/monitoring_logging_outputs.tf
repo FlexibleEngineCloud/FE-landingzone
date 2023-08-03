@@ -1,9 +1,25 @@
 // TMS outputs
 
-// OBS CTS Bucket ID
-output "bucket_id" {
-  description = "The name of the bucket."
-  value       = module.obs_cts_bucket.id
+// OBS CTS Bucket IDs for tenants
+output "cts_network_bucket_id" {
+  description = "Bucket ID of CTS network tenant tracker"
+  value       = module.obs_cts_bucket_network.id
+}
+output "cts_dev_bucket_id" {
+  description = "Bucket ID of CTS dev tenant tracker"
+  value       = module.obs_cts_bucket_dev.id
+}
+output "cts_preprod_bucket_id" {
+  description = "Bucket ID of CTS preprod tenant tracker"
+  value       = module.obs_cts_bucket_preprod.id
+}
+output "cts_prod_bucket_id" {
+  description = "Bucket ID of CTS prod tenant tracker"
+  value       = module.obs_cts_bucket_prod.id
+}
+output "cts_shared_bucket_id" {
+  description = "Bucket ID of CTS shared services tenant tracker"
+  value       = module.obs_cts_bucket_shared.id
 }
 
 // CTS OBS IAM Policy
@@ -12,11 +28,28 @@ output "bucket_id" {
 // CTS outputs
 
 
-// LTS Group ID
-output "lts_group_id" {
+// LTS Group IDs
+output "lts_prod_group_id" {
   description = "The ID of LTS Group"
-  value       = flexibleengine_lts_group.lts_hosts_group.id
+  value       = flexibleengine_lts_group.lts_prod_hosts_group.id
 }
+output "lts_preprod_group_id" {
+  description = "The ID of LTS Group"
+  value       = flexibleengine_lts_group.lts_preprod_hosts_group.id
+}
+output "lts_dev_group_id" {
+  description = "The ID of LTS Group"
+  value       = flexibleengine_lts_group.lts_dev_hosts_group.id
+}
+output "lts_network_group_id" {
+  description = "The ID of LTS Group"
+  value       = flexibleengine_lts_group.lts_network_hosts_group.id
+}
+output "lts_shared_group_id" {
+  description = "The ID of LTS Group"
+  value       = flexibleengine_lts_group.lts_shared_hosts_group.id
+}
+
 // LTS Topic IDs
 output "lts_prod_topic_id" {
   description = "The ID of LTS Prod Topic"
@@ -34,6 +67,15 @@ output "lts_bastion_topic_id" {
   description = "The ID of LTS Bastion Topic"
   value       = flexibleengine_lts_topic.lts_bastion_hosts_topic.id
 }
+output "lts_transit_topic_id" {
+  description = "The ID of LTS Transit Topic"
+  value       = flexibleengine_lts_topic.lts_transit_hosts_topic.id
+}
+output "lts_shared_topic_id" {
+  description = "The ID of LTS Shared Topic"
+  value       = flexibleengine_lts_topic.lts_shared_hosts_topic.id
+}
+
 
 /*
 # ICAgenct agency outputs
