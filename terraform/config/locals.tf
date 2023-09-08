@@ -18,6 +18,9 @@ locals {
   # Load Group IDs
   group_ids = module.iam_groups.group_ids
 
+  # Load Project IDs
+  project_ids = jsondecode(file("${path.module}/projects.json"))
+
   # Mapping Group IDs with their associated User IDs
   group_membership = {
     for group in local.groups : group.name => {
@@ -60,9 +63,6 @@ locals {
     ]
   }
 
-  # Load project IDs
-  project_ids = module.iam_projects.project_ids
-
   # Combining Group IDs, Project IDs, and Policy IDs
   groups_roles = [
     for group in local.groups :
@@ -76,7 +76,7 @@ locals {
           id   = local.project_ids[project.name]
           roles = flatten([
             for role in project.permissions :
-              role == "Tenant_Admin" ? ["c0783d60df5440a7acc4b1eb5b2a1913"] : local.policy_ids[role]
+              role == "Tenant_Admin" ? ["c0783d60df5440a7acc4b1eb5b2a1913"] : role == "Guest" ? ["bb5e60bd4ce14f54863138e11ae7750b"] :  local.policy_ids[role]
           ])
         }
       ]
