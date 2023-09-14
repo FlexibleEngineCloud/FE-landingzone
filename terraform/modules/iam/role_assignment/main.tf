@@ -16,10 +16,10 @@ resource "flexibleengine_identity_role_assignment_v3" "role_assignment" {
   }
 
   group_id   = each.value.group_id
-  project_id = each.value.project_id
   role_id    = each.value.role_id
 
-  # any other attributes you need to set for each role assignments
+  project_id = each.value.project_id != null ? each.value.project_id : null
+  domain_id  = each.value.domain_id != null ? each.value.domain_id : null
 }
 
 
