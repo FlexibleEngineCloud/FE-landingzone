@@ -13,6 +13,10 @@ variable "domain_name" {
   type        = string
   description = "The Name of the Domain to scope to"
 }
+variable "domain_id" {
+  type        = string
+  description = "The ID of the Domain to scope to"
+}
 variable "tenant_name" {
   type        = string
   description = "The Name of the Project to login with"
@@ -38,32 +42,27 @@ variable "availability_zones" {
 variable "network_tenant_name" {
   type        = string
   description = "networking project name to login with"
-  default = "eu-west-0_Netowrk2"
-}
-variable "security_tenant_name" {
-  type        = string
-  description = "security project name to login with"
-  default = "eu-west-0_Security_Management2"
+  default = "eu-west-0"
 }
 variable "dev_tenant_name" {
   type        = string
   description = "dev project name to login with"
-  default = "eu-west-0_Dev2"
+  default = "eu-west-0_Dev10"
 }
 variable "preprod_tenant_name" {
   type        = string
   description = "preprod project name to login with"
-  default = "eu-west-0_PreProd2"
+  default = "eu-west-0_PreProd10"
 }
 variable "prod_tenant_name" {
   type        = string
   description = "prod project name to login with"
-  default = "eu-west-0_Prod2"
+  default = "eu-west-0_Prod10"
 }
 variable "sharedservices_tenant_name" {
   type        = string
   description = "shared services project name to login with"
-  default = "eu-west-0_Shared_Services2"
+  default = "eu-west-0_Shared_Services10"
 }
 
 // ------------------------- Network variables
@@ -532,7 +531,7 @@ variable "cts_obs_role" {
   default = {
     name        = "delegate-cts-obs"
     description = "Delegate access on CTS OBS bucket"
-    type        = "AX"
+    type        = "XA"
   }
 }
 
