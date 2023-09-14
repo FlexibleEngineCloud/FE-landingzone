@@ -214,27 +214,27 @@ module "cts_obs_role_assignment" {
   source = "../modules/iam/role_assignment"
   role_assignments = [
     {
-        group_id   = local.group_ids["security"]
+        group_id   = local.group_ids["security_admin"]
         project_id = local.project_ids[var.network_tenant_name]
         role_id    = module.cts_obs_role.id[0]
     },
     {
-        group_id   = local.group_ids["security"]
+        group_id   = local.group_ids["security_admin"]
         project_id = local.project_ids[var.dev_tenant_name]
         role_id    = module.cts_obs_role.id[1]
     },
     {
-        group_id   = local.group_ids["security"]
+        group_id   = local.group_ids["security_admin"]
         project_id = local.project_ids[var.preprod_tenant_name]
         role_id    = module.cts_obs_role.id[2]
     },
     {
-        group_id   = local.group_ids["security"]
+        group_id   = local.group_ids["security_admin"]
         project_id = local.project_ids[var.prod_tenant_name]
         role_id    = module.cts_obs_role.id[3]
     },
     {
-        group_id   = local.group_ids["security"]
+        group_id   = local.group_ids["security_admin"]
         project_id = local.project_ids[var.sharedservices_tenant_name]
         role_id    = module.cts_obs_role.id[4]
     }
