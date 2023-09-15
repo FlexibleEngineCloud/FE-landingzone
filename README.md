@@ -113,8 +113,6 @@ variable "region" {
 ...etc
 ```
 
-<br/>
-<br/>
 In a terminal, go into the scenario that fits your requirements, and run the **terraform init** command:
 
 ```
