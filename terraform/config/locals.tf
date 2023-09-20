@@ -32,17 +32,6 @@ locals {
   # Load Group memeberships
   group_membership_ids = module.group_membership.group_memberships
 
-  /*
-  # Extract User IDs
-  user_ids = flatten([
-    for group in local.groups :
-    [for user in group.users :
-    {
-      name = user.name
-      id   = user.id
-    }]
-  ])
-  */
 
   # Extract Group names
   group_names = flatten([
