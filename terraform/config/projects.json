@@ -1,7 +1,7 @@
 {
-    "eu-west-0": "a057e45abf454f92b58a1500536dade9",
-    "eu-west-0_Shared_Services10": "a46675e031ca4c9c8e359ca200fac50d",
-    "eu-west-0_Dev10": "b9b9c9072300429d9d715e457ee221ca",
-    "eu-west-0_PreProd10": "9b3c6429199a4a578d8460a66bf3b8b4",
-    "eu-west-0_Prod10": "c59b56f716444dc8b4c338dd1c8592a3"
+    "eu-west-0": "NETWORK TENANT ID",
+    "eu-west-0_Shared_Services10": "SHARED SERVICES TENANT ID",
+    "eu-west-0_Dev10": "DEV TENANT ID",
+    "eu-west-0_PreProd10": "PREPROD TENANT ID",
+    "eu-west-0_Prod10": "PROD TENANT ID"
 }
