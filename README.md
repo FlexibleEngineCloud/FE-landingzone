@@ -4,7 +4,7 @@
 
 This repository contains the Terraform code and related resources necessary to deploy a Landing Zone in **Flexible Engine**.
 
-## Diagram Blueprint (in-progress):
+## Diagram Blueprint
 ![Alt text](https://github.com/FlexibleEngineCloud/FE-landingzone/blob/main/docs/designs/landingzone-all-in-one.png)
 
 
