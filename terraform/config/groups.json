@@ -56,8 +56,13 @@
     ],
     "users": [
       {
+<<<<<<< HEAD
         "id": "user_id_here",
         "name": "user_name"
+=======
+        "id": "USER ID 1",
+        "name": "user1"
+>>>>>>> b6033c5a3fd433e442e96b204dd4bc41dc3c4573
       }
     ]
   },
@@ -118,8 +123,13 @@
     ],
     "users": [
       {
+<<<<<<< HEAD
         "id": "user_id_here",
         "name": "user_name"
+=======
+        "id": "USER ID 2",
+        "name": "user2"
+>>>>>>> b6033c5a3fd433e442e96b204dd4bc41dc3c4573
       }
     ]
   },
@@ -149,8 +159,13 @@
     ],
     "users": [
       {
+<<<<<<< HEAD
         "id": "user_id_here",
         "name": "user_name"
+=======
+        "id": "USER ID 3",
+        "name": "user3"
+>>>>>>> b6033c5a3fd433e442e96b204dd4bc41dc3c4573
       }
     ]
   },
@@ -229,8 +244,13 @@
     ],
     "users": [
       {
+<<<<<<< HEAD
         "id": "user_id_here",
         "name": "user_name"
+=======
+        "id": "USER ID 4",
+        "name": "user4"
+>>>>>>> b6033c5a3fd433e442e96b204dd4bc41dc3c4573
       }
     ]
   }

@@ -7,7 +7,7 @@ terraform {
   }
 }
 
-# Configuration of Home FE provider
+# Configuration of Global FE provider
 provider "flexibleengine" {
   alias       = "home_fe"
   access_key  = var.ak
@@ -25,17 +25,6 @@ provider "flexibleengine" {
   secret_key  = var.sk
   domain_name = var.domain_name
   tenant_name = var.network_tenant_name
-  region      = var.region
-  auth_url    = "https://iam.eu-west-0.prod-cloud-ocb.orange-business.com/v3"
-}
-
-# Configuration of FE provider for IAM & Security tenant.
-provider "flexibleengine" {
-  alias = "security_fe"
-  access_key  = var.ak
-  secret_key  = var.sk
-  domain_name = var.domain_name
-  tenant_name = var.security_tenant_name
   region      = var.region
   auth_url    = "https://iam.eu-west-0.prod-cloud-ocb.orange-business.com/v3"
 }

@@ -53,11 +53,9 @@ It is essential to use a dedicated secret management system to securely store an
 - Azure Key Vault
 
 Access to secrets should be limited to only those who require it to perform their duties. Access should be granted based on the principle of least privilege. This means that users should only be granted the minimum level of access necessary to perform their job duties.
--- to be completed --
 
 ## Use Encryption
 When transferring secrets, they should be encrypted both in transit and at rest. TLS should be used when transferring secrets over the network, and secrets should be encrypted when stored in the secret management system. Terraform also has the capability to encrypt state files using a passphrase.
--- to be completed --
 
 ## Conclusion
 Proper management of Terraform secrets is critical to maintaining the security of your infrastructure. By following the best practices you can reduce the risk of secrets being compromised.

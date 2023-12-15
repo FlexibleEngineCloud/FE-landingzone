@@ -354,9 +354,8 @@ resource "flexibleengine_lts_topic" "lts_shared_hosts_topic" {
 
 
 /*
-Roles To Be checked, if it access across multi tenants.
-# ICAgent agency to allow icagent client on ECS hosts access LTS
-# You can either, use AK/SK in icagent command or using this agency.
+# ICAgent agency to allow icagent clients on ECS hosts access LTS.
+# You can either, use AK/SK in icagent command, or using this agency.
 module "icagent_agency" {
   providers = {
     flexibleengine = flexibleengine.home_fe
