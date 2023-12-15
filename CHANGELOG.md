@@ -1,3 +1,11 @@
+## CHANGELOG
+
+## v1.0.1 (15 December 2023)
+
+IMPROVEMENTS:
+* Improved IAM Design
+* Reformat code
+
 ## v1.0.0 (December 2023)
 
 FEATURES:
