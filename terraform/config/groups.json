@@ -1,46 +1,116 @@
 [
   {
-    "name": "network",
+    "name": "super_admin",
     "projects": [
       {
-        "name": "eu-west-0_Netowrk2",
-        "permissions": [
-          "Anti-DDoS",
-          "DNS",
-          "ECS",
-          "WAF",
-          "VPN",
-          "VPC",
-          "KMS"
-        ]
+        "name": "eu-west-0",
+        "permissions": ["Tenant_Admin"]
+      },
+      {
+        "name": "eu-west-0_Dev",
+        "permissions": ["Tenant_Admin"]
+      },
+      {
+        "name": "eu-west-0_PreProd",
+        "permissions": ["Tenant_Admin"]
+      },
+      {
+        "name": "eu-west-0_Prod",
+        "permissions": ["Tenant_Admin"]
+      },
+      {
+        "name": "eu-west-0_Shared_Services",
+        "permissions": ["Tenant_Admin"]
       }
     ],
     "users": [
       {
-        "id": "41e437b403404796af1c5cde52b25aca",
-        "name": "vincent"
+        "id": "user_id_here",
+        "name": "user_name"
       }
     ]
   },
   {
-    "name": "app_dev",
+    "name": "domain_admin",
     "projects": [
       {
-        "name": "eu-west-0_Prod2",
+        "name": "eu-west-0",
+        "permissions": ["Tenant_Admin"]
+      },
+      {
+        "name": "eu-west-0_Dev",
+        "permissions": ["Tenant_Admin"]
+      },
+      {
+        "name": "eu-west-0_PreProd",
+        "permissions": ["Tenant_Admin"]
+      },
+      {
+        "name": "eu-west-0_Prod",
+        "permissions": ["Tenant_Admin"]
+      },
+      {
+        "name": "eu-west-0_Shared_Services",
+        "permissions": ["Tenant_Admin"]
+      }
+    ],
+    "users": [
+      {
+        "id": "user_id_here",
+        "name": "user_name"
+      }
+    ]
+  },
+  {
+    "name": "network_admin",
+    "projects": [
+      {
+        "name": "eu-west-0",
+        "permissions": ["Tenant_Admin"]
+      },
+      {
+        "name": "eu-west-0_Dev",
+        "permissions": ["VPC","WAF","VPN"]
+      },
+      {
+        "name": "eu-west-0_PreProd",
+        "permissions": ["VPC","WAF","VPN"]
+      },
+      {
+        "name": "eu-west-0_Prod",
+        "permissions": ["VPC","WAF","VPN"]
+      },
+      {
+        "name": "eu-west-0_Shared_Services",
+        "permissions": ["VPC","WAF","VPN"]
+      }
+    ],
+    "users": [
+      {
+        "id": "user_id_here",
+        "name": "user_name"
+      }
+    ]
+  },
+  {
+    "name": "dev_admin",
+    "projects": [
+      {
+        "name": "eu-west-0_Prod",
         "permissions": [
           "Tenant_Admin"
         ]
       },
 
       {
-        "name": "eu-west-0_Dev2",
+        "name": "eu-west-0_Dev",
         "permissions": [
           "Tenant_Admin"
         ]
       },
 
       {
-        "name": "eu-west-0_PreProd2",
+        "name": "eu-west-0_PreProd",
         "permissions": [
           "Tenant_Admin"
         ]
@@ -48,8 +118,70 @@
     ],
     "users": [
       {
-        "id": "baf1dc435a634040840cf85537a2951a",
-        "name": "abdel"
+        "id": "user_id_here",
+        "name": "user_name"
+      }
+    ]
+  },
+  {
+    "name": "preprod_admin",
+    "projects": [
+      {
+        "name": "eu-west-0_Prod",
+        "permissions": [
+          "Tenant_Admin"
+        ]
+      },
+
+      {
+        "name": "eu-west-0_Dev",
+        "permissions": [
+          "Tenant_Admin"
+        ]
+      },
+
+      {
+        "name": "eu-west-0_PreProd",
+        "permissions": [
+          "Tenant_Admin"
+        ]
+      }
+    ],
+    "users": [
+      {
+        "id": "user_id_here",
+        "name": "user_name"
+      }
+    ]
+  },
+  {
+    "name": "prod_admin",
+    "projects": [
+      {
+        "name": "eu-west-0_Prod",
+        "permissions": [
+          "Tenant_Admin"
+        ]
+      },
+
+      {
+        "name": "eu-west-0_Dev",
+        "permissions": [
+          "Tenant_Admin"
+        ]
+      },
+
+      {
+        "name": "eu-west-0_PreProd",
+        "permissions": [
+          "Tenant_Admin"
+        ]
+      }
+    ],
+    "users": [
+      {
+        "id": "user_id_here",
+        "name": "user_name"
       }
     ]
   },
@@ -57,7 +189,7 @@
     "name": "shared_services",
     "projects": [
       {
-        "name": "eu-west-0_Shared_Services2",
+        "name": "eu-west-0_Shared_Services",
         "permissions": [
           "VPC",
           "ECS"
@@ -66,80 +198,39 @@
     ],
     "users": [
       {
-        "id": "41e437b403404796af1c5cde52b25aca",
-        "name": "vincent"
+        "id": "user_id_here",
+        "name": "user_name"
       }
     ]
   },
-
   {
-    "name": "security",
+    "name": "security_admin",
     "projects": [
       {
-        "name": "eu-west-0_Netowrk2",
-        "permissions": [
-          "CES",
-          "CTS",
-          "KMS",
-          "CBR",
-          "CSBS",
-          "RTS",
-          "WAF"
-        ]
+        "name": "eu-west-0",
+        "permissions": ["KMS","Guest"]
       },
       {
-        "name": "eu-west-0_PreProd2",
-        "permissions": [
-          "CES",
-          "CTS",
-          "KMS",
-          "CBR",
-          "CSBS",
-          "RTS",
-          "WAF"
-        ]
+        "name": "eu-west-0_Dev",
+        "permissions": ["KMS","Guest"]
       },
       {
-        "name": "eu-west-0_Dev2",
-        "permissions": [
-          "CES",
-          "CTS",
-          "KMS",
-          "CBR",
-          "CSBS",
-          "RTS",
-          "WAF"
-        ]
+        "name": "eu-west-0_PreProd",
+        "permissions": ["KMS","Guest"]
       },
       {
-        "name": "eu-west-0_Prod2",
-        "permissions": [
-          "CES",
-          "CTS",
-          "KMS",
-          "CBR",
-          "CSBS",
-          "RTS",
-          "WAF"
-        ]
+        "name": "eu-west-0_Prod",
+        "permissions": ["KMS","Guest"]
       },
       {
-        "name": "eu-west-0_Shared_Services2",
-        "permissions": [
-          "CES",
-          "CTS",
-          "KMS",
-          "CBR",
-          "CSBS",
-          "RTS",
-          "WAF"
-        ]
+        "name": "eu-west-0_Shared_Services",
+        "permissions": ["KMS","Guest"]
       }
     ],
     "users": [
       {
-        "id": "41e437b403404796af1c5cde52b25aca",
-        "name": "vincent"
+        "id": "user_id_here",
+        "name": "user_name"
       }
     ]
   }
