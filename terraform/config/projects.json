@@ -1,16 +1,7 @@
 {
-<<<<<<< HEAD
     "eu-west-0": "project_id_here",
     "eu-west-0_Shared_Services": "project_id_here",
     "eu-west-0_Dev": "project_id_here",
     "eu-west-0_PreProd": "project_id_here",
     "eu-west-0_Prod": "project_id_here"
 }
-=======
-    "eu-west-0": "NETWORK TENANT ID",
-    "eu-west-0_Shared_Services10": "SHARED SERVICES TENANT ID",
-    "eu-west-0_Dev10": "DEV TENANT ID",
-    "eu-west-0_PreProd10": "PREPROD TENANT ID",
-    "eu-west-0_Prod10": "PROD TENANT ID"
-}
->>>>>>> b6033c5a3fd433e442e96b204dd4bc41dc3c4573

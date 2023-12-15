@@ -1,5 +1,5 @@
-domain_name = "XXXXXXXX"
-tenant_name = "XXXXXXXX"
+domain_name = "OCB000XXXX"
+tenant_name = "eu-west-0"
 region = "eu-west-0"
 
 tag = "bvpn-dmz-private-multicloud"
